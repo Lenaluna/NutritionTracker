@@ -1,0 +1,29 @@
+# Allgemein
+*.class
+*.log
+*.jar
+*.war
+*.ear
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Maven
+target/
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+
+# Umgebungsvariablen
+application.yml
+application-dev.yml
+application-integration-test.yml
+
+# Sensible Daten
+*.key
+*.p12
+*.pem
+
