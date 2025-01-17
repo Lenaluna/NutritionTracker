@@ -1,8 +1,11 @@
 package com.example.NutritionTracker.entity;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+
 import java.util.UUID;
 
+@NoArgsConstructor
 @Entity
 @Table(name = "app_user")
 public class User {

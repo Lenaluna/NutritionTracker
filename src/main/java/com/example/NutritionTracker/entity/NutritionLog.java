@@ -1,10 +1,13 @@
 package com.example.NutritionTracker.entity;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+@NoArgsConstructor
 @Entity
 public class NutritionLog {
 
