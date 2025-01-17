@@ -20,7 +20,7 @@ public class FoodItem {
     @ElementCollection
     @CollectionTable(name = "amino_acid_profile", joinColumns = @JoinColumn(name = "food_item_id"))
     @MapKeyColumn(name = "amino_acid")
-    @Column(name = "value")
+    @Column(name = "amino_acid_value")
     private Map<String, Double> aminoAcidProfile;
 
     // Getters and Setters

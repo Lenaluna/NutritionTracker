@@ -70,4 +70,42 @@ public class NutritionLog {
     public void setTotalProtein(Double totalProtein) {
         this.totalProtein = totalProtein;
     }
+
+private NutritionLog(Builder builder) {
+    this.user = builder.user;
+    this.foodItems = builder.foodItems;
+    this.logDate = builder.logDate;
+    this.totalProtein = builder.totalProtein;
+}
+
+public static class Builder {
+    private User user;
+    private List<FoodItem> foodItems;
+    private LocalDate logDate;
+    private Double totalProtein;
+
+    public Builder setUser(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public Builder setFoodItems(List<FoodItem> foodItems) {
+        this.foodItems = foodItems;
+        return this;
+    }
+
+    public Builder setLogDate(LocalDate logDate) {
+        this.logDate = logDate;
+        return this;
+    }
+
+    public Builder setTotalProtein(Double totalProtein) {
+        this.totalProtein = totalProtein;
+        return this;
+    }
+
+    public NutritionLog build() {
+        return new NutritionLog(this);
+    }
+}
 }
