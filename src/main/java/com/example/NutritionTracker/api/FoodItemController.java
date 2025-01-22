@@ -2,7 +2,6 @@ package com.example.NutritionTracker.api;
 
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.service.FoodItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +13,12 @@ import java.util.UUID;
 @RequestMapping("/api/food-items")
 public class FoodItemController {
 
-    @Autowired
-    private FoodItemService foodItemService;
+    private final FoodItemService foodItemService;
+
+    // Constructor Injection
+    public FoodItemController(FoodItemService foodItemService) {
+        this.foodItemService = foodItemService;
+    }
 
     @GetMapping
     public List<FoodItem> getAllFoodItems() {

@@ -26,11 +26,9 @@ public class NutritionLogControllerTest {
     @InjectMocks
     private NutritionLogController nutritionLogController;
 
-    private MockMvc mockMvc;
-
     @Test
     void testGetAllLogs() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(nutritionLogController).build();
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(nutritionLogController).build();
 
         when(nutritionLogService.getAllLogs()).thenReturn(Collections.emptyList());
 

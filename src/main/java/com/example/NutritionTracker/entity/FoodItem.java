@@ -58,4 +58,9 @@ public class FoodItem {
     public void setAminoAcidProfile(Map<String, Double> aminoAcidProfile) {
         this.aminoAcidProfile = aminoAcidProfile;
     }
+
+    public void setProtein(double v) {
+    }
+
+
 }

@@ -27,3 +27,5 @@ application-integration-test.yml
 *.p12
 *.pem
 
+nutritionTracker.txt
+
