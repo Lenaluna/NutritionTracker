@@ -10,6 +10,8 @@ import com.example.NutritionTracker.service.AminoAcidCalculator;
 import com.example.NutritionTracker.service.BasicAminoAcidCalculator;
 import com.example.NutritionTracker.service.NutritionLogService;
 import com.example.NutritionTracker.service.ChildAminoAcidDecorator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,8 @@ import java.util.UUID;
 
 @Component
 public class StartupRunner implements ApplicationRunner {
+
+    private static final Logger logger = LoggerFactory.getLogger(StartupRunner.class);
 
     private final FoodItemRepository foodItemRepository;
     private final UserRepository userRepository;
@@ -33,7 +37,7 @@ public class StartupRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("StartupRunner executed: Loading initial data...");
+        logger.info("StartupRunner executed: Loading initial data...");
 
         // Benutzer erstellen
         User user1 = new User();
@@ -51,6 +55,7 @@ public class StartupRunner implements ApplicationRunner {
         user2.setIsAthlete(true);
 
         userRepository.saveAll(List.of(user1, user2));
+        logger.debug("Users initialized: {} and {}", user1.getName(), user2.getName());
 
         // Nahrungsmittel erstellen
         FoodItem chickenBreast = new FoodItem();
@@ -74,26 +79,29 @@ public class StartupRunner implements ApplicationRunner {
         ));
 
         foodItemRepository.saveAll(List.of(chickenBreast, quinoa));
+        logger.debug("Food items initialized: {}, {}", chickenBreast.getName(), quinoa.getName());
 
         // Ernährungstagebuch erstellen
         NutritionLog log = new NutritionLog();
         log.setFoodItems(List.of(chickenBreast, quinoa));
-        log.setUser(user2); // Beispiel: Jane Athlete ist der Benutzer des Logs
+        log.setUser(user2);
+        logger.debug("Nutrition log created for user: {}", user2.getName());
 
         // Dekorator für Aminosäuren-Berechnung anwenden
         AminoAcidCalculator calculator = new BasicAminoAcidCalculator();
-        // Prüfen, ob der Benutzer ein Kind ist (z. B. Alter < 18)
         if (user2.getAge() < 18) {
             calculator = new ChildAminoAcidDecorator(calculator);
+            logger.debug("ChildAminoAcidDecorator applied for user: {}", user2.getName());
         }
 
-        // Athleten-Dekorator hinzufügen, wenn Benutzer ein Athlet ist
         if (user2.getIsAthlete()) {
             calculator = new AthleteAminoAcidDecorator(calculator);
+            logger.debug("AthleteAminoAcidDecorator applied for user: {}", user2.getName());
         }
 
         // Aminosäurenprofil berechnen
         Map<String, Double> aminoAcids = calculator.calculateAminoAcids(log);
+        logger.info("Amino acid profile calculated for {}: {}", user2.getName(), aminoAcids);
 
         // Tagesbedarf berechnen und abgleichen
         Map<String, Double> user1DailyNeeds = nutritionLogService.calculateDailyAminoAcidNeeds(user1);
@@ -102,6 +110,6 @@ public class StartupRunner implements ApplicationRunner {
         nutritionLogService.compareAminoAcidIntakeWithNeeds("John Doe", aminoAcids, user1DailyNeeds);
         nutritionLogService.compareAminoAcidIntakeWithNeeds("Jane Athlete", aminoAcids, user2DailyNeeds);
 
-        System.out.println("StartupRunner completed: Initial data loaded.");
+        logger.info("StartupRunner completed: Initial data loaded.");
     }
 }
