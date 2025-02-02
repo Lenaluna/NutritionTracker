@@ -2,7 +2,7 @@ package com.example.NutritionTracker.service;
 
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.repo.FoodItemRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class FoodItemService {
 
-    @Autowired
-    private FoodItemRepository foodItemRepository;
+    private final FoodItemRepository foodItemRepository;
 
     public List<FoodItem> getAllFoodItems() {
         return foodItemRepository.findAll();

@@ -1,4 +1,3 @@
-python3 -c "
 import os
 
 directories = [
@@ -35,5 +34,4 @@ def list_and_read_files(directories):
 results = list_and_read_files(directories)
 
 for file_path, content in results.items():
-    print(f'--- {file_path} ---\\n{content}\\n')
-"
+    print(f'--- {file_path} ---\n{content}\n')

@@ -1,12 +1,16 @@
 package com.example.NutritionTracker.entity;
 
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Map;
 import java.util.UUID;
 
+@AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
 public class FoodItem {
 
@@ -25,42 +29,4 @@ public class FoodItem {
     @MapKeyColumn(name = "amino_acid")
     @Column(name = "amino_acid_value")
     private Map<String, Double> aminoAcidProfile;
-
-    // Getters and Setters
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getProteinContent() {
-        return proteinContent;
-    }
-
-    public void setProteinContent(Double proteinContent) {
-        this.proteinContent = proteinContent;
-    }
-
-    public Map<String, Double> getAminoAcidProfile() {
-        return aminoAcidProfile;
-    }
-
-    public void setAminoAcidProfile(Map<String, Double> aminoAcidProfile) {
-        this.aminoAcidProfile = aminoAcidProfile;
-    }
-
-    public void setProtein(double v) {
-    }
-
-
 }
