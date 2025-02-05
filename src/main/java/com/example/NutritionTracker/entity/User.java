@@ -5,28 +5,22 @@ import lombok.*;
 
 import java.util.UUID;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
 @Getter
 @Setter
+@Table(name = "users")
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@Entity
-@Table(name = "app_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(nullable = false)
     private String name;
-
-    @Column(nullable = false)
     private Integer age;
-
-    @Column(nullable = false)
     private Double weight;
-
-    @Column(nullable = false)
     private Boolean isAthlete;
+
 }

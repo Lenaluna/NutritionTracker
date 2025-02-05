@@ -2,6 +2,7 @@ package com.example.NutritionTracker.api;
 
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.service.FoodItemService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +12,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/food-items")
+@RequiredArgsConstructor
 public class FoodItemController {
 
     private final FoodItemService foodItemService;
-
-    // Constructor Injection
-    public FoodItemController(FoodItemService foodItemService) {
-        this.foodItemService = foodItemService;
-    }
 
     @GetMapping
     public List<FoodItem> getAllFoodItems() {

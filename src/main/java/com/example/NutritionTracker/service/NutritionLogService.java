@@ -1,21 +1,22 @@
 package com.example.NutritionTracker.service;
 
-import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.entity.NutritionLog;
-import com.example.NutritionTracker.entity.User;
 import com.example.NutritionTracker.repo.NutritionLogRepository;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-
 public class NutritionLogService {
 
     private final NutritionLogRepository nutritionLogRepository;
+    private final AminoAcidCalculator baseCalculator = new BasicAminoAcidCalculator();
 
     public List<NutritionLog> getAllLogs() {
         return nutritionLogRepository.findAll();
@@ -33,45 +34,22 @@ public class NutritionLogService {
         nutritionLogRepository.deleteById(id);
     }
 
-    public Map<String, Object> analyzeLog(NutritionLog log) {
-        Map<String, Object> analysis = new HashMap<>();
+    public Map<String, Double> calculateAminoAcidsForLog(NutritionLog log) {
+        AminoAcidCalculator calculator = baseCalculator;
 
-        double totalProtein = log.getFoodItems().stream()
-                .mapToDouble(FoodItem::getProteinContent)
-                .sum();
-        analysis.put("totalProtein", totalProtein);
-
-        Map<String, Double> totalAminoAcids = new HashMap<>();
-        log.getFoodItems().forEach(item -> item.getAminoAcidProfile().forEach((aminoAcid, value) ->
-                totalAminoAcids.merge(aminoAcid, value, Double::sum)
-        ));
-        analysis.put("aminoAcidProfile", totalAminoAcids);
-
-        return analysis;
-    }
-    public Map<String, Double> calculateDailyAminoAcidNeeds(User user) {
-        double weightFactor = user.getWeight() / 70.0;
-        double ageFactor = user.getAge() > 50 ? 1.2 : 1.0;
-        double athleteFactor = user.getIsAthlete() ? 1.5 : 1.0;
-
-        return Map.of(
-                "Lysin", 3.0 * weightFactor * ageFactor * athleteFactor,
-                "Valin", 2.5 * weightFactor * ageFactor * athleteFactor,
-                "Isoleucin", 2.0 * weightFactor * ageFactor * athleteFactor
-        );
-    }
-
-    public void compareAminoAcidIntakeWithNeeds(String userName, Map<String, Double> logAminoAcids, Map<String, Double> dailyNeeds) {
-        System.out.println("Vergleiche Aminosäurenaufnahme für Benutzer: " + userName);
-        dailyNeeds.forEach((aminoAcid, neededAmount) -> {
-            double intake = logAminoAcids.getOrDefault(aminoAcid, 0.0);
-            if (intake >= neededAmount) {
-                System.out.println(aminoAcid + ": Bedarf gedeckt (" + intake + " von " + neededAmount + " g)");
-            } else {
-                System.out.println(aminoAcid + ": Bedarf NICHT gedeckt (" + intake + " von " + neededAmount + " g)");
+        if (log.getUser() != null) {
+            if (log.getUser().getAge() < 18) {
+                calculator = new ChildAminoAcidDecorator(calculator);
             }
-        });
+
+            if (log.getUser().getIsAthlete()) {
+                calculator = new AthleteAminoAcidDecorator(calculator);
+                System.out.println("Ist der Nutzer Athlet? " + log.getUser().getIsAthlete());
+            }
+        }
+        return calculator.calculateAminoAcids(log);
     }
 }
+
 
 

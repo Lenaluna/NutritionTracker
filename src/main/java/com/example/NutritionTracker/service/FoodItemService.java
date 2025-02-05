@@ -2,8 +2,8 @@ package com.example.NutritionTracker.service;
 
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.repo.FoodItemRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;

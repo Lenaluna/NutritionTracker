@@ -2,25 +2,22 @@ package com.example.NutritionTracker.api;
 
 import com.example.NutritionTracker.entity.NutritionLog;
 import com.example.NutritionTracker.service.NutritionLogService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/nutrition-logs")
+@RequiredArgsConstructor
 public class NutritionLogController {
-
 
     private final NutritionLogService nutritionLogService;
 
-    // Constructor Injection
-    public NutritionLogController(NutritionLogService nutritionLogService) {
-        this.nutritionLogService = nutritionLogService;
-    }
     @GetMapping
     public List<NutritionLog> getAllLogs() {
         return nutritionLogService.getAllLogs();
@@ -33,8 +30,9 @@ public class NutritionLogController {
     }
 
     @PostMapping
-    public NutritionLog createLog(@RequestBody NutritionLog log) {
-        return nutritionLogService.createLog(log);
+    public ResponseEntity<NutritionLog> createLog(@RequestBody NutritionLog log) {
+        NutritionLog savedLog = nutritionLogService.createLog(log);
+        return ResponseEntity.ok(savedLog);
     }
 
     @DeleteMapping("/{id}")
@@ -43,10 +41,9 @@ public class NutritionLogController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/analysis")
-    public ResponseEntity<Map<String, Object>> analyzeLog(@PathVariable UUID id) {
-        Optional<NutritionLog> log = nutritionLogService.getLogById(id);
-        return log.map(l -> ResponseEntity.ok(nutritionLogService.analyzeLog(l)))
-                .orElse(ResponseEntity.notFound().build());
+    @PostMapping("/calculate-amino-acids")
+    public ResponseEntity<Map<String, Double>> calculateAminoAcids(@RequestBody NutritionLog log) {
+        Map<String, Double> aminoAcids = nutritionLogService.calculateAminoAcidsForLog(log);
+        return ResponseEntity.ok(aminoAcids);
     }
 }

@@ -12,7 +12,7 @@ public class ChildAminoAcidDecorator extends AminoAcidCalculatorDecorator {
     @Override
     public Map<String, Double> calculateAminoAcids(NutritionLog log) {
         Map<String, Double> baseProfile = super.calculateAminoAcids(log);
-        baseProfile.replaceAll((aminoAcid, value) -> value * 0.8); // Reduzierung um 20 %
+        baseProfile.replaceAll((aminoAcid, value) -> value * 0.8);
         return baseProfile;
     }
 }
