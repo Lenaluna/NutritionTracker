@@ -44,7 +44,6 @@ public class NutritionLogService {
 
             if (log.getUser().getIsAthlete()) {
                 calculator = new AthleteAminoAcidDecorator(calculator);
-                System.out.println("Ist der Nutzer Athlet? " + log.getUser().getIsAthlete());
             }
         }
         return calculator.calculateAminoAcids(log);
