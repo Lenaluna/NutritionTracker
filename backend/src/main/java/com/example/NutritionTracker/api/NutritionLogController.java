@@ -41,6 +41,12 @@ public class NutritionLogController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<NutritionLog> updateLog(@PathVariable UUID id, @RequestBody NutritionLog log) {
+        NutritionLog updatedLog = nutritionLogService.updateLog(id, log);
+        return ResponseEntity.ok(updatedLog);
+    }
+
     @PostMapping("/calculate-amino-acids")
     public ResponseEntity<Map<String, Double>> calculateAminoAcids(@RequestBody NutritionLog log) {
         Map<String, Double> aminoAcids = nutritionLogService.calculateAminoAcidsForLog(log);

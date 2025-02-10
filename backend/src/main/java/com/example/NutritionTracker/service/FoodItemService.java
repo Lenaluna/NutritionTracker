@@ -30,4 +30,14 @@ public class FoodItemService {
     public void deleteFoodItem(UUID id) {
         foodItemRepository.deleteById(id);
     }
+
+    public FoodItem updateFoodItem(UUID id, FoodItem updatedItem) {
+        return foodItemRepository.findById(id)
+                .map(existingItem -> {
+                    existingItem.setName(updatedItem.getName());
+                    existingItem.setProteinContent(updatedItem.getProteinContent());
+                    existingItem.setAminoAcidProfile(updatedItem.getAminoAcidProfile());
+                    return foodItemRepository.save(existingItem);
+                }).orElseThrow(() -> new RuntimeException("FoodItem not found"));
+    }
 }

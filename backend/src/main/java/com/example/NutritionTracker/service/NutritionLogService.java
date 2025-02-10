@@ -1,6 +1,8 @@
 package com.example.NutritionTracker.service;
 
+import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.entity.NutritionLog;
+import com.example.NutritionTracker.repo.FoodItemRepository;
 import com.example.NutritionTracker.repo.NutritionLogRepository;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ public class NutritionLogService {
 
     private final NutritionLogRepository nutritionLogRepository;
     private final AminoAcidCalculator baseCalculator = new BasicAminoAcidCalculator();
+    private final FoodItemRepository foodItemRepository;
 
     public List<NutritionLog> getAllLogs() {
         return nutritionLogRepository.findAll();
@@ -34,6 +37,16 @@ public class NutritionLogService {
         nutritionLogRepository.deleteById(id);
     }
 
+    public NutritionLog updateLog(UUID id, NutritionLog updatedLog) {
+        return nutritionLogRepository.findById(id)
+                .map(existingLog -> {
+                    existingLog.setFoodItems(updatedLog.getFoodItems());
+                    existingLog.setTotalProtein(updatedLog.getTotalProtein());
+                    existingLog.setLogDate(updatedLog.getLogDate());
+                    return nutritionLogRepository.save(existingLog);
+                }).orElseThrow(() -> new RuntimeException("Log not found"));
+    }
+
     public Map<String, Double> calculateAminoAcidsForLog(NutritionLog log) {
         AminoAcidCalculator calculator = baseCalculator;
 
@@ -47,6 +60,15 @@ public class NutritionLogService {
             }
         }
         return calculator.calculateAminoAcids(log);
+    }
+    public FoodItem updateFoodItem(UUID id, FoodItem updatedItem) {
+        return foodItemRepository.findById(id)
+                .map(existingItem -> {
+                    existingItem.setName(updatedItem.getName());
+                    existingItem.setProteinContent(updatedItem.getProteinContent());
+                    existingItem.setAminoAcidProfile(updatedItem.getAminoAcidProfile());
+                    return foodItemRepository.save(existingItem);
+                }).orElseThrow(() -> new RuntimeException("FoodItem not found"));
     }
 }
 

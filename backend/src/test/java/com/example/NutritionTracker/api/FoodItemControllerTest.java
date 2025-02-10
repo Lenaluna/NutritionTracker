@@ -7,10 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -25,26 +22,26 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(MockitoExtension.class)  // Aktiviert Mockito für Tests
+@ExtendWith(MockitoExtension.class)
 class FoodItemControllerTest {
 
     private MockMvc mockMvc;
 
-    @Mock  // Erstellt eine Mock-Instanz des FoodItemService
+    @Mock
     private FoodItemService foodItemService;
 
-    @InjectMocks  // Initialisiert den FoodItemController mit gemocktem FoodItemService
+    @InjectMocks
     private FoodItemController foodItemController;
 
     @BeforeEach
     void setUp() {
-        // MockMvc für Controller-Tests einrichten
+
         mockMvc = MockMvcBuilders.standaloneSetup(foodItemController).build();
     }
 
     @Test
     void shouldReturnAllFoodItems() throws Exception {
-        // Mock-Daten erstellen
+
         List<FoodItem> mockFoodItems = List.of(new FoodItem(
                 UUID.randomUUID(),
                 "Apple",
@@ -52,10 +49,10 @@ class FoodItemControllerTest {
                 Map.of("Carbs", 14.0, "Protein", 0.3)
         ));
 
-        // Verhalten des gemockten FoodItemService definieren
+
         when(foodItemService.getAllFoodItems()).thenReturn(mockFoodItems);
 
-        // HTTP GET-Anfrage simulieren und Ergebnisse überprüfen
+
         mockMvc.perform(get("/api/food-items")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

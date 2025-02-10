@@ -1,14 +1,23 @@
 import os
 
 directories = [
-    'src/main/java/com/example/NutritionTracker/Application.java',
-    'src/main/java/com/example/NutritionTracker/api',
-    'src/main/java/com/example/NutritionTracker/service',
-    'src/main/java/com/example/NutritionTracker/entity',
-    'src/main/java/com/example/NutritionTracker/repo',
-    'src/main/resources',
-    'src/test/java/com/example/NutritionTracker/api',
-    'src/test/java/com/example/NutritionTracker/entity'
+    # Backend
+    'Backend/src/main/java/com/example/NutritionTracker/Application.java',
+    'Backend/src/main/java/com/example/NutritionTracker/api',
+    'Backend/src/main/java/com/example/NutritionTracker/service',
+    'Backend/src/main/java/com/example/NutritionTracker/entity',
+    'Backend/src/main/java/com/example/NutritionTracker/repo',
+    'Backend/src/main/resources',
+    'Backend/src/test/java/com/example/NutritionTracker/api',
+    'Backend/src/test/java/com/example/NutritionTracker/service',
+
+    # Frontend
+    'Frontend/my-angular-app/src/app/app.component.ts',
+    'Frontend/my-angular-app/src/app/app.routes.ts',
+    'Frontend/my-angular-app/src/app/components/food-item',
+    'Frontend/my-angular-app/src/app/components/nutrition-log',
+    'Frontend/my-angular-app/src/app/components/user',
+    'Frontend/my-angular-app/src/app/services'
 ]
 
 def list_and_read_files(directories):

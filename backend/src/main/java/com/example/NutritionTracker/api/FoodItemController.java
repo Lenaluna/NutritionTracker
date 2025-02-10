@@ -38,4 +38,10 @@ public class FoodItemController {
         foodItemService.deleteFoodItem(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<FoodItem> updateFoodItem(@PathVariable UUID id, @RequestBody FoodItem foodItem) {
+        FoodItem updatedItem = foodItemService.updateFoodItem(id, foodItem);
+        return ResponseEntity.ok(updatedItem);
+    }
 }
