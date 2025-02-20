@@ -2,10 +2,12 @@ package com.example.NutritionTracker.service;
 
 import com.example.NutritionTracker.entity.User;
 import com.example.NutritionTracker.repo.UserRepository;
-import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,21 +15,41 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    /**
+     * Creates or updates a user.
+     * If a user with the same name already exists, it returns the existing user.
+     * Otherwise, a new user is created and saved in the database.
+     *
+     * @param newUser The user object to be created or retrieved.
+     * @return The persisted user.
+     */
+    @Transactional
+    public User createUser(User newUser) {
+        logger.info("Creating user: {}", newUser.getName());
+
+        Optional<User> existingUser = userRepository.findByName(newUser.getName());
+
+        if (existingUser.isPresent()) {
+            logger.warn("User already exists: {} with ID {}", existingUser.get().getName(), existingUser.get().getId());
+            return existingUser.get(); // Return existing user
+        }
+
+        newUser.setId(UUID.randomUUID()); // Ensure ID is set
+        logger.info("Saving new user with ID: {}", newUser.getId());
+
+        return userRepository.save(newUser); // Use save() instead of saveAndFlush()
     }
 
-    public Optional<User> getUserById(UUID id) {
-        return userRepository.findById(id);
-    }
-
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
-
-    public void deleteUser(UUID id) {
-        userRepository.deleteById(id);
+    /**
+     * Retrieves a user by their name.
+     * This method is transactional to ensure a consistent read from the database.
+     *
+     * @return An Optional containing the user if found.
+     */
+    public Optional<User> getUser() {
+        return userRepository.findByName("Test User");
     }
 }

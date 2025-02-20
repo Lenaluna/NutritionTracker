@@ -2,7 +2,6 @@ package com.example.NutritionTracker.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.Map;
 import java.util.UUID;
 
@@ -19,8 +18,9 @@ public class FoodItem {
     private UUID id;
 
     private String name;
-    private Double proteinContent;
 
     @ElementCollection
     private Map<String, Double> aminoAcidProfile;
-}
+
+    }
+

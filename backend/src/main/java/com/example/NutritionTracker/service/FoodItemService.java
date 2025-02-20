@@ -2,8 +2,8 @@ package com.example.NutritionTracker.service;
 
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.repo.FoodItemRepository;
-import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +15,7 @@ public class FoodItemService {
 
     private final FoodItemRepository foodItemRepository;
 
+    /** Returns all FoodItems */
     public List<FoodItem> getAllFoodItems() {
         return foodItemRepository.findAll();
     }
@@ -23,21 +24,18 @@ public class FoodItemService {
         return foodItemRepository.findById(id);
     }
 
-    public FoodItem createFoodItem(FoodItem foodItem) {
+    /** Saves a single FoodItem */
+    public FoodItem saveFoodItem(FoodItem foodItem) {
         return foodItemRepository.save(foodItem);
     }
 
-    public void deleteFoodItem(UUID id) {
-        foodItemRepository.deleteById(id);
+    /** Saves a list of FoodItems */
+    public void saveAllFoodItems(List<FoodItem> foodItems) {
+        foodItemRepository.saveAll(foodItems);
     }
 
-    public FoodItem updateFoodItem(UUID id, FoodItem updatedItem) {
-        return foodItemRepository.findById(id)
-                .map(existingItem -> {
-                    existingItem.setName(updatedItem.getName());
-                    existingItem.setProteinContent(updatedItem.getProteinContent());
-                    existingItem.setAminoAcidProfile(updatedItem.getAminoAcidProfile());
-                    return foodItemRepository.save(existingItem);
-                }).orElseThrow(() -> new RuntimeException("FoodItem not found"));
+    /** Deletes a food item from the database */
+    public void deleteFoodItem(UUID foodItemId) {
+        foodItemRepository.deleteById(foodItemId);
     }
 }
