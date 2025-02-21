@@ -40,8 +40,8 @@ class FoodItemControllerTest {
     void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(foodItemController).build();
 
-        foodItem1 = new FoodItem(UUID.randomUUID(), "Apple", Map.of("Lysine", 0.2, "Methionine", 0.1));
-        foodItem2 = new FoodItem(UUID.randomUUID(), "Banana", Map.of("Leucine", 0.3, "Histidine", 0.15));
+        foodItem1 = new FoodItem(UUID.randomUUID(), "Apple", Map.of("Lysine", 0.2, "Methionine", 0.1), 0);
+        foodItem2 = new FoodItem(UUID.randomUUID(), "Banana", Map.of("Leucine", 0.3, "Histidine", 0.15), 0);
     }
 
     @Test
@@ -83,7 +83,7 @@ class FoodItemControllerTest {
     @Test
     void shouldAddNewFoodItem() throws Exception {
         UUID newId = UUID.randomUUID();
-        FoodItem newFoodItem = new FoodItem(newId, "Orange", Map.of("Valine", 0.25, "Isoleucine", 0.2));
+        FoodItem newFoodItem = new FoodItem(newId, "Orange", Map.of("Valine", 0.25, "Isoleucine", 0.2), 0);
 
         when(foodItemService.saveFoodItem(any(FoodItem.class))).thenReturn(newFoodItem);
 

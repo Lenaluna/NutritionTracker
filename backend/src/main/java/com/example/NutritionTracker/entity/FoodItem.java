@@ -22,5 +22,8 @@ public class FoodItem {
     @ElementCollection
     private Map<String, Double> aminoAcidProfile;
 
-    }
+    @Version
+    private Integer version;
+
+}
 

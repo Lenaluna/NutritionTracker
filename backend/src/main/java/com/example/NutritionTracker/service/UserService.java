@@ -45,6 +45,16 @@ public class UserService {
 
     /**
      * Retrieves a user by their name.
+     *
+     * @param name The name of the user to find.
+     * @return An Optional containing the user if found.
+     */
+    public Optional<User> findByName(String name) {
+        return userRepository.findByName(name);
+    }
+
+    /**
+     * Retrieves a user by their name.
      * This method is transactional to ensure a consistent read from the database.
      *
      * @return An Optional containing the user if found.

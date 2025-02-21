@@ -39,9 +39,7 @@ public class DevDataLoader implements CommandLineRunner {
         logger.info("Loading test data...");
 
         // Check if a user already exists in the database
-        Optional<User> existingUser = userService.getUser(); // Use getUser() from UserService
-
-        User user;
+        Optional<User> existingUser = userService.findByName("Test User");        User user;
 
         if (existingUser.isPresent()) {
             user = existingUser.get();
@@ -53,6 +51,7 @@ public class DevDataLoader implements CommandLineRunner {
                     .age(30)
                     .weight(70.0)
                     .isAthlete(false)
+                    .version(0)
                     .build();
 
             // Save the user using UserService
