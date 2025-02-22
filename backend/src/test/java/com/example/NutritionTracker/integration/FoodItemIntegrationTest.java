@@ -42,13 +42,13 @@ class FoodItemIntegrationTest {
     @Rollback(false)
     void shouldCreateAndRetrieveFoodItem() throws Exception {
         String requestBody = """
-        {
-            "name": "Banana",
-            "aminoAcidProfile": {
-                "Lysine": 1.2,
-                "Valine": 2.0
-            }
-        }
+                {
+                       "name": "Banana",
+                       "aminoAcidProfile": {
+                           "Lysine": 1.2,
+                           "Valine": 2.0
+                       }
+                   }
         """;
 
         // Sends a POST request to create a new FoodItem
@@ -72,7 +72,6 @@ class FoodItemIntegrationTest {
                 .id(UUID.randomUUID())
                 .name("Apple")
                 .aminoAcidProfile(Map.of("Lysine", 0.5))
-                .version(1)
                 .build();
         foodItemRepository.save(item);
 

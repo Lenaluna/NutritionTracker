@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import lombok.Builder.Default;
 
 import java.util.List;
 import java.util.UUID;
@@ -38,7 +39,5 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NutritionLog> nutritionLogs;
 
-    @Version
-    private Integer version;
 
 }

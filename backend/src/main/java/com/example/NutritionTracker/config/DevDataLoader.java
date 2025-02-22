@@ -3,6 +3,7 @@ package com.example.NutritionTracker.config;
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.entity.NutritionLog;
 import com.example.NutritionTracker.entity.User;
+import com.example.NutritionTracker.exception.UserAlreadyExistsException;
 import com.example.NutritionTracker.service.FoodItemService;
 import com.example.NutritionTracker.service.NutritionLogService;
 import com.example.NutritionTracker.service.UserService;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * DevDataLoader is responsible for populating the database with test data when
@@ -24,7 +24,7 @@ import java.util.Optional;
  * items and a test nutrition log to simulate user interactions.
  */
 @Component
-@Profile("dev") // Runs only when the "dev" profile is active
+@Profile({"dev","test"})// Runs only when the "dev" profile is active
 @RequiredArgsConstructor
 public class DevDataLoader implements CommandLineRunner {
 
@@ -38,26 +38,15 @@ public class DevDataLoader implements CommandLineRunner {
     public void run(String... args) {
         logger.info("Loading test data...");
 
-        // Check if a user already exists in the database
-        Optional<User> existingUser = userService.findByName("Test User");        User user;
-
-        if (existingUser.isPresent()) {
-            user = existingUser.get();
-            logger.info("User already exists in database: {}", user.getName());
-        } else {
-            // Create a new dummy user if none exists
-            user = User.builder()
-                    .name("Test User")
-                    .age(30)
-                    .weight(70.0)
-                    .isAthlete(false)
-                    .version(0)
-                    .build();
-
-            // Save the user using UserService
-            user = userService.createUser(user);
-            logger.info("Dummy user created: {}", user.getName());
-        }
+        userService.cleanup();
+        User user = User.builder()
+                .name("Test User")
+                .age(30)
+                .weight(70.0)
+                .isAthlete(false)
+                .build();
+        userService.createUser(user);
+        logger.info("Test User created.");
 
         // Create sample FoodItems
         FoodItem chickenBreast = FoodItem.builder()
