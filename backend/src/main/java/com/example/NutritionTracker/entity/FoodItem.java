@@ -19,8 +19,7 @@ public class FoodItem {
 
     private String name;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private Map<String, Double> aminoAcidProfile;
-
 }
 

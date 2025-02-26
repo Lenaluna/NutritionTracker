@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import lombok.Builder.Default;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Table(name = "app_user")
+
 public class User {
 
     @Id
@@ -38,6 +38,5 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NutritionLog> nutritionLogs;
-
 
 }

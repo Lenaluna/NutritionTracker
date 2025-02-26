@@ -20,17 +20,20 @@ public class FoodItemController {
     /** Returns all available food items */
     @GetMapping
     public ResponseEntity<List<FoodItem>> getAllFoodItems() {
-        return ResponseEntity.ok(foodItemService.getAllFoodItems());
+        List<FoodItem> foodItems = foodItemService.getAllFoodItems();
+        return ResponseEntity.ok(foodItems);
     }
 
-    /** Deletes a food item (Fixes UUID issue) */
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteFoodItem(@PathVariable String id) {
-        UUID foodItemId = UUID.fromString(id);
-        foodItemService.deleteFoodItem(foodItemId);
+    @GetMapping("/search")
+    public ResponseEntity<List<FoodItem>> searchByNameOrPartial(@RequestParam String name) {
+        List<FoodItem> foodItems = foodItemService.findByNameContainingIgnoreCase(name);
+        if (foodItems.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(foodItems);
     }
 
+    /** Retrieves a single food item by ID */
     @GetMapping("/{id}")
     public ResponseEntity<FoodItem> getFoodItemById(@PathVariable UUID id) {
         Optional<FoodItem> foodItem = foodItemService.getFoodItemById(id);
@@ -38,9 +41,25 @@ public class FoodItemController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    /** Adds a new food item */
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public FoodItem addFoodItem(@RequestBody FoodItem foodItem) {
-        return foodItemService.saveFoodItem(foodItem);
+    public ResponseEntity<FoodItem> addFoodItem(@RequestBody FoodItem foodItem) {
+        FoodItem savedItem = foodItemService.saveFoodItem(foodItem);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedItem);
+    }
+
+    /** Updates an existing food item */
+    @PutMapping("/{id}")
+    public ResponseEntity<FoodItem> updateFoodItem(@PathVariable UUID id, @RequestBody FoodItem updatedItem) {
+        Optional<FoodItem> updated = foodItemService.updateFoodItem(id, updatedItem);
+        return updated.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /** Deletes a food item */
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteFoodItem(@PathVariable UUID id) {
+        foodItemService.deleteFoodItem(id);
     }
 }

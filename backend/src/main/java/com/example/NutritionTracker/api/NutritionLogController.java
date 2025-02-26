@@ -3,6 +3,7 @@ package com.example.NutritionTracker.api;
 import com.example.NutritionTracker.entity.NutritionLog;
 import com.example.NutritionTracker.service.NutritionLogService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +47,19 @@ public class NutritionLogController {
         NutritionLog updatedLog = nutritionLogService.updateLog(id, log);
         return ResponseEntity.ok(updatedLog);
     }
+
+    @DeleteMapping("/{logId}/food-item/{foodItemId}")
+    public ResponseEntity<Void> removeFoodItemFromLog(@PathVariable UUID logId, @PathVariable UUID foodItemId) {
+        nutritionLogService.removeFoodItemFromLog(logId, foodItemId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{logId}/food-items/{foodItemId}")
+    public ResponseEntity<Void> addFoodItemToLog(@PathVariable UUID logId, @PathVariable UUID foodItemId) {
+        nutritionLogService.addFoodItemToLog(logId, foodItemId);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
 
     @PostMapping("/calculate-amino-acids")
     public ResponseEntity<Map<String, Double>> calculateAminoAcids(@RequestBody NutritionLog log) {

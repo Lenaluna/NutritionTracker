@@ -1,8 +1,14 @@
 package com.example.NutritionTracker.service;
 
+import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.entity.NutritionLog;
+import com.example.NutritionTracker.entity.NutritionLogFoodItem;
 import com.example.NutritionTracker.entity.User;
+import com.example.NutritionTracker.repo.FoodItemRepository;
+import com.example.NutritionTracker.repo.NutritionLogFoodItemRepository;
 import com.example.NutritionTracker.repo.NutritionLogRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +28,9 @@ public class NutritionLogService {
     private final NutritionLogRepository nutritionLogRepository;
     private final UserService userService;
     private final AminoAcidCalculator baseCalculator = new BasicAminoAcidCalculator();
+    private final FoodItemRepository foodItemRepository;
+    private final NutritionLogFoodItemRepository nutritionLogFoodItemRepository;
+
 
     public User getUser() {
         return userService.getUser()
@@ -31,6 +40,36 @@ public class NutritionLogService {
                         .weight(70.0)
                         .isAthlete(false)
                         .build());
+    }
+
+    @Transactional
+    public void removeFoodItemFromLog(UUID logId, UUID foodItemId) {
+        NutritionLog log = nutritionLogRepository.findById(logId)
+                .orElseThrow(() -> new EntityNotFoundException("NutritionLog not found"));
+
+        Optional<NutritionLogFoodItem> nutritionLogFoodItem = nutritionLogFoodItemRepository
+                .findByNutritionLogIdAndFoodItemId(logId, foodItemId);
+
+        if (nutritionLogFoodItem.isPresent()) {
+            nutritionLogFoodItemRepository.delete(nutritionLogFoodItem.get()); // Löscht direkt aus der DB
+            logger.info("Deleted FoodItem with ID {} from NutritionLog {}", foodItemId, logId);
+        } else {
+            logger.warn("FoodItem with ID {} not found in NutritionLog {}", foodItemId, logId);
+            throw new EntityNotFoundException("FoodItem not found in this NutritionLog");
+        }
+    }
+    @Transactional
+    public void addFoodItemToLog(UUID logId,  UUID foodItemId) {
+        NutritionLog nutritionLog = nutritionLogRepository.findById(logId)
+                .orElseThrow(() -> new EntityNotFoundException("NutritionLog not found"));
+
+        FoodItem foodItem = foodItemRepository.findById(foodItemId)
+                .orElseThrow(() -> new EntityNotFoundException("FoodItem not found"));
+
+        NutritionLogFoodItem nutritionLogFoodItem = new NutritionLogFoodItem(nutritionLog, foodItem);
+
+        nutritionLog.getFoodItems().add(nutritionLogFoodItem);
+        nutritionLogFoodItemRepository.save(nutritionLogFoodItem);
     }
 
     /**
@@ -51,21 +90,10 @@ public class NutritionLogService {
 
     /**
      * Creates a new NutritionLog and saves it to the H2 database.
-     * Ensures that there is no existing log for the same user on the same date.
      */
     public NutritionLog createLog(NutritionLog log) {
-        User user = getUser();
-        Optional<NutritionLog> existingLog = nutritionLogRepository.findByUserAndLogDateTime(user, log.getLogDateTime());
-
-        if (existingLog.isPresent()) {
-            logger.warn("A NutritionLog for {} already exists!", log.getLogDateTime());
-            return existingLog.get();
-        }
-
-        log.setUser(user);
-
         NutritionLog savedLog = nutritionLogRepository.save(log);
-        logger.info("Created new NutritionLog with ID {} for User {}", savedLog.getId(), savedLog.getUser().getName());
+        logger.info("New NutritionLog with ID {} created.", savedLog.getId());
         return savedLog;
     }
 

@@ -59,6 +59,28 @@ class FoodItemControllerTest {
     }
 
     @Test
+    void shouldUpdateFoodItem() throws Exception {
+        UUID id = foodItem1.getId();
+        FoodItem updatedFoodItem = new FoodItem(id, "Updated Apple", Map.of("Lysine", 0.4, "Methionine", 0.2));
+
+        when(foodItemService.updateFoodItem(eq(id), any(FoodItem.class))).thenReturn(Optional.of(updatedFoodItem));
+
+        mockMvc.perform(put("/api/food-items/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                            {
+                                "name": "Updated Apple",
+                                "aminoAcidProfile": {
+                                    "Lysine": 0.4,
+                                    "Methionine": 0.2
+                                }
+                            }
+                            """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Updated Apple"));
+    }
+
+    @Test
     void shouldReturnFoodItemById() throws Exception {
         UUID id = foodItem1.getId();
 

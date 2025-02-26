@@ -1,8 +1,0 @@
-server:
-  port: 8080
-  servlet:
-    context-path: /api
-
-spring:
-  profiles:
-    active: dev

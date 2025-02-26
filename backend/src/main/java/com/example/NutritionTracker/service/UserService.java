@@ -8,10 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.NutritionTracker.exception.UserAlreadyExistsException;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +17,6 @@ public class UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
-
 
 
     @PreDestroy
@@ -30,19 +27,13 @@ public class UserService {
     }
 
     @Transactional
-    public User createUser(User user) {
-        return userRepository.save(user);
+    public User createUser(User user)
+    {if (userRepository.count() > 0) {
+        throw new IllegalStateException("Ein Benutzer ist bereits vorhanden. Es kann nur ein Benutzer existieren.");
+    }
+            return userRepository.save(user);
     }
 
-    /**
-     * Retrieves a user by their name.
-     *
-     * @param name The name of the user to find.
-     * @return An Optional containing the user if found.
-     */
-    public Optional<User> findByName(String name) {
-        return userRepository.findByName(name);
-    }
 
     /**
      * Retrieves a user by their name.
@@ -51,6 +42,6 @@ public class UserService {
      * @return An Optional containing the user if found.
      */
     public Optional<User> getUser() {
-        return userRepository.findByName("Test User");
+        return userRepository.findAll().stream().findFirst();
     }
 }

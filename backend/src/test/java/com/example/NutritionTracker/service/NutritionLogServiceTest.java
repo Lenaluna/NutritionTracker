@@ -2,6 +2,7 @@ package com.example.NutritionTracker.service;
 
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.entity.NutritionLog;
+import com.example.NutritionTracker.entity.NutritionLogFoodItem;
 import com.example.NutritionTracker.entity.User;
 import com.example.NutritionTracker.repo.NutritionLogRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,13 +31,11 @@ class NutritionLogServiceTest {
     private NutritionLogService nutritionLogService;
 
     private NutritionLog log;
-    private User user;
-    private FoodItem chicken;
-    private FoodItem quinoa;
+    private NutritionLogFoodItem logItem2;
 
     @BeforeEach
     void setUp() {
-        user = User.builder()
+        User user = User.builder()
                 .id(UUID.randomUUID())
                 .name("Test User")
                 .age(30)
@@ -44,13 +43,13 @@ class NutritionLogServiceTest {
                 .isAthlete(false)
                 .build();
 
-        chicken = FoodItem.builder()
+        FoodItem chicken = FoodItem.builder()
                 .id(UUID.randomUUID())
                 .name("Chicken Breast")
                 .aminoAcidProfile(Map.of("Lysine", 2.5, "Valine", 3.0))
                 .build();
 
-        quinoa = FoodItem.builder()
+        FoodItem quinoa = FoodItem.builder()
                 .id(UUID.randomUUID())
                 .name("Quinoa")
                 .aminoAcidProfile(Map.of("Lysine", 1.2, "Valine", 2.0))
@@ -59,9 +58,13 @@ class NutritionLogServiceTest {
         log = NutritionLog.builder()
                 .id(UUID.randomUUID())
                 .user(user)
-                .foodItems(List.of(chicken, quinoa))
                 .logDateTime(LocalDateTime.now())
                 .build();
+
+        NutritionLogFoodItem logItem1 = new NutritionLogFoodItem(log, chicken);
+        logItem2 = new NutritionLogFoodItem(log, quinoa);
+
+        log.setFoodItems(List.of(logItem1, logItem2)); // Korrekte Speicherung
     }
 
     @Test
@@ -73,12 +76,13 @@ class NutritionLogServiceTest {
 
         assertTrue(foundLog.isPresent());
         assertEquals(logId, foundLog.get().getId());
+        assertEquals(2, foundLog.get().getFoodItems().size());
     }
 
     @Test
     void shouldDeleteLog() {
         // Arrange
-        UUID logId = UUID.fromString("e4178ca7-0d6b-4b8b-8932-927f87fb9567");
+        UUID logId = log.getId();
         when(nutritionLogRepository.existsById(logId)).thenReturn(true);
 
         // Act
@@ -97,5 +101,6 @@ class NutritionLogServiceTest {
 
         assertFalse(logs.isEmpty());
         assertEquals(1, logs.size());
+        assertEquals(2, logs.get(0).getFoodItems().size()); // Prüfen, ob die FoodItems korrekt geladen wurden
     }
 }
