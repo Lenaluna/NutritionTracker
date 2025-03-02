@@ -26,7 +26,7 @@ import java.util.Map;
  * It creates sample food items and a test nutrition log to simulate user interactions.
  */
 @Component
-@Profile("dev")
+@Profile({"dev"})
 @RequiredArgsConstructor
 public class DevDataLoader implements CommandLineRunner {
 

@@ -9,7 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +20,6 @@ public class UserService {
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository;
-
 
     @PreDestroy
     public void cleanup() {
@@ -27,13 +29,12 @@ public class UserService {
     }
 
     @Transactional
-    public User createUser(User user)
-    {if (userRepository.count() > 0) {
-        throw new IllegalStateException("Ein Benutzer ist bereits vorhanden. Es kann nur ein Benutzer existieren.");
+    public User createUser(User user) {
+        if (userRepository.count() > 0) {
+            throw new IllegalStateException("Ein Benutzer ist bereits vorhanden. Es kann nur ein Benutzer existieren.");
+        }
+        return userRepository.save(user);
     }
-            return userRepository.save(user);
-    }
-
 
     /**
      * Retrieves a user by their name.
@@ -41,7 +42,16 @@ public class UserService {
      *
      * @return An Optional containing the user if found.
      */
+    @Transactional(readOnly = true)
     public Optional<User> getUser() {
         return userRepository.findAll().stream().findFirst();
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+       }
+
+    public void deleteUser(UUID userId) {
+        userRepository.deleteById(userId);
     }
 }

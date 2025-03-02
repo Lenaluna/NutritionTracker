@@ -8,16 +8,14 @@ import com.example.NutritionTracker.repo.FoodItemRepository;
 import com.example.NutritionTracker.repo.NutritionLogFoodItemRepository;
 import com.example.NutritionTracker.repo.NutritionLogRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import org.hibernate.Hibernate;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +29,7 @@ public class NutritionLogService {
     private final FoodItemRepository foodItemRepository;
     private final NutritionLogFoodItemRepository nutritionLogFoodItemRepository;
 
-
+    @Transactional(readOnly = true)
     public User getUser() {
         return userService.getUser()
                 .orElseGet(() -> User.builder()
@@ -42,64 +40,74 @@ public class NutritionLogService {
                         .build());
     }
 
-    @Transactional
     public void removeFoodItemFromLog(UUID logId, UUID foodItemId) {
-        NutritionLog log = nutritionLogRepository.findById(logId)
-                .orElseThrow(() -> new EntityNotFoundException("NutritionLog not found"));
+
+        if (!nutritionLogRepository.existsById(logId)) {
+            throw new EntityNotFoundException("NutritionLog not found");
+        }
 
         Optional<NutritionLogFoodItem> nutritionLogFoodItem = nutritionLogFoodItemRepository
                 .findByNutritionLogIdAndFoodItemId(logId, foodItemId);
 
         if (nutritionLogFoodItem.isPresent()) {
-            nutritionLogFoodItemRepository.delete(nutritionLogFoodItem.get()); // Löscht direkt aus der DB
+            nutritionLogFoodItemRepository.delete(nutritionLogFoodItem.get());
             logger.info("Deleted FoodItem with ID {} from NutritionLog {}", foodItemId, logId);
         } else {
             logger.warn("FoodItem with ID {} not found in NutritionLog {}", foodItemId, logId);
             throw new EntityNotFoundException("FoodItem not found in this NutritionLog");
         }
     }
+
     @Transactional
-    public void addFoodItemToLog(UUID logId,  UUID foodItemId) {
+    public void addFoodItemToLog(UUID logId, UUID foodItemId) {
         NutritionLog nutritionLog = nutritionLogRepository.findById(logId)
                 .orElseThrow(() -> new EntityNotFoundException("NutritionLog not found"));
 
         FoodItem foodItem = foodItemRepository.findById(foodItemId)
                 .orElseThrow(() -> new EntityNotFoundException("FoodItem not found"));
 
-        NutritionLogFoodItem nutritionLogFoodItem = new NutritionLogFoodItem(nutritionLog, foodItem);
+        // Nullprüfung für foodItems-Liste
+        if (nutritionLog.getFoodItems() == null) {
+            nutritionLog.setFoodItems(new ArrayList<>());
+            logger.warn("foodItems list was null for NutritionLog with ID: {}. Initialized an empty list.", logId);
+        }
 
-        nutritionLog.getFoodItems().add(nutritionLogFoodItem);
-        nutritionLogFoodItemRepository.save(nutritionLogFoodItem);
+        NutritionLogFoodItem logFoodItem = new NutritionLogFoodItem();
+        logFoodItem.setNutritionLog(nutritionLog);
+        logFoodItem.setFoodItem(foodItem);
+
+        nutritionLogFoodItemRepository.save(logFoodItem);
+
+        // Hinzufügen des neuen FoodItems zur Liste
+        nutritionLog.getFoodItems().add(logFoodItem);
+
+        logger.info("Added FoodItem {} to NutritionLog {}", foodItemId, logId);
     }
 
-    /**
-     * Returns all NutritionLogs stored in the H2 database.
-     */
+    @Transactional(readOnly = true)
     public List<NutritionLog> getAllLogs() {
         logger.info("Fetching all nutrition logs. Total logs: {}", nutritionLogRepository.count());
         return nutritionLogRepository.findAll();
     }
 
-    /**
-     * Finds a NutritionLog by its ID from the H2 database.
-     */
+
+    @Transactional(readOnly = true)
     public Optional<NutritionLog> getLogById(UUID id) {
-        logger.info("Searching for NutritionLog with ID: {}", id);
-        return nutritionLogRepository.findById(id);
+        Optional<NutritionLog> nutritionLog = nutritionLogRepository.findById(id);
+
+        nutritionLog.ifPresent(log -> Hibernate.initialize(log.getFoodItems()));
+
+        return nutritionLog;
     }
 
-    /**
-     * Creates a new NutritionLog and saves it to the H2 database.
-     */
+    @Transactional
     public NutritionLog createLog(NutritionLog log) {
         NutritionLog savedLog = nutritionLogRepository.save(log);
         logger.info("New NutritionLog with ID {} created.", savedLog.getId());
         return savedLog;
     }
 
-    /**
-     * Deletes a NutritionLog by its ID from the H2 database.
-     */
+    @Transactional
     public void deleteLog(UUID id) {
         if (nutritionLogRepository.existsById(id)) {
             nutritionLogRepository.deleteById(id);
@@ -109,9 +117,7 @@ public class NutritionLogService {
         }
     }
 
-    /**
-     * Updates an existing NutritionLog in the H2 database.
-     */
+    @Transactional
     public NutritionLog updateLog(UUID id, NutritionLog updatedLog) {
         return nutritionLogRepository.findById(id).map(existingLog -> {
             existingLog.setFoodItems(updatedLog.getFoodItems());
@@ -121,14 +127,11 @@ public class NutritionLogService {
             return savedLog;
         }).orElseThrow(() -> {
             logger.error("Attempted to update non-existent NutritionLog with ID: {}", id);
-            return new RuntimeException("Log not found");
+            return new EntityNotFoundException("Log not found");
         });
     }
 
-    /**
-     * Calculates amino acid values based on NutritionLog data.
-     * Applies additional decorators for children or athletes if applicable.
-     */
+    @Transactional(readOnly = true)
     public Map<String, Double> calculateAminoAcidsForLog(NutritionLog log) {
         AminoAcidCalculator calculator = baseCalculator;
 

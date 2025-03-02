@@ -28,4 +28,7 @@ public class NutritionLogFoodItem {
         this.nutritionLog = nutritionLog;
         this.foodItem = foodItem;
     }
+
+    @Version
+    private Long version;
 }

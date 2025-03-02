@@ -3,7 +3,7 @@ package com.example.NutritionTracker.service;
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.repo.FoodItemRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +18,13 @@ public class FoodItemService {
     private final FoodItemRepository foodItemRepository;
 
     /** Returns all FoodItems */
+    @Transactional(readOnly = true)
     public List<FoodItem> getAllFoodItems() {
         return foodItemRepository.findAll();
     }
 
     /** Retrieves a FoodItem by ID */
+    @Transactional(readOnly = true)
     public Optional<FoodItem> getFoodItemById(UUID id) {
         return foodItemRepository.findById(id);
     }
@@ -50,6 +52,9 @@ public class FoodItemService {
             return foodItemRepository.save(existingItem);
         });
     }
+
+    /** Finds FoodItems by name containing a specific string (case-insensitive) */
+    @Transactional(readOnly = true)
     public List<FoodItem> findByNameContainingIgnoreCase(String namePart) {
         return foodItemRepository.findByNameContainingIgnoreCase(namePart);
     }
@@ -61,4 +66,5 @@ public class FoodItemService {
             throw new EntityNotFoundException("FoodItem with ID " + foodItemId + " not found");
         }
         foodItemRepository.deleteById(foodItemId);
-    }}
+    }
+}

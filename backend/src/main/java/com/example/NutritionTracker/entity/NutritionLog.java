@@ -20,7 +20,7 @@ public class NutritionLog {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -28,4 +28,7 @@ public class NutritionLog {
     private List<NutritionLogFoodItem> foodItems = new ArrayList<>();
 
     private LocalDateTime logDateTime;
+
+    @Version
+    private Long version;
 }
