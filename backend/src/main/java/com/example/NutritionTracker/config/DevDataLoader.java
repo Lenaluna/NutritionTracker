@@ -26,7 +26,7 @@ import java.util.Map;
  * It creates sample food items and a test nutrition log to simulate user interactions.
  */
 @Component
-@Profile({"dev"})
+@Profile({"dev", "test"})
 @RequiredArgsConstructor
 public class DevDataLoader implements CommandLineRunner {
 
@@ -42,7 +42,12 @@ public class DevDataLoader implements CommandLineRunner {
 
 
         // Cleanup existing test data
+        nutritionLogService.cleanup();
+        foodItemService.cleanup();
         userService.cleanup();
+
+        logger.info("Test data cleaned up.");
+
 
         // Create a test user
         User user = User.builder()

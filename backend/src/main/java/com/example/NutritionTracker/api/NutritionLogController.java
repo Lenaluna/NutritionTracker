@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/nutrition-logs")
+@RequestMapping("/nutrition-logs")
 @RequiredArgsConstructor
 public class NutritionLogController {
 

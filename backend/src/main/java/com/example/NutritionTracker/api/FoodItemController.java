@@ -12,10 +12,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/food-items")
+@RequestMapping("/food-items")
 @RequiredArgsConstructor
 public class FoodItemController {
     private final FoodItemService foodItemService;
+
 
     /** Returns all available food items */
     @GetMapping

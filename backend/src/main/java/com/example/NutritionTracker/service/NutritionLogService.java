@@ -1,5 +1,6 @@
 package com.example.NutritionTracker.service;
 
+import com.example.NutritionTracker.dto.UserDTO;
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.entity.NutritionLog;
 import com.example.NutritionTracker.entity.NutritionLogFoodItem;
@@ -30,9 +31,16 @@ public class NutritionLogService {
     private final NutritionLogFoodItemRepository nutritionLogFoodItemRepository;
 
     @Transactional(readOnly = true)
-    public User getUser() {
+    public UserDTO getUser() {
         return userService.getUser()
-                .orElseGet(() -> User.builder()
+                .map(user -> UserDTO.builder()
+                        .id(user.getId())
+                        .name(user.getName())
+                        .age(user.getAge())
+                        .weight(user.getWeight())
+                        .isAthlete(user.getIsAthlete())
+                        .build())
+                .orElseGet(() -> UserDTO.builder()
                         .name("Default User")
                         .age(30)
                         .weight(70.0)
@@ -40,6 +48,14 @@ public class NutritionLogService {
                         .build());
     }
 
+    @Transactional
+    public void cleanup() {
+        logger.info("Cleaning up database before shutdown...");
+        nutritionLogRepository.deleteAll();
+        logger.info("All nutrition logs deleted.");
+    }
+
+    @Transactional
     public void removeFoodItemFromLog(UUID logId, UUID foodItemId) {
 
         if (!nutritionLogRepository.existsById(logId)) {
@@ -102,9 +118,15 @@ public class NutritionLogService {
 
     @Transactional
     public NutritionLog createLog(NutritionLog log) {
-        NutritionLog savedLog = nutritionLogRepository.save(log);
-        logger.info("New NutritionLog with ID {} created.", savedLog.getId());
-        return savedLog;
+        UUID userId = log.getUser().getId();
+        User user = userService.getUserById(userId);
+        if (user == null) {
+            throw new EntityNotFoundException("User mit ID: " + userId + " wurde nicht gefunden.");
+        }
+
+        log.setUser(user);
+
+        return nutritionLogRepository.save(log);
     }
 
     @Transactional

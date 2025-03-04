@@ -2,7 +2,10 @@ package com.example.NutritionTracker.service;
 
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.repo.FoodItemRepository;
+import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,11 +19,19 @@ import java.util.UUID;
 public class FoodItemService {
 
     private final FoodItemRepository foodItemRepository;
+    private static final Logger logger = LoggerFactory.getLogger(FoodItemService.class);
 
     /** Returns all FoodItems */
     @Transactional(readOnly = true)
     public List<FoodItem> getAllFoodItems() {
         return foodItemRepository.findAll();
+    }
+
+    @PreDestroy
+    public void cleanup() {
+        logger.info("Cleaning up food items from database...");
+        foodItemRepository.deleteAll();
+        logger.info("All food items deleted.");
     }
 
     /** Retrieves a FoodItem by ID */

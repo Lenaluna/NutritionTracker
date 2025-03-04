@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
- * Integrationstest für die NutritionLog-Funktionalität.
+ * Integration test for the NutritionLog functionality.
  */
 @SpringBootTest
 @ActiveProfiles("test")
@@ -43,13 +43,13 @@ class NutritionLogIntegrationTest {
     private User testUser;
 
     /**
-     * Bereinigt und initialisiert die Datenbank vor jedem Testlauf.
+     * Cleans and initializes the database before each test run.
      */
     @BeforeEach
     void setup() {
         cleanDatabase();
 
-        // Test-Benutzer persistieren und für alle Tests verfügbar machen
+        // Persist test user and make it available for all tests
         testUser = userService.createUser(User.builder()
                 .name("Integration Test User")
                 .age(25)
@@ -60,44 +60,41 @@ class NutritionLogIntegrationTest {
     }
 
     /**
-     * Leert die gesamte Datenbank, um Tests immer mit einem konsistenten Zustand zu starten.
+     * Empties the entire database to start tests with a consistent state.
      */
     void cleanDatabase() {
-        // Alle FoodItems entfernen
+        // Remove all FoodItems
         foodItemService.getAllFoodItems()
                 .forEach(item -> foodItemService.deleteFoodItem(item.getId()));
 
-        // Alle Logs entfernen
+        // Remove all logs
         nutritionLogService.getAllLogs()
                 .forEach(log -> nutritionLogService.deleteLog(log.getId()));
 
-        // Alle Benutzer entfernen
+        // Remove all users
         userService.getAllUsers()
                 .forEach(user -> userService.deleteUser(user.getId()));
     }
 
     /**
-     * Testet die Erstellung eines NutritionLogs und das Hinzufügen von FoodItems.
-     */
-    /**
-     * Testet die Erstellung eines NutritionLogs und das Hinzufügen von FoodItems.
+     * Tests the creation of a NutritionLog and adding FoodItems to it.
      */
     @Test
     void testCreateNutritionLogAndAddFoodItems() {
-        // Sicherstellen, dass ein Benutzer existiert
+        // Ensure a user exists
         assertNotNull(testUser, "Test User should not be null");
 
-        // 1. NutritionLog erstellen
+        // 1. Create a NutritionLog
         NutritionLog log = nutritionLogService.createLog(NutritionLog.builder()
                 .user(testUser)
                 .logDateTime(LocalDateTime.now())
                 .build());
 
-        // Überprüfen, ob NutritionLog korrekt erstellt wurde
+        // Verify that the NutritionLog was created correctly
         assertNotNull(log, "Created NutritionLog should not be null");
         assertNotNull(log.getId(), "Created NutritionLog ID should not be null");
 
-        // 2. FoodItem erstellen
+        // 2. Create a FoodItem
         FoodItem foodItem = foodItemService.saveFoodItem(FoodItem.builder()
                 .name("Test Food Item")
                 .aminoAcidProfile(Map.of(
@@ -106,18 +103,18 @@ class NutritionLogIntegrationTest {
                 ))
                 .build());
 
-        // Überprüfen, ob FoodItem korrekt erstellt wurde
+        // Verify that the FoodItem was created correctly
         assertNotNull(foodItem, "FoodItem should not be null");
         assertNotNull(foodItem.getId(), "Created FoodItem ID should not be null");
 
-        // 3. FoodItem zum NutritionLog hinzufügen
+        // 3. Add the FoodItem to the NutritionLog
         nutritionLogService.addFoodItemToLog(log.getId(), foodItem.getId());
 
-        // 4. NutritionLog abrufen und sicherstellen, dass das FoodItem hinzugefügt wurde
+        // 4. Retrieve the NutritionLog and ensure the FoodItem was added
         NutritionLog updatedLog = nutritionLogService.getLogById(log.getId())
                 .orElseThrow(() -> new EntityNotFoundException("NutritionLog not found"));
 
-        // Sicherstellen, dass das NutritionLog das hinzugefügte FoodItem enthält
+        // Ensure that the NutritionLog contains the added FoodItem
         assertNotNull(updatedLog.getFoodItems(), "NutritionLog FoodItems list should not be null");
         assertFalse(updatedLog.getFoodItems().isEmpty(), "NutritionLog should contain at least one FoodItem");
 
@@ -126,9 +123,8 @@ class NutritionLogIntegrationTest {
         assertTrue(containsItem, "NutritionLog should contain the added FoodItem");
     }
 
-
     /**
-     * Testet, dass ein FoodItem zu einem nicht existierenden NutritionLog nicht hinzugefügt werden kann.
+     * Tests that a FoodItem cannot be added to a non-existing NutritionLog.
      */
     @Test
     void testAddFoodItemToNonExistingLog() {
@@ -139,7 +135,7 @@ class NutritionLogIntegrationTest {
     }
 
     /**
-     * Testet, dass ein nicht existierendes FoodItem nicht zu einem NutritionLog hinzugefügt werden kann.
+     * Tests that a non-existing FoodItem cannot be added to a NutritionLog.
      */
     @Test
     void testAddNonExistingFoodItemToLog() {
@@ -158,7 +154,7 @@ class NutritionLogIntegrationTest {
     }
 
     /**
-     * Testet das Abrufen aller NutritionLogs.
+     * Tests retrieving all NutritionLogs.
      */
     @Test
     void testFetchAllNutritionLogs() {
@@ -175,7 +171,7 @@ class NutritionLogIntegrationTest {
     }
 
     /**
-     * Testet die Aktualisierung eines NutritionLogs.
+     * Tests updating a NutritionLog.
      */
     @Test
     void testUpdateNutritionLog() {
@@ -184,7 +180,7 @@ class NutritionLogIntegrationTest {
 
         assertNotNull(savedLog.getId());
 
-        // Aktualisierung durchführen
+        // Perform update
         savedLog.setLogDateTime(LocalDateTime.now().minusDays(3));
         NutritionLog updatedLog = nutritionLogService.updateLog(savedLog.getId(), savedLog);
 
@@ -193,7 +189,7 @@ class NutritionLogIntegrationTest {
     }
 
     /**
-     * Testet das Löschen eines NutritionLogs.
+     * Tests deleting a NutritionLog.
      */
     @Test
     void testDeleteNutritionLog() {
@@ -202,7 +198,7 @@ class NutritionLogIntegrationTest {
 
         assertNotNull(savedLog.getId());
 
-        // Log löschen
+        // Delete the log
         nutritionLogService.deleteLog(savedLog.getId());
 
         var logs = nutritionLogService.getAllLogs();

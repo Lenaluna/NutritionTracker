@@ -1,8 +1,10 @@
 package com.example.NutritionTracker.service;
 
+import com.example.NutritionTracker.dto.UserDTO;
 import com.example.NutritionTracker.entity.User;
 import com.example.NutritionTracker.repo.UserRepository;
 import jakarta.annotation.PreDestroy;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,15 +38,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    /**
-     * Retrieves a user by their name.
-     * This method is transactional to ensure a consistent read from the database.
-     *
-     * @return An Optional containing the user if found.
-     */
     @Transactional(readOnly = true)
-    public Optional<User> getUser() {
-        return userRepository.findAll().stream().findFirst();
+    public Optional<UserDTO> getUser() {
+        return userRepository.findAll().stream()
+                .findFirst()
+                .map(user -> UserDTO.builder()
+                        .id(user.getId())
+                        .name(user.getName())
+                        .age(user.getAge())
+                        .weight(user.getWeight())
+                        .isAthlete(user.getIsAthlete())
+                        .build());
     }
 
     public List<User> getAllUsers() {
@@ -53,5 +57,11 @@ public class UserService {
 
     public void deleteUser(UUID userId) {
         userRepository.deleteById(userId);
+    }
+
+    @Transactional(readOnly = true)
+    public User getUserById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with ID " + id + " was not found."));
     }
 }

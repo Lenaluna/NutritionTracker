@@ -50,7 +50,7 @@ class FoodItemControllerTest {
 
         when(foodItemService.getAllFoodItems()).thenReturn(mockFoodItems);
 
-        mockMvc.perform(get("/api/food-items")
+        mockMvc.perform(get("/food-items")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
@@ -65,7 +65,7 @@ class FoodItemControllerTest {
 
         when(foodItemService.updateFoodItem(eq(id), any(FoodItem.class))).thenReturn(Optional.of(updatedFoodItem));
 
-        mockMvc.perform(put("/api/food-items/{id}", id)
+        mockMvc.perform(put("/food-items/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                             {
@@ -86,7 +86,7 @@ class FoodItemControllerTest {
 
         when(foodItemService.getFoodItemById(id)).thenReturn(Optional.of(foodItem1));
 
-        mockMvc.perform(get("/api/food-items/{id}", id)
+        mockMvc.perform(get("/food-items/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Apple"));
@@ -97,7 +97,7 @@ class FoodItemControllerTest {
         UUID id = UUID.randomUUID();
         when(foodItemService.getFoodItemById(id)).thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/api/food-items/{id}", id)
+        mockMvc.perform(get("/food-items/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
@@ -109,7 +109,7 @@ class FoodItemControllerTest {
 
         when(foodItemService.saveFoodItem(any(FoodItem.class))).thenReturn(newFoodItem);
 
-        mockMvc.perform(post("/api/food-items")
+        mockMvc.perform(post("/food-items")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -129,7 +129,7 @@ class FoodItemControllerTest {
         UUID id = foodItem1.getId();
         doNothing().when(foodItemService).deleteFoodItem(id);
 
-        mockMvc.perform(delete("/api/food-items/{id}", id)
+        mockMvc.perform(delete("/food-items/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
