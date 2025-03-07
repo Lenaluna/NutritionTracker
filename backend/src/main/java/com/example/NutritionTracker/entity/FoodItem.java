@@ -28,10 +28,10 @@ public class FoodItem {
     private Map<String, Double> aminoAcidProfile;
 
     @Version
-    private Long version;
+    @Builder.Default
+    private Long version = 0L;
 
-    public FoodItem(UUID id, String name, Map<String, Double> aminoAcidProfile) {
-        this.id = id;
+    public FoodItem(String name, Map<String, Double> aminoAcidProfile) {
         this.name = name;
         this.aminoAcidProfile = aminoAcidProfile;
     }

@@ -1,6 +1,6 @@
 package com.example.NutritionTracker.api;
 
-import com.example.NutritionTracker.entity.FoodItem;
+import com.example.NutritionTracker.dto.FoodItemDTO;
 import com.example.NutritionTracker.service.FoodItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,14 +20,14 @@ public class FoodItemController {
 
     /** Returns all available food items */
     @GetMapping
-    public ResponseEntity<List<FoodItem>> getAllFoodItems() {
-        List<FoodItem> foodItems = foodItemService.getAllFoodItems();
+    public ResponseEntity<List<FoodItemDTO>> getAllFoodItems() {
+        List<FoodItemDTO> foodItems = foodItemService.getAllFoodItems();
         return ResponseEntity.ok(foodItems);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<FoodItem>> searchByNameOrPartial(@RequestParam String name) {
-        List<FoodItem> foodItems = foodItemService.findByNameContainingIgnoreCase(name);
+    public ResponseEntity<List<FoodItemDTO>> searchByNameOrPartial(@RequestParam String name) {
+        List<FoodItemDTO> foodItems = foodItemService.findByNameContainingIgnoreCase(name);
         if (foodItems.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -36,23 +36,21 @@ public class FoodItemController {
 
     /** Retrieves a single food item by ID */
     @GetMapping("/{id}")
-    public ResponseEntity<FoodItem> getFoodItemById(@PathVariable UUID id) {
-        Optional<FoodItem> foodItem = foodItemService.getFoodItemById(id);
-        return foodItem.map(ResponseEntity::ok)
+    public ResponseEntity<FoodItemDTO> getFoodItemById(@PathVariable UUID id) {
+        Optional<FoodItemDTO> foodItemDTO = foodItemService.getFoodItemById(id);
+        return foodItemDTO.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
     /** Adds a new food item */
     @PostMapping
-    public ResponseEntity<FoodItem> addFoodItem(@RequestBody FoodItem foodItem) {
-        FoodItem savedItem = foodItemService.saveFoodItem(foodItem);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedItem);
+    public ResponseEntity<FoodItemDTO> addFoodItem(@RequestBody FoodItemDTO foodItemDTO) {
+        return ResponseEntity.ok(foodItemService.saveFoodItem(foodItemDTO));
     }
 
     /** Updates an existing food item */
     @PutMapping("/{id}")
-    public ResponseEntity<FoodItem> updateFoodItem(@PathVariable UUID id, @RequestBody FoodItem updatedItem) {
-        Optional<FoodItem> updated = foodItemService.updateFoodItem(id, updatedItem);
+    public ResponseEntity<FoodItemDTO> updateFoodItem(@PathVariable UUID id, @RequestBody FoodItemDTO updatedItem) {
+        Optional<FoodItemDTO> updated = foodItemService.updateFoodItem(id, updatedItem);
         return updated.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

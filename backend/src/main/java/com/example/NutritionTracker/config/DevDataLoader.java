@@ -1,30 +1,23 @@
 package com.example.NutritionTracker.config;
 
-import com.example.NutritionTracker.entity.FoodItem;
+import com.example.NutritionTracker.dto.FoodItemDTO;
 import com.example.NutritionTracker.entity.NutritionLog;
 import com.example.NutritionTracker.entity.User;
 import com.example.NutritionTracker.service.FoodItemService;
 import com.example.NutritionTracker.service.NutritionLogService;
 import com.example.NutritionTracker.service.UserService;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
-/**
- * DevDataLoader is responsible for populating the database with test data when
- * the application is running in the development or test profile.
- * It creates sample food items and a test nutrition log to simulate user interactions.
- */
 @Component
 @Profile({"dev", "test"})
 @RequiredArgsConstructor
@@ -40,16 +33,12 @@ public class DevDataLoader implements CommandLineRunner {
     public void run(String... args) {
         logger.info("Loading test data...");
 
-
-        // Cleanup existing test data
         nutritionLogService.cleanup();
         foodItemService.cleanup();
         userService.cleanup();
 
         logger.info("Test data cleaned up.");
 
-
-        // Create a test user
         User user = User.builder()
                 .name("Test User")
                 .age(30)
@@ -59,46 +48,27 @@ public class DevDataLoader implements CommandLineRunner {
         userService.createUser(user);
         logger.info("Test User created.");
 
-        // Create sample FoodItems
-        FoodItem chickenBreast = FoodItem.builder()
-                .name("Chicken Breast")
-                .aminoAcidProfile(Map.of("Lysine", 2.5, "Valine", 3.0))
-                .build();
+        List<FoodItemDTO> foodItemsToSave = List.of(
+                new FoodItemDTO(UUID.randomUUID(), "Chicken Breast", Map.of("Lysine", 2.5, "Valine", 3.0)),
+                new FoodItemDTO(UUID.randomUUID(), "Quinoa", Map.of("Lysine", 1.2, "Valine", 2.0)),
+                new FoodItemDTO(UUID.randomUUID(), "Lentils", Map.of("Lysine", 2.1, "Valine", 2.8))
+        );
 
-        FoodItem quinoa = FoodItem.builder()
-                .name("Quinoa")
-                .aminoAcidProfile(Map.of("Lysine", 1.2, "Valine", 2.0))
-                .build();
-
-        FoodItem lentils = FoodItem.builder()
-                .name("Lentils")
-                .aminoAcidProfile(Map.of("Lysine", 2.1, "Valine", 2.8))
-                .build();
-
-        // Save FoodItems and retrieve saved instances
-        List<FoodItem> savedFoodItems = foodItemService.saveAllFoodItems(List.of(chickenBreast, quinoa, lentils));
-
-        // Extract saved instances
-        FoodItem savedChickenBreast = savedFoodItems.get(0);
-        FoodItem savedQuinoa = savedFoodItems.get(1);
-        FoodItem savedLentils = savedFoodItems.get(2);
+        List<FoodItemDTO> savedFoodItems = foodItemService.saveAllFoodItems(foodItemsToSave);
 
         logger.info("Test food items saved to database.");
 
-        // Create a sample NutritionLog
         NutritionLog log = NutritionLog.builder()
-                .logDateTime(LocalDateTime.now()) // Set the new date-time field
-                .user(user) // Assign user to the log
+                .logDateTime(LocalDateTime.now())
+                .user(user)
                 .build();
 
-        // Save NutritionLog to H2 database
         NutritionLog savedLog = nutritionLogService.createLog(log);
         logger.info("Test nutrition log created in database.");
 
-        // Save NutritionLogFoodItems
-        nutritionLogService.addFoodItemToLog(savedLog.getId(), savedChickenBreast.getId());
-        nutritionLogService.addFoodItemToLog(savedLog.getId(), savedQuinoa.getId());
-        nutritionLogService.addFoodItemToLog(savedLog.getId(), savedLentils.getId());
+        for (FoodItemDTO item : savedFoodItems) {
+            nutritionLogService.addFoodItemToLog(savedLog.getId(), item.getId());
+        }
 
         logger.info("Test nutrition log linked with food items.");
     }

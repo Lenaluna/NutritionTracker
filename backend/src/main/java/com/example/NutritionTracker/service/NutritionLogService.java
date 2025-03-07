@@ -154,19 +154,23 @@ public class NutritionLogService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, Double> calculateAminoAcidsForLog(NutritionLog log) {
+    public Map<String, Double> calculateAminoAcidsForLog(UUID logId) {
+        NutritionLog log = nutritionLogRepository.findById(logId)
+                .orElseThrow(() -> new EntityNotFoundException("NutritionLog not found"));
+
+        UserDTO userDTO = userService.getUser()
+                .orElseThrow(() -> new EntityNotFoundException("No user found"));
+
         AminoAcidCalculator calculator = baseCalculator;
 
-        if (log.getUser() != null) {
-            if (log.getUser().getAge() < 18) {
-                calculator = new ChildAminoAcidDecorator(calculator);
-                logger.info("Applying ChildAminoAcidDecorator for User: {}", log.getUser().getName());
-            }
+        if (userDTO.getAge() < 18) {
+            calculator = new ChildAminoAcidDecorator(calculator);
+            logger.info("Applying ChildAminoAcidDecorator for User: {}", userDTO.getName());
+        }
 
-            if (Boolean.TRUE.equals(log.getUser().getIsAthlete())) {
-                calculator = new AthleteAminoAcidDecorator(calculator);
-                logger.info("Applying AthleteAminoAcidDecorator for User: {}", log.getUser().getName());
-            }
+        if (Boolean.TRUE.equals(userDTO.getIsAthlete())) {
+            calculator = new AthleteAminoAcidDecorator(calculator);
+            logger.info("Applying AthleteAminoAcidDecorator for User: {}", userDTO.getName());
         }
 
         logger.info("Calculating amino acids for NutritionLog with ID: {}", log.getId());

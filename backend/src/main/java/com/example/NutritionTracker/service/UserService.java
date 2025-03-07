@@ -64,4 +64,25 @@ public class UserService {
         return userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User with ID " + id + " was not found."));
     }
+
+    @Transactional
+    public UserDTO saveOrUpdateUser(UserDTO userDTO) {
+        Optional<User> existingUser = userRepository.findById(userDTO.getId());
+
+        User user = existingUser.orElseGet(User::new);
+        user.setName(userDTO.getName());
+        user.setAge(userDTO.getAge());
+        user.setWeight(userDTO.getWeight());
+        user.setIsAthlete(userDTO.getIsAthlete());
+
+        User savedUser = userRepository.save(user);
+
+        return UserDTO.builder()
+                .id(savedUser.getId())
+                .name(savedUser.getName())
+                .age(savedUser.getAge())
+                .weight(savedUser.getWeight())
+                .isAthlete(savedUser.getIsAthlete())
+                .build();
+    }
 }

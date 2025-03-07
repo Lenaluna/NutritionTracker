@@ -63,7 +63,7 @@ public class NutritionLogController {
 
     @PostMapping("/calculate-amino-acids")
     public ResponseEntity<Map<String, Double>> calculateAminoAcids(@RequestBody NutritionLog log) {
-        Map<String, Double> aminoAcids = nutritionLogService.calculateAminoAcidsForLog(log);
+        Map<String, Double> aminoAcids = nutritionLogService.calculateAminoAcidsForLog(log.getId());  // FIX: log → log.getId()
         return ResponseEntity.ok(aminoAcids);
     }
 }

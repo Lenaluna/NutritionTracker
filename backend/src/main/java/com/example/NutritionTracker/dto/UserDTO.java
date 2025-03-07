@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-// DTO-Objekt für User
 @Data
 @Builder
 @NoArgsConstructor

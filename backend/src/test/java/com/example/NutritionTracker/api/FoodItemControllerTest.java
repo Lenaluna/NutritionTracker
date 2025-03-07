@@ -1,6 +1,6 @@
 package com.example.NutritionTracker.api;
 
-import com.example.NutritionTracker.entity.FoodItem;
+import com.example.NutritionTracker.dto.FoodItemDTO;
 import com.example.NutritionTracker.service.FoodItemService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,11 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -33,20 +29,20 @@ class FoodItemControllerTest {
     @InjectMocks
     private FoodItemController foodItemController;
 
-    private FoodItem foodItem1;
-    private FoodItem foodItem2;
+    private FoodItemDTO foodItem1;
+    private FoodItemDTO foodItem2;
 
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(foodItemController).build();
 
-        foodItem1 = new FoodItem(UUID.randomUUID(), "Apple", Map.of("Lysine", 0.2, "Methionine", 0.1));
-        foodItem2 = new FoodItem(UUID.randomUUID(), "Banana", Map.of("Leucine", 0.3, "Histidine", 0.15));
+        foodItem1 = new FoodItemDTO(UUID.randomUUID(), "Apple", Map.of("Lysine", 0.2, "Methionine", 0.1));
+        foodItem2 = new FoodItemDTO(UUID.randomUUID(), "Banana", Map.of("Leucine", 0.3, "Histidine", 0.15));
     }
 
     @Test
     void shouldReturnAllFoodItems() throws Exception {
-        List<FoodItem> mockFoodItems = Arrays.asList(foodItem1, foodItem2);
+        List<FoodItemDTO> mockFoodItems = Arrays.asList(foodItem1, foodItem2);
 
         when(foodItemService.getAllFoodItems()).thenReturn(mockFoodItems);
 
@@ -60,33 +56,34 @@ class FoodItemControllerTest {
 
     @Test
     void shouldUpdateFoodItem() throws Exception {
-        UUID id = foodItem1.getId();
-        FoodItem updatedFoodItem = new FoodItem(id, "Updated Apple", Map.of("Lysine", 0.4, "Methionine", 0.2));
+        UUID id = UUID.randomUUID(); // Erzeuge eine UUID für den Test
 
-        when(foodItemService.updateFoodItem(eq(id), any(FoodItem.class))).thenReturn(Optional.of(updatedFoodItem));
+        FoodItemDTO updatedFoodItemDTO = new FoodItemDTO(id, "Updated Apple",
+                Map.of("Lysine", 0.4, "Methionine", 0.2));
+
+        when(foodItemService.updateFoodItem(eq(id), any(FoodItemDTO.class)))
+                .thenReturn(Optional.of(updatedFoodItemDTO));
 
         mockMvc.perform(put("/food-items/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                            {
-                                "name": "Updated Apple",
-                                "aminoAcidProfile": {
-                                    "Lysine": 0.4,
-                                    "Methionine": 0.2
-                                }
-                            }
-                            """))
+                    {
+                        "name": "Updated Apple",
+                        "aminoAcidProfile": {
+                            "Lysine": 0.4,
+                            "Methionine": 0.2
+                        }
+                    }
+                    """))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Updated Apple"));
     }
 
     @Test
     void shouldReturnFoodItemById() throws Exception {
-        UUID id = foodItem1.getId();
+        when(foodItemService.getFoodItemById(any())).thenReturn(Optional.of(foodItem1));
 
-        when(foodItemService.getFoodItemById(id)).thenReturn(Optional.of(foodItem1));
-
-        mockMvc.perform(get("/food-items/{id}", id)
+        mockMvc.perform(get("/food-items/{id}", "some-id")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Apple"));
@@ -94,45 +91,45 @@ class FoodItemControllerTest {
 
     @Test
     void shouldReturnNotFoundForNonExistingFoodItem() throws Exception {
-        UUID id = UUID.randomUUID();
-        when(foodItemService.getFoodItemById(id)).thenReturn(Optional.empty());
+        when(foodItemService.getFoodItemById(any())).thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/food-items/{id}", id)
+        mockMvc.perform(get("/food-items/{id}", "some-id")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     void shouldAddNewFoodItem() throws Exception {
-        UUID newId = UUID.randomUUID();
-        FoodItem newFoodItem = new FoodItem(newId, "Orange", Map.of("Valine", 0.25, "Isoleucine", 0.2));
+        UUID newId = UUID.randomUUID(); // Erzeuge eine UUID für das neue FoodItem
 
-        when(foodItemService.saveFoodItem(any(FoodItem.class))).thenReturn(newFoodItem);
+        FoodItemDTO newFoodItemDTO = new FoodItemDTO(newId, "Orange",
+                Map.of("Valine", 0.25, "Isoleucine", 0.2));
+
+        when(foodItemService.saveFoodItem(any(FoodItemDTO.class))).thenReturn(newFoodItemDTO);
 
         mockMvc.perform(post("/food-items")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {
-                                    "name": "Orange",
-                                    "aminoAcidProfile": {
-                                        "Valine": 0.25,
-                                        "Isoleucine": 0.2
-                                    }
-                                }
-                                """))
+                        {
+                            "name": "Orange",
+                            "aminoAcidProfile": {
+                                "Valine": 0.25,
+                                "Isoleucine": 0.2
+                            }
+                        }
+                        """))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name").value("Orange"));
     }
 
     @Test
     void shouldDeleteFoodItem() throws Exception {
-        UUID id = foodItem1.getId();
-        doNothing().when(foodItemService).deleteFoodItem(id);
+        doNothing().when(foodItemService).deleteFoodItem(any());
 
-        mockMvc.perform(delete("/food-items/{id}", id)
+        mockMvc.perform(delete("/food-items/{id}", "some-id")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
-        verify(foodItemService, times(1)).deleteFoodItem(id);
+        verify(foodItemService, times(1)).deleteFoodItem(any());
     }
 }

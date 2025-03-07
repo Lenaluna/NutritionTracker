@@ -1,8 +1,8 @@
 package com.example.NutritionTracker.api;
 
-import com.example.NutritionTracker.entity.FoodItem;
+import com.example.NutritionTracker.dto.FoodItemDTO;
+import com.example.NutritionTracker.dto.UserDTO;
 import com.example.NutritionTracker.entity.NutritionLog;
-import com.example.NutritionTracker.entity.User;
 import com.example.NutritionTracker.service.FoodItemService;
 import com.example.NutritionTracker.service.NutritionLogService;
 import com.example.NutritionTracker.service.UserService;
@@ -14,8 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Map;
+import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("test")
 @Transactional
@@ -31,49 +32,40 @@ public class DevDataLoaderUserTest {
     @Autowired
     private NutritionLogService nutritionLogService;
 
-    private FoodItem chicken;
-    private FoodItem quinoa;
-
-    private User devUser;
+    private FoodItemDTO chicken;
+    private FoodItemDTO quinoa;
+    private UserDTO devUser;
+    private NutritionLog devLog;
 
     @BeforeEach
     void setup() {
-        // Bereinige Datenbank, aber behalte den Nutzer aus dem DevDataLoader
         foodItemService.cleanup();
         nutritionLogService.cleanup();
 
-        // DevDataLoader Nutzer abrufen
-        devUser = userService.getAllUsers().stream().findFirst().orElseThrow(() ->
-                new IllegalStateException("DevDataLoader User nicht gefunden!"));
+        // DevDataLoader User abrufen oder erstellen
+        devUser = userService.getUser().orElseGet(() ->
+                userService.saveOrUpdateUser(new UserDTO(UUID.randomUUID(), "Test User", 30, 70.0, false)));
 
-        // Beispiel-FoodItems in die Datenbank einfügen
-        chicken = foodItemService.saveFoodItem(FoodItem.builder()
-                .name("Chicken")
-                .aminoAcidProfile(Map.of("Leucine", 2.5, "Valine", 3.0))
-                .build());
+        // Beispielhafte FoodItems hinzufügen
+        chicken = foodItemService.saveFoodItem(new FoodItemDTO(UUID.randomUUID(), "Chicken", Map.of("Leucine", 2.5, "Valine", 3.0)));
+        quinoa = foodItemService.saveFoodItem(new FoodItemDTO(UUID.randomUUID(), "Quinoa", Map.of("Leucine", 1.0, "Valine", 1.8)));
 
-        quinoa = foodItemService.saveFoodItem(FoodItem.builder()
-                .name("Quinoa")
-                .aminoAcidProfile(Map.of("Leucine", 1.0, "Valine", 1.8))
+        // NutritionLog für den User erstellen
+        devLog = nutritionLogService.createLog(NutritionLog.builder()
+                .user(userService.getUserById(devUser.getId()))
                 .build());
     }
 
     @Test
     void testAminoAcidCalculationsForDevDataLoaderUser() {
-        // NutritionLog für den DevDataLoader Nutzer erstellen
-        NutritionLog devLog = nutritionLogService.createLog(NutritionLog.builder()
-                .user(devUser)
-                .build());
-
         // Lebensmittel hinzufügen
         nutritionLogService.addFoodItemToLog(devLog.getId(), chicken.getId());
         nutritionLogService.addFoodItemToLog(devLog.getId(), quinoa.getId());
 
-        // Aminosäuren berechnen
-        Map<String, Double> devAminoAcids = nutritionLogService.calculateAminoAcidsForLog(devLog);
+        // **Fix: Hier übergeben wir jetzt die UUID statt dem NutritionLog-Objekt**
+        Map<String, Double> devAminoAcids = nutritionLogService.calculateAminoAcidsForLog(devLog.getId());
 
-        // Berechnungen prüfen
-        // Beispiel: keine Änderungen, da der Nutzer nicht speziell behandelt (Basic-User als Annahme)
+        // Berechnungen überprüfen
         assertEquals(3.5, devAminoAcids.get("Leucine"), 0.01);
         assertEquals(4.8, devAminoAcids.get("Valine"), 0.01);
     }

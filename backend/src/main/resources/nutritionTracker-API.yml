@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  title: Nutrition Tracker API
+  description: API for managing food items and nutrition logs in a nutrition tracking application.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Development Server
+
+paths:
+  /food-items:
+    get:
+      summary: Get all food items
+      description: Retrieves a list of all available food items.
+      responses:
+        '200':
+          description: A list of food items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FoodItem'
+    post:
+      summary: Add a new food item
+      description: Adds a new food item to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodItem'
+      responses:
+        '201':
+          description: The created food item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodItem'
+
+  /food-items/{id}:
+    get:
+      summary: Get food item by ID
+      description: Retrieves a specific food item by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the food item
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: The requested food item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodItem'
+        '404':
+          description: Food item not found
+    put:
+      summary: Update food item
+      description: Updates the details of an existing food item.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the food item
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodItem'
+      responses:
+        '200':
+          description: The updated food item
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodItem'
+        '404':
+          description: Food item not found
+    delete:
+      summary: Delete food item
+      description: Deletes a food item by its ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the food item
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: The food item was successfully deleted
+        '404':
+          description: Food item not found
+
+  /nutrition-logs:
+    get:
+      summary: Get all nutrition logs
+      description: Retrieves a list of all nutrition logs.
+      responses:
+        '200':
+          description: A list of nutrition logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NutritionLog'
+
+components:
+  schemas:
+    FoodItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        calories:
+          type: integer
+        protein:
+          type: number
+        carbs:
+          type: number
+        fats:
+          type: number
+    NutritionLog:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        date:
+          type: string
+          format: date
+        meals:
+          type: array
+          items:
+            type: string
