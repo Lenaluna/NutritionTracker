@@ -41,7 +41,7 @@ class NutritionLogIntegrationTest {
         cleanDatabase();
 
         testUser = User.builder()
-                .name("Integration Test User")
+                .name("Test User")
                 .age(25)
                 .weight(80.0)
                 .isAthlete(false)

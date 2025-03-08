@@ -25,14 +25,11 @@ public class User {
     private UUID id;  // Unique identifier, only required if using a database
 
     @NotNull
-    @Size(min = 3, max = 50)
-    private String name;  // User's name, must be between 3 and 50 characters
+    private String name;
 
-    @Min(0) @Max(150)
-    private Integer age;  // User's age, restricted between 0 and 150
+    private Integer age;
 
-    @Min(1) @Max(500)
-    private Double weight;  // User's weight, between 1 and 500 kg
+    private Double weight;
 
     private Boolean isAthlete;  // Indicates whether the user is an athlete
 

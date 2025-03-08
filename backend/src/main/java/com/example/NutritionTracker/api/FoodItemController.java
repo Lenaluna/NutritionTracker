@@ -2,6 +2,7 @@ package com.example.NutritionTracker.api;
 
 import com.example.NutritionTracker.dto.FoodItemDTO;
 import com.example.NutritionTracker.service.FoodItemService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,10 +42,10 @@ public class FoodItemController {
         return foodItemDTO.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-    /** Adds a new food item */
+
     @PostMapping
     public ResponseEntity<FoodItemDTO> addFoodItem(@RequestBody FoodItemDTO foodItemDTO) {
-        return ResponseEntity.ok(foodItemService.saveFoodItem(foodItemDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(foodItemService.saveFoodItem(foodItemDTO));
     }
 
     /** Updates an existing food item */
@@ -57,8 +58,14 @@ public class FoodItemController {
 
     /** Deletes a food item */
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteFoodItem(@PathVariable UUID id) {
-        foodItemService.deleteFoodItem(id);
+    public ResponseEntity<Void> deleteFoodItem(@PathVariable UUID id) {
+        try {
+            foodItemService.deleteFoodItem(id);
+            return ResponseEntity.noContent().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
