@@ -1,6 +1,4 @@
-package com.example.NutritionTracker.service;
-
-import com.example.NutritionTracker.entity.NutritionLog;
+package com.example.NutritionTracker.decorator;
 
 import java.util.Map;
 
@@ -12,8 +10,7 @@ public abstract class AminoAcidCalculatorDecorator implements AminoAcidCalculato
     }
 
     @Override
-    public Map<String, Double> calculateAminoAcids(NutritionLog log) {
-        return wrapped.calculateAminoAcids(log);
+    public Map<String, Double> calculateAminoAcids(Map<String, Double> dailyNeeds) {
+        return wrapped.calculateAminoAcids(dailyNeeds);
     }
 }
-

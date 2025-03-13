@@ -2,6 +2,7 @@ package com.example.NutritionTracker.dto;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -11,7 +12,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FoodItemDTO {
-    private UUID id;
-    private String name;
-    private Map<String, Double> aminoAcidProfile;
-}
+        private UUID id;
+        private String name;
+    }

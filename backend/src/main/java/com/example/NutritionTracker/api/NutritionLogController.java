@@ -1,5 +1,8 @@
 package com.example.NutritionTracker.api;
 
+import com.example.NutritionTracker.dto.NutritionLogCreateDTO;
+import com.example.NutritionTracker.dto.NutritionLogDTO;
+import com.example.NutritionTracker.dto.NutritionLogResponseDTO;
 import com.example.NutritionTracker.entity.NutritionLog;
 import com.example.NutritionTracker.service.NutritionLogService;
 import lombok.RequiredArgsConstructor;
@@ -7,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
 import java.util.UUID;
 
 @RestController
@@ -19,39 +20,19 @@ public class NutritionLogController {
 
     private final NutritionLogService nutritionLogService;
 
-    @GetMapping
-    public List<NutritionLog> getAllLogs() {
-        return nutritionLogService.getAllLogs();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<NutritionLog> getLogById(@PathVariable UUID id) {
-        Optional<NutritionLog> log = nutritionLogService.getLogById(id);
-        return log.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public ResponseEntity<NutritionLog> createLog(@RequestBody NutritionLog log) {
-        NutritionLog savedLog = nutritionLogService.createLog(log);
-        return ResponseEntity.ok(savedLog);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLog(@PathVariable UUID id) {
-        nutritionLogService.deleteLog(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<NutritionLog> updateLog(@PathVariable UUID id, @RequestBody NutritionLog log) {
-        NutritionLog updatedLog = nutritionLogService.updateLog(id, log);
-        return ResponseEntity.ok(updatedLog);
-    }
-
-    @DeleteMapping("/{logId}/food-item/{foodItemId}")
-    public ResponseEntity<Void> removeFoodItemFromLog(@PathVariable UUID logId, @PathVariable UUID foodItemId) {
-        nutritionLogService.removeFoodItemFromLog(logId, foodItemId);
-        return ResponseEntity.noContent().build();
+    /**
+     * Creates a new NutritionLog.
+     *
+     * The frontend only sends the user ID inside `NutritionLogCreateDTO`,
+     * meaning the NutritionLog is created for this user without any food items yet.
+     *
+     * In the response, the backend returns the generated NutritionLog ID and the associated user ID.
+     * The food items list is not included because food items are added later.
+     */
+    @PostMapping("/create")
+    public ResponseEntity<NutritionLogResponseDTO> createLog(@RequestBody NutritionLogCreateDTO logDTO) {
+        NutritionLog savedLog = nutritionLogService.createLogFromFrontend(logDTO);
+        return ResponseEntity.ok(new NutritionLogResponseDTO(savedLog.getId(), savedLog.getUser().getId()));
     }
 
     @PostMapping("/{logId}/food-items/{foodItemId}")
@@ -60,10 +41,19 @@ public class NutritionLogController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<NutritionLog> getNutritionLog(@PathVariable UUID id) {
+        NutritionLog nutritionLog = nutritionLogService.getNutritionLogById(id);
+        return ResponseEntity.ok(nutritionLog);
+    }
 
-    @PostMapping("/calculate-amino-acids")
-    public ResponseEntity<Map<String, Double>> calculateAminoAcids(@RequestBody NutritionLog log) {
-        Map<String, Double> aminoAcids = nutritionLogService.calculateAminoAcidsForLog(log.getId());  // FIX: log → log.getId()
-        return ResponseEntity.ok(aminoAcids);
+    /**
+     * Retrieving the Latest Nutrition Log from the Database.
+     */
+    @GetMapping("/latest")
+    public ResponseEntity<NutritionLogDTO> getLatestNutritionLog() {
+        return nutritionLogService.getLatestNutritionLog()
+                .map(log -> ResponseEntity.ok(nutritionLogService.convertToDTO(log)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

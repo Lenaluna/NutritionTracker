@@ -3,7 +3,6 @@ package com.example.NutritionTracker.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,24 +15,19 @@ import java.util.UUID;
 public class FoodItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private String name;
 
-    @OneToMany(mappedBy = "foodItem", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<NutritionLogFoodItem> nutritionLogFoodItems;
-
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "food_item_amino_acids", joinColumns = @JoinColumn(name = "food_item_id"))
+    @MapKeyColumn(name = "amino_acid")
+    @Column(name = "amino_acid_value")
     private Map<String, Double> aminoAcidProfile;
 
     @Version
     @Builder.Default
     private Long version = 0L;
-
-    public FoodItem(String name, Map<String, Double> aminoAcidProfile) {
-        this.name = name;
-        this.aminoAcidProfile = aminoAcidProfile;
-    }
 }
 

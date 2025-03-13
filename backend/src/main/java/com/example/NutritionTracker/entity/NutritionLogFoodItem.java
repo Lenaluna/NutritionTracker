@@ -1,10 +1,12 @@
 package com.example.NutritionTracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
-@Table(name = "nutrition_log_food_items")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,11 +15,12 @@ import lombok.*;
 public class NutritionLogFoodItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "nutrition_log_id", nullable = false)
+    @JsonBackReference
     private NutritionLog nutritionLog;
 
     @ManyToOne
@@ -28,6 +31,8 @@ public class NutritionLogFoodItem {
         this.nutritionLog = nutritionLog;
         this.foodItem = foodItem;
     }
+
+
 
     @Version
     private Long version;

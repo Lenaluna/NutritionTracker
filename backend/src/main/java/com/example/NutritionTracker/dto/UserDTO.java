@@ -17,4 +17,6 @@ public class UserDTO {
     private Integer age;
     private Double weight;
     private Boolean isAthlete;
+    private Boolean isVegan;
+    private Boolean isLongevityFocused;
 }

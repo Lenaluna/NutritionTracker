@@ -1,10 +1,9 @@
 package com.example.NutritionTracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.List;
@@ -21,19 +20,24 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;  // Unique identifier, only required if using a database
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
     private Integer age;
 
     private Double weight;
 
-    private Boolean isAthlete;  // Indicates whether the user is an athlete
+    private Boolean isAthlete;
+
+    private Boolean isVegan;
+
+    private Boolean isLongevityFocused;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<NutritionLog> nutritionLogs;
 
     @Version

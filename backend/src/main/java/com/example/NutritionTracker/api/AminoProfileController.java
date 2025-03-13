@@ -1,102 +1,56 @@
 package com.example.NutritionTracker.api;
 
-
-import com.example.NutritionTracker.entity.FoodItem;
-import com.example.NutritionTracker.repo.FoodItemRepository;
+import com.example.NutritionTracker.service.AminoProfileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-import java.util.UUID;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/amino-profile")
 @RequiredArgsConstructor
 public class AminoProfileController {
-
-    private final FoodItemRepository foodItemRepository;
+    private final AminoProfileService aminoProfileService;
     private static final Logger logger = LoggerFactory.getLogger(AminoProfileController.class);
 
+    /**
+     * Calculates the sum of amino acids from the selected food items in a nutrition log.
+     * @return a map of amino acids and their summed values
+     */
+    @PostMapping("/sum")
+    public ResponseEntity<Map<String, Double>> calculateAminoAcidSum() {
+        logger.info("Request zum Berechnen der Aminosäuren für das neueste Log erhalten.");
 
-    @PostMapping("/calculate")
-    public ResponseEntity<AminoProfileResponse> calculateAminoProfile(@RequestBody AminoProfileRequest request) {
-        System.out.println("AminoProfileController aufgerufen");
+        Map<String, Double> aminoAcidSum = aminoProfileService.calculateAminoAcidSumsForLatestLog();
 
-        logger.info("Empfangene Anfrage: {}", request);
-
-        UserData userData = request.getUserData();
-        List<UUID> foodIds = request.getSelectedFoodIds();
-
-        logger.info("User-Daten: {}, Ausgewählte Lebensmittel-IDs: {}", userData, foodIds);
-
-        // Lebensmittel aus der Datenbank laden
-        List<FoodItem> selectedFoods = foodItemRepository.findAllById(foodIds);
-        logger.info("Geladene Lebensmittel: {}", selectedFoods);
-
-        // Aminosäuren berechnen
-        Map<String, Double> sumAminos = calculateAminoAcidSums(selectedFoods);
-        logger.info("Summierte Aminosäuren: {}", sumAminos);
-
-        // Tagesbedarf berechnen
-        Map<String, Double> dailyCoverage = calculateDailyNeeds(sumAminos, userData);
-        logger.info("Tagesbedarf Deckung: {}", dailyCoverage);
-
-        // Antwort erstellen
-        AminoProfileResponse response = new AminoProfileResponse();
-        response.setAminoAcids(sumAminos);
-        response.setDailyCoverage(dailyCoverage);
-
-        logger.debug("UserData: {}", request.getUserData());
-        logger.debug("Selected Food IDs: {}", request.getSelectedFoodIds());
-        logger.debug("Calculated Amino Acids: {}", response.getAminoAcids());
-        logger.debug("Daily Coverage before returning: {}", response.getDailyCoverage());
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(aminoAcidSum);
     }
 
-    /** Hilfsmethode: Summiert die Aminosäurenwerte aller gewählten Lebensmittel */
-    private Map<String, Double> calculateAminoAcidSums(List<FoodItem> foodItems) {
-        Map<String, Double> sumAminos = new HashMap<>();
-        for (FoodItem item : foodItems) {
-            if (item.getAminoAcidProfile() != null) {
-                item.getAminoAcidProfile().forEach((amino, value) ->
-                        sumAminos.merge(amino, value, Double::sum)
-                );
-            }
-        }
-        return sumAminos;
+    /**
+     * Retrieves the calculated daily amino acid needs based on user weight and decorators.
+     * @return a map of amino acids and their daily required amounts
+     */
+    @GetMapping("/daily-needs")
+    public ResponseEntity<Map<String, Double>> calculateDailyAminoNeeds() {
+        logger.info("Received request to calculate daily amino acid needs.");
+        Map<String, Double> dailyNeeds = aminoProfileService.calculateDailyAminoAcidNeeds();
+        return ResponseEntity.ok(dailyNeeds);
     }
 
-    /** Hilfsmethode: Berechnet die prozentuale Deckung des Tagesbedarfs */
-    private Map<String, Double> calculateDailyNeeds(Map<String, Double> sumAminos, UserData userData) {
-        Map<String, Double> dailyNeeds = getRecommendedDailyAminoNeeds(userData);
-        Map<String, Double> dailyCoverage = new HashMap<>();
+    /**
+     * Calculates the amino acid coverage percentage based on daily needs and consumed food items.
+     * @return a map of amino acids and their coverage percentage
+     */
+    @PostMapping("/coverage")
+    public ResponseEntity<Map<String, Double>> calculateAminoAcidCoverage() {
+        logger.info("Request zum Berechnen der Aminosäurenabdeckung für das neueste Log erhalten.");
 
-        for (String amino : dailyNeeds.keySet()) {
-            double requiredAmount = dailyNeeds.get(amino);
-            double consumedAmount = sumAminos.getOrDefault(amino, 0.0);
-            double percentage = (consumedAmount / requiredAmount) * 100;
-            dailyCoverage.put(amino, Math.min(percentage, 100.0)); // Maximal 100%
-        }
+        // Coverage berechnen mit dem neuesten NutritionLog
+        Map<String, Double> coverage = aminoProfileService.calculateAminoAcidCoverageForLatestLog();
 
-        return dailyCoverage;
-    }
-
-    /** Beispielhafte Tagesbedarfswerte (könnten in einer DB oder Config-Datei stehen) */
-    private Map<String, Double> getRecommendedDailyAminoNeeds(UserData userData) {
-        Map<String, Double> dailyNeeds = new HashMap<>();
-
-        // Beispielwerte für Aminosäurenbedarf in mg/kg Körpergewicht
-        double baseWeight = userData.getWeight();
-        dailyNeeds.put("Lysin", 38 * baseWeight);
-        dailyNeeds.put("Methionin", 15 * baseWeight);
-        dailyNeeds.put("Threonin", 23 * baseWeight);
-        dailyNeeds.put("Valin", 39 * baseWeight);
-        // ... weitere Werte hinzufügen
-
-        return dailyNeeds;
+        return ResponseEntity.ok(coverage);
     }
 }

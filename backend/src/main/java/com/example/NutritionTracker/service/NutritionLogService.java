@@ -1,6 +1,9 @@
 package com.example.NutritionTracker.service;
 
-import com.example.NutritionTracker.dto.UserDTO;
+
+import com.example.NutritionTracker.dto.NutritionLogCreateDTO;
+import com.example.NutritionTracker.dto.NutritionLogDTO;
+import com.example.NutritionTracker.dto.NutritionLogFoodItemDTO;
 import com.example.NutritionTracker.entity.FoodItem;
 import com.example.NutritionTracker.entity.NutritionLog;
 import com.example.NutritionTracker.entity.NutritionLogFoodItem;
@@ -8,8 +11,8 @@ import com.example.NutritionTracker.entity.User;
 import com.example.NutritionTracker.repo.FoodItemRepository;
 import com.example.NutritionTracker.repo.NutritionLogFoodItemRepository;
 import com.example.NutritionTracker.repo.NutritionLogRepository;
+import com.example.NutritionTracker.repo.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.Hibernate;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -17,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,28 +29,9 @@ public class NutritionLogService {
     private static final Logger logger = LoggerFactory.getLogger(NutritionLogService.class);
 
     private final NutritionLogRepository nutritionLogRepository;
-    private final UserService userService;
-    private final AminoAcidCalculator baseCalculator = new BasicAminoAcidCalculator();
     private final FoodItemRepository foodItemRepository;
     private final NutritionLogFoodItemRepository nutritionLogFoodItemRepository;
-
-    @Transactional(readOnly = true)
-    public UserDTO getUser() {
-        return userService.getUser()
-                .map(user -> UserDTO.builder()
-                        .id(user.getId())
-                        .name(user.getName())
-                        .age(user.getAge())
-                        .weight(user.getWeight())
-                        .isAthlete(user.getIsAthlete())
-                        .build())
-                .orElseGet(() -> UserDTO.builder()
-                        .name("Default User")
-                        .age(30)
-                        .weight(70.0)
-                        .isAthlete(false)
-                        .build());
-    }
+    private final UserRepository userRepository; // Ensure this is defined
 
     @Transactional
     public void cleanup() {
@@ -55,125 +40,117 @@ public class NutritionLogService {
         logger.info("All nutrition logs deleted.");
     }
 
-    @Transactional
-    public void removeFoodItemFromLog(UUID logId, UUID foodItemId) {
-
-        if (!nutritionLogRepository.existsById(logId)) {
-            throw new EntityNotFoundException("NutritionLog not found");
-        }
-
-        Optional<NutritionLogFoodItem> nutritionLogFoodItem = nutritionLogFoodItemRepository
-                .findByNutritionLogIdAndFoodItemId(logId, foodItemId);
-
-        if (nutritionLogFoodItem.isPresent()) {
-            nutritionLogFoodItemRepository.delete(nutritionLogFoodItem.get());
-            logger.info("Deleted FoodItem with ID {} from NutritionLog {}", foodItemId, logId);
-        } else {
-            logger.warn("FoodItem with ID {} not found in NutritionLog {}", foodItemId, logId);
-            throw new EntityNotFoundException("FoodItem not found in this NutritionLog");
-        }
+    @Transactional(readOnly = true)
+    public List<NutritionLog> getAllLogs() {
+        return nutritionLogRepository.findAll();
     }
 
     @Transactional
     public void addFoodItemToLog(UUID logId, UUID foodItemId) {
         NutritionLog nutritionLog = nutritionLogRepository.findById(logId)
-                .orElseThrow(() -> new EntityNotFoundException("NutritionLog not found"));
+                .orElseThrow(() -> new EntityNotFoundException("NutritionLog not found with ID: " + logId));
 
         FoodItem foodItem = foodItemRepository.findById(foodItemId)
-                .orElseThrow(() -> new EntityNotFoundException("FoodItem not found"));
+                .orElseThrow(() -> new EntityNotFoundException("FoodItem not found with ID: " + foodItemId));
 
-        // Nullprüfung für foodItems-Liste
-        if (nutritionLog.getFoodItems() == null) {
-            nutritionLog.setFoodItems(new ArrayList<>());
-            logger.warn("foodItems list was null for NutritionLog with ID: {}. Initialized an empty list.", logId);
+        // Prüfen, ob die Kombination aus NutritionLog und FoodItem bereits existiert
+//        boolean exists = nutritionLogFoodItemRepository.findByNutritionLogIdAndFoodItemId(logId, foodItemId).isPresent();
+//        if (exists) {
+//            logger.warn("FoodItem {} ist bereits im NutritionLog {} vorhanden.", foodItemId, logId);
+//            return;
+//        }
+//
+//        if (nutritionLog.getFoodItems() == null) {
+//            nutritionLog.setFoodItems(new ArrayList<>());
+//            logger.warn("foodItems list war null für NutritionLog mit ID: {}. Neue Liste initialisiert.", logId);
+//        }
+
+        // Überprüfung, ob das FoodItem schon existiert
+        if (nutritionLog.getFoodItems().stream().anyMatch(item -> item.getFoodItem().getId().equals(foodItemId))) {
+            logger.warn("FoodItem {} ist bereits im NutritionLog {} vorhanden.", foodItemId, logId);
+            return;
         }
 
         NutritionLogFoodItem logFoodItem = new NutritionLogFoodItem();
         logFoodItem.setNutritionLog(nutritionLog);
         logFoodItem.setFoodItem(foodItem);
 
+        nutritionLog.getFoodItems().add(logFoodItem);
         nutritionLogFoodItemRepository.save(logFoodItem);
 
-        // Hinzufügen des neuen FoodItems zur Liste
-        nutritionLog.getFoodItems().add(logFoodItem);
+        nutritionLogRepository.save(nutritionLog);
 
         logger.info("Added FoodItem {} to NutritionLog {}", foodItemId, logId);
     }
 
+    @Transactional
+    public NutritionLog createLog(NutritionLog log) {
+        NutritionLog savedLog = nutritionLogRepository.save(log);
+
+        // Überprüfung, ob es wirklich gespeichert wurde
+        savedLog = nutritionLogRepository.findById(savedLog.getId()).orElse(null);
+
+        if (savedLog == null || savedLog.getId() == null) {
+            throw new IllegalStateException("Fehler beim Speichern von NutritionLog.");
+        }
+
+        return savedLog;
+    }
+//    public NutritionLog createLog(NutritionLog log) {
+//        return nutritionLogRepository.save(log);
+//    }
+
     @Transactional(readOnly = true)
-    public List<NutritionLog> getAllLogs() {
-        logger.info("Fetching all nutrition logs. Total logs: {}", nutritionLogRepository.count());
-        return nutritionLogRepository.findAll();
+    public NutritionLog getNutritionLogById(UUID logId) {
+        if (logId == null) {
+            logger.error("Die übergebene logId (UUID) ist null. Bitte eine gültige UUID angeben.");
+            throw new IllegalArgumentException("Die logId darf nicht null sein!");
+        }
+
+        logger.info("Versuche, NutritionLog mit logId (UUID): {} aus der Datenbank abzurufen.", logId);
+
+        return nutritionLogRepository.findById(logId)
+                .map(nutritionLog -> {
+                    logger.info("NutritionLog erfolgreich gefunden: {}", nutritionLog);
+                    return nutritionLog;
+                })
+                .orElseThrow(() -> {
+                    logger.warn("NutritionLog mit logId (UUID): {} wurde nicht gefunden.", logId);
+                    return new IllegalArgumentException("NutritionLog mit der UUID " + logId + " wurde nicht gefunden.");
+                });
     }
 
-
-    @Transactional(readOnly = true)
-    public Optional<NutritionLog> getLogById(UUID id) {
-        Optional<NutritionLog> nutritionLog = nutritionLogRepository.findById(id);
-
-        nutritionLog.ifPresent(log -> Hibernate.initialize(log.getFoodItems()));
-
-        return nutritionLog;
+    public NutritionLogDTO convertToDTO(NutritionLog nutritionLog) {
+        return NutritionLogDTO.builder()
+                .id(nutritionLog.getId())
+                .userId(nutritionLog.getUser().getId())
+                .foodItems(nutritionLog.getFoodItems().stream()
+                        .map(item -> new NutritionLogFoodItemDTO(item.getId(), item.getFoodItem().getId(), nutritionLog.getId()))
+                        .collect(Collectors.toList()))
+                .build();
     }
 
     @Transactional
-    public NutritionLog createLog(NutritionLog log) {
-        UUID userId = log.getUser().getId();
-        User user = userService.getUserById(userId);
-        if (user == null) {
-            throw new EntityNotFoundException("User mit ID: " + userId + " wurde nicht gefunden.");
+    public NutritionLog createLogFromFrontend(NutritionLogCreateDTO logDTO) {
+
+        if (logDTO.getUserId() == null) {
+            throw new IllegalArgumentException("User ID darf nicht null sein!");
         }
 
-        log.setUser(user);
+
+        User user = userRepository.findById(logDTO.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("User mit ID " + logDTO.getUserId() + " nicht gefunden"));
+
+        NutritionLog log = NutritionLog.builder()
+                .user(user)
+                .build();
 
         return nutritionLogRepository.save(log);
     }
 
-    @Transactional
-    public void deleteLog(UUID id) {
-        if (nutritionLogRepository.existsById(id)) {
-            nutritionLogRepository.deleteById(id);
-            logger.info("Deleted NutritionLog with ID: {}", id);
-        } else {
-            logger.warn("NutritionLog with ID {} not found for deletion", id);
-        }
-    }
-
-    @Transactional
-    public NutritionLog updateLog(UUID id, NutritionLog updatedLog) {
-        return nutritionLogRepository.findById(id).map(existingLog -> {
-            existingLog.setFoodItems(updatedLog.getFoodItems());
-            existingLog.setLogDateTime(updatedLog.getLogDateTime());
-            NutritionLog savedLog = nutritionLogRepository.save(existingLog);
-            logger.info("Updated NutritionLog with ID: {}", id);
-            return savedLog;
-        }).orElseThrow(() -> {
-            logger.error("Attempted to update non-existent NutritionLog with ID: {}", id);
-            return new EntityNotFoundException("Log not found");
-        });
-    }
-
     @Transactional(readOnly = true)
-    public Map<String, Double> calculateAminoAcidsForLog(UUID logId) {
-        NutritionLog log = nutritionLogRepository.findById(logId)
-                .orElseThrow(() -> new EntityNotFoundException("NutritionLog not found"));
-
-        UserDTO userDTO = userService.getUser()
-                .orElseThrow(() -> new EntityNotFoundException("No user found"));
-
-        AminoAcidCalculator calculator = baseCalculator;
-
-        if (userDTO.getAge() < 18) {
-            calculator = new ChildAminoAcidDecorator(calculator);
-            logger.info("Applying ChildAminoAcidDecorator for User: {}", userDTO.getName());
-        }
-
-        if (Boolean.TRUE.equals(userDTO.getIsAthlete())) {
-            calculator = new AthleteAminoAcidDecorator(calculator);
-            logger.info("Applying AthleteAminoAcidDecorator for User: {}", userDTO.getName());
-        }
-
-        logger.info("Calculating amino acids for NutritionLog with ID: {}", log.getId());
-        return calculator.calculateAminoAcids(log);
+    public Optional<NutritionLog> getLatestNutritionLog() {
+        return nutritionLogRepository.findTopByOrderByIdDesc();
     }
 }
+
