@@ -130,27 +130,72 @@ public class NutritionLogService {
                 .build();
     }
 
+//    @Transactional
+//    public NutritionLog createLogFromFrontend(NutritionLogCreateDTO logDTO) {
+//
+//        if (logDTO.getUserId() == null) {
+//            throw new IllegalArgumentException("User ID darf nicht null sein!");
+//        }
+//
+//
+//        User user = userRepository.findById(logDTO.getUserId())
+//                .orElseThrow(() -> new EntityNotFoundException("User mit ID " + logDTO.getUserId() + " nicht gefunden"));
+//
+//        NutritionLog log = NutritionLog.builder()
+//                .user(user)
+//                .build();
+//
+//        return nutritionLogRepository.save(log);
+//    }
+
     @Transactional
     public NutritionLog createLogFromFrontend(NutritionLogCreateDTO logDTO) {
+        logger.info("📝 Anfrage zum Erstellen eines NutritionLogs erhalten: {}", logDTO);
 
         if (logDTO.getUserId() == null) {
+            logger.error("❌ Fehler: User ID ist null! NutritionLog kann nicht erstellt werden.");
             throw new IllegalArgumentException("User ID darf nicht null sein!");
         }
 
+        logger.info("🔍 Suche nach Benutzer mit ID: {}", logDTO.getUserId());
 
+        // Benutzer aus der Datenbank abrufen
         User user = userRepository.findById(logDTO.getUserId())
-                .orElseThrow(() -> new EntityNotFoundException("User mit ID " + logDTO.getUserId() + " nicht gefunden"));
+                .orElseThrow(() -> {
+                    logger.error("❌ Benutzer mit ID {} nicht gefunden!", logDTO.getUserId());
+                    return new EntityNotFoundException("User mit ID " + logDTO.getUserId() + " nicht gefunden");
+                });
 
+        logger.info("✅ Benutzer gefunden: {} (ID: {})", user.getName(), user.getId());
+
+        // Neues NutritionLog für den Benutzer erstellen
         NutritionLog log = NutritionLog.builder()
                 .user(user)
                 .build();
 
-        return nutritionLogRepository.save(log);
+        // Speichern des NutritionLogs
+        NutritionLog savedLog = nutritionLogRepository.save(log);
+
+        // Überprüfung nach dem Speichern
+        if (savedLog.getId() == null) {
+            logger.error("❌ Fehler beim Speichern des NutritionLogs! Das Objekt hat keine ID erhalten.");
+            throw new IllegalStateException("Fehler beim Speichern von NutritionLog.");
+        }
+
+        logger.info("✅ NutritionLog erfolgreich erstellt mit ID: {}", savedLog.getId());
+
+        return savedLog;
     }
 
     @Transactional(readOnly = true)
-    public Optional<NutritionLog> getLatestNutritionLog() {
-        return nutritionLogRepository.findTopByOrderByIdDesc();
+    public Optional<NutritionLogDTO> getLatestNutritionLog() {
+        return nutritionLogRepository.findTopByOrderByIdDesc()
+                .map(NutritionLogDTO::new); // Wandelt NutritionLog in NutritionLogDTO um, falls vorhanden
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<NutritionLog> getLatestNutritionLogEntity() {
+        return nutritionLogRepository.findTopByOrderByIdDesc(); // Gibt direkt die Entity zurück
     }
 }
 

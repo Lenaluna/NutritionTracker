@@ -15,10 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -30,17 +27,54 @@ public class AminoProfileService {
     private final Logger logger = LoggerFactory.getLogger(AminoProfileService.class);
     private final NutritionLogRepository nutritionLogRepository;
     private final UserDataService userDataService;
+//
+//    @Transactional(readOnly = true)
+//    public Map<String, Double> calculateAminoAcidSumsForLatestLog() {
+//        // Neuestes NutritionLog abrufen
+//        NutritionLog latestLog = nutritionLogRepository.findTopByOrderByIdDesc()
+//                .orElseThrow(() -> new IllegalArgumentException("Kein NutritionLog gefunden!"));
+//
+//        // Summen der konsumierten Aminosäuren berechnen
+//        Map<String, Double> aminoAcidSums = new HashMap<>();
+//        for (NutritionLogFoodItem logFoodItem : latestLog.getFoodItems()) {
+//            FoodItem foodItem = logFoodItem.getFoodItem();
+//            if (foodItem.getAminoAcidProfile() != null) {
+//                foodItem.getAminoAcidProfile().forEach((amino, value) -> {
+//                    aminoAcidSums.merge(amino, value, Double::sum);
+//                });
+//            }
+//        }
+//
+//        // Ergebnis loggen
+//        logger.info("Summierte Aminosäuren für das neueste NutritionLog: {}", aminoAcidSums);
+//
+//        return aminoAcidSums;
+//    }
+
 
     @Transactional(readOnly = true)
     public Map<String, Double> calculateAminoAcidSumsForLatestLog() {
+        logger.info("🔍 calculateAminoAcidSumsForLatestLog() wurde aufgerufen!");
+        System.out.println("🔍 Methode wurde gestartet!");
+
         // Neuestes NutritionLog abrufen
         NutritionLog latestLog = nutritionLogRepository.findTopByOrderByIdDesc()
                 .orElseThrow(() -> new IllegalArgumentException("Kein NutritionLog gefunden!"));
 
-        // Summen der konsumierten Aminosäuren berechnen
+        logger.info("📝 Gefundenes NutritionLog mit ID: {}", latestLog.getId());
+
+        // Prüfen, ob das Log Lebensmittel enthält
+        if (latestLog.getFoodItems() == null || latestLog.getFoodItems().isEmpty()) {
+            logger.warn("⚠️ Keine Lebensmittel im aktuellen NutritionLog gespeichert.");
+            return Collections.emptyMap();
+        }
+
+        // Summieren der Aminosäuren nur für ausgewählte Lebensmittel
         Map<String, Double> aminoAcidSums = new HashMap<>();
         for (NutritionLogFoodItem logFoodItem : latestLog.getFoodItems()) {
             FoodItem foodItem = logFoodItem.getFoodItem();
+            logger.info("📦 Verarbeitung von FoodItem: {}", foodItem.getName());
+
             if (foodItem.getAminoAcidProfile() != null) {
                 foodItem.getAminoAcidProfile().forEach((amino, value) -> {
                     aminoAcidSums.merge(amino, value, Double::sum);
@@ -49,11 +83,10 @@ public class AminoProfileService {
         }
 
         // Ergebnis loggen
-        logger.info("Summierte Aminosäuren für das neueste NutritionLog: {}", aminoAcidSums);
+        logger.info("✅ Summierte Aminosäuren für das neueste NutritionLog: {}", aminoAcidSums);
 
         return aminoAcidSums;
     }
-
 
     @Transactional(readOnly = true)
     public Map<String, Double> calculateDailyAminoAcidNeeds() {

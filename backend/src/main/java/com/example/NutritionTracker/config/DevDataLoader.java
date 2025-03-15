@@ -118,7 +118,7 @@ public class DevDataLoader implements CommandLineRunner {
                 logger.info("FoodItems gespeichert.");
             }
 
-            Optional<NutritionLog> existingLog = nutritionLogService.getLatestNutritionLog();
+            Optional<NutritionLog> existingLog = nutritionLogService.getLatestNutritionLogEntity();
             if (existingLog.isEmpty()) {
                 NutritionLog log = NutritionLog.builder().user(user).build();
                 nutritionLogService.createLog(log);

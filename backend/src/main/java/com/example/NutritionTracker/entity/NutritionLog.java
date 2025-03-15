@@ -22,14 +22,13 @@ public class NutritionLog {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "nutritionLog", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Builder.Default
-    @JsonManagedReference
     private List<NutritionLogFoodItem> foodItems = new ArrayList<>();
 
     @Version

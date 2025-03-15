@@ -307,7 +307,7 @@ OS name: "mac os x", version: "15.3.1", arch: "aarch64", family: "mac"
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for ow2-snapshot (http://repository.ow2.org/nexus/content/repositories/snapshots).
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for vaadin-snapshots (http://oss.sonatype.org/content/repositories/vaadin-snapshots/).
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for vaadin-releases (http://oss.sonatype.org/content/repositories/vaadin-releases/).
-[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=939334, ConflictMarker.markTime=282000, ConflictMarker.nodeCount=301, ConflictIdSorter.graphTime=419375, ConflictIdSorter.topsortTime=171250, ConflictIdSorter.conflictIdCount=106, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=7790292, ConflictResolver.conflictItemCount=205, DfDependencyCollector.collectTime=248615333, DfDependencyCollector.transformTime=10564000}
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=709000, ConflictMarker.markTime=267042, ConflictMarker.nodeCount=301, ConflictIdSorter.graphTime=409667, ConflictIdSorter.topsortTime=163250, ConflictIdSorter.conflictIdCount=106, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=7739917, ConflictResolver.conflictItemCount=205, DfDependencyCollector.collectTime=262033000, DfDependencyCollector.transformTime=10226708}
 [DEBUG] com.example:NutritionTracker:jar:1.0.0
 [DEBUG]    org.springframework.boot:spring-boot-starter-data-jpa:jar:3.4.1:compile
 [DEBUG]       org.springframework.boot:spring-boot-starter:jar:3.4.1:compile (version managed from 3.4.1)
@@ -415,7 +415,7 @@ OS name: "mac os x", version: "15.3.1", arch: "aarch64", family: "mac"
 [DEBUG]    org.mockito:mockito-junit-jupiter:jar:5.5.0:test
 [INFO]
 [INFO] --- resources:3.3.1:resources (default-resources) @ NutritionTracker ---
-[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=78208, ConflictMarker.markTime=34917, ConflictMarker.nodeCount=13, ConflictIdSorter.graphTime=20291, ConflictIdSorter.topsortTime=8417, ConflictIdSorter.conflictIdCount=9, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=131709, ConflictResolver.conflictItemCount=13, DfDependencyCollector.collectTime=21788125, DfDependencyCollector.transformTime=284042}
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=64042, ConflictMarker.markTime=34916, ConflictMarker.nodeCount=13, ConflictIdSorter.graphTime=39791, ConflictIdSorter.topsortTime=8625, ConflictIdSorter.conflictIdCount=9, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=116500, ConflictResolver.conflictItemCount=13, DfDependencyCollector.collectTime=22911584, DfDependencyCollector.transformTime=276250}
 [DEBUG] org.apache.maven.plugins:maven-resources-plugin:jar:3.3.1
 [DEBUG]    org.codehaus.plexus:plexus-interpolation:jar:1.26:runtime
 [DEBUG]    org.codehaus.plexus:plexus-utils:jar:3.5.1:compile
@@ -494,7 +494,7 @@ OS name: "mac os x", version: "15.3.1", arch: "aarch64", family: "mac"
 [DEBUG] env.IJ_RESTARTER_LOG: /Users/flashayla/Library/Logs/JetBrains/IntelliJIdea2024.2/restarter.log
 [DEBUG] env.INFOPATH: /opt/homebrew/share/info:
 [DEBUG] env.JAVA_HOME: /Users/flashayla/Library/Java/JavaVirtualMachines/corretto-17.0.14/Contents/Home
-[DEBUG] env.JAVA_MAIN_CLASS_88993: org.codehaus.plexus.classworlds.launcher.Launcher
+[DEBUG] env.JAVA_MAIN_CLASS_18095: org.codehaus.plexus.classworlds.launcher.Launcher
 [DEBUG] env.LC_CTYPE: UTF-8
 [DEBUG] env.LOGNAME: flashayla
 [DEBUG] env.MAVEN_CMD_LINE_ARGS:  spring-boot:run -X
@@ -514,7 +514,7 @@ OS name: "mac os x", version: "15.3.1", arch: "aarch64", family: "mac"
 [DEBUG] env.SSH_AUTH_SOCK: /private/tmp/com.apple.launchd.NlorLrJUNC/Listeners
 [DEBUG] env.TERM: xterm-256color
 [DEBUG] env.TERMINAL_EMULATOR: JetBrains-JediTerm
-[DEBUG] env.TERM_SESSION_ID: 4f8bf71c-5efd-4a49-84ec-4cf889320548
+[DEBUG] env.TERM_SESSION_ID: 435f5a25-4115-4609-aa70-2bc6d2c8855a
 [DEBUG] env.TMPDIR: /var/folders/y9/nk_xzq511jn0hg4vz2yrmngw0000gn/T/
 [DEBUG] env.USER: flashayla
 [DEBUG] env.XPC_FLAGS: 0x0
@@ -642,7 +642,7 @@ OS name: "mac os x", version: "15.3.1", arch: "aarch64", family: "mac"
 [DEBUG] maven-source-plugin.version: 3.3.1
 [DEBUG] maven-surefire-plugin.version: 3.5.2
 [DEBUG] maven-war-plugin.version: 3.4.0
-[DEBUG] maven.build.timestamp: 2025-03-13T08:43:10Z
+[DEBUG] maven.build.timestamp: 2025-03-14T07:31:02Z
 [DEBUG] maven.build.version: Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
 [DEBUG] maven.compiler.release: 17
 [DEBUG] maven.conf: /opt/homebrew/Cellar/maven/3.9.9/libexec/conf
@@ -789,7 +789,7 @@ includes []
 [INFO]
 [INFO] --- compiler:3.13.0:compile (default-compile) @ NutritionTracker ---
 [DEBUG] Using mirror maven-default-http-blocker (http://0.0.0.0/) for apache.snapshots (http://repository.apache.org/snapshots).
-[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=18625, ConflictMarker.markTime=64417, ConflictMarker.nodeCount=22, ConflictIdSorter.graphTime=24292, ConflictIdSorter.topsortTime=12083, ConflictIdSorter.conflictIdCount=14, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=155625, ConflictResolver.conflictItemCount=22, DfDependencyCollector.collectTime=17391792, DfDependencyCollector.transformTime=286666}
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=19334, ConflictMarker.markTime=45833, ConflictMarker.nodeCount=22, ConflictIdSorter.graphTime=13250, ConflictIdSorter.topsortTime=12333, ConflictIdSorter.conflictIdCount=14, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=188875, ConflictResolver.conflictItemCount=22, DfDependencyCollector.collectTime=18984792, DfDependencyCollector.transformTime=294250}
 [DEBUG] org.apache.maven.plugins:maven-compiler-plugin:jar:3.13.0
 [DEBUG]    org.apache.maven.shared:maven-shared-utils:jar:3.4.2:compile
 [DEBUG]       org.slf4j:slf4j-api:jar:1.7.36:compile
@@ -866,87 +866,7 @@ includes []
   /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/generated-sources/annotations
 [DEBUG] CompilerReuseStrategy: reuseCreated
 [DEBUG] useIncrementalCompilation enabled
-[INFO]  Stale source detected: /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/src/main/java/com/example/NutritionTracker/config/DevDataLoader.java
-[INFO] Recompiling the module because of changed source code.
-[DEBUG] Classpath:
-[DEBUG]  /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/classes
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.1/spring-boot-starter-data-jpa-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.1/spring-boot-starter-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot/3.4.1/spring-boot-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.1/spring-boot-autoconfigure-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.1/spring-boot-starter-jdbc-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-jdbc/6.2.1/spring-jdbc-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/hibernate/orm/hibernate-core/6.6.4.Final/hibernate-core-6.6.4.Final.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/data/spring-data-jpa/3.4.1/spring-data-jpa-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/data/spring-data-commons/3.4.1/spring-data-commons-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-orm/6.2.1/spring-orm-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-context/6.2.1/spring-context-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-aop/6.2.1/spring-aop-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-tx/6.2.1/spring-tx-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-beans/6.2.1/spring-beans-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-aspects/6.2.1/spring-aspects-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.1/spring-boot-starter-web-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.1/spring-boot-starter-json-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.2/jackson-datatype-jdk8-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.2/jackson-module-parameter-names-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.1/spring-boot-starter-tomcat-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.34/tomcat-embed-core-10.1.34.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.34/tomcat-embed-el-10.1.34.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.34/tomcat-embed-websocket-10.1.34.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-web/6.2.1/spring-web-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/micrometer/micrometer-observation/1.14.2/micrometer-observation-1.14.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/micrometer/micrometer-commons/1.14.2/micrometer-commons-1.14.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-webmvc/6.2.1/spring-webmvc-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-expression/6.2.1/spring-expression-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/slf4j/slf4j-simple/2.0.7/slf4j-simple-2.0.7.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.2/jackson-datatype-jsr310-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.1.Final/hibernate-validator-8.0.1.Final.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/glassfish/jakarta.el/4.0.2/jakarta.el-4.0.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/el/jakarta.el-api/4.0.0/jakarta.el-api-4.0.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.1/spring-boot-starter-logging-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/slf4j/jul-to-slf4j/2.0.16/jul-to-slf4j-2.0.16.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/modelmapper/modelmapper/3.2.2/modelmapper-3.2.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-ui/2.2.0/springdoc-openapi-starter-webmvc-ui-2.2.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-api/2.2.0/springdoc-openapi-starter-webmvc-api-2.2.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-common/2.2.0/springdoc-openapi-starter-common-2.2.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-core-jakarta/2.2.15/swagger-core-jakarta-2.2.15.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/commons/commons-lang3/3.17.0/commons-lang3-3.17.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-annotations-jakarta/2.2.15/swagger-annotations-jakarta-2.2.15.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-models-jakarta/2.2.15/swagger-models-jakarta-2.2.15.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.18.2/jackson-dataformat-yaml-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/webjars/swagger-ui/5.2.0/swagger-ui-5.2.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/net/minidev/json-smart/2.4.10/json-smart-2.4.10.jar
-[DEBUG]  /Users/flashayla/.m2/repository/net/minidev/accessors-smart/2.4.9/accessors-smart-2.4.9.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-core/6.2.1/spring-core-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-jcl/6.2.1/spring-jcl-6.2.1.jar
-[DEBUG] Source roots:
-[DEBUG]  /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/src/main/java
-[DEBUG]  /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/generated-sources/annotations
-[DEBUG] Command line options:
-[DEBUG] -d /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/classes -classpath /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/classes:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.1/spring-boot-starter-data-jpa-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.1/spring-boot-starter-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot/3.4.1/spring-boot-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.1/spring-boot-autoconfigure-3.4.1.jar:/Users/flashayla/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/flashayla/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.1/spring-boot-starter-jdbc-3.4.1.jar:/Users/flashayla/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/flashayla/.m2/repository/org/springframework/spring-jdbc/6.2.1/spring-jdbc-6.2.1.jar:/Users/flashayla/.m2/repository/org/hibernate/orm/hibernate-core/6.6.4.Final/hibernate-core-6.6.4.Final.jar:/Users/flashayla/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/flashayla/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/flashayla/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/flashayla/.m2/repository/org/springframework/data/spring-data-jpa/3.4.1/spring-data-jpa-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/data/spring-data-commons/3.4.1/spring-data-commons-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-orm/6.2.1/spring-orm-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-context/6.2.1/spring-context-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-aop/6.2.1/spring-aop-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-tx/6.2.1/spring-tx-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-beans/6.2.1/spring-beans-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-aspects/6.2.1/spring-aspects-6.2.1.jar:/Users/flashayla/.m2/repository/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.1/spring-boot-starter-web-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.1/spring-boot-starter-json-3.4.1.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.2/jackson-datatype-jdk8-2.18.2.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.2/jackson-module-parameter-names-2.18.2.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.1/spring-boot-starter-tomcat-3.4.1.jar:/Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.34/tomcat-embed-core-10.1.34.jar:/Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.34/tomcat-embed-el-10.1.34.jar:/Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.34/tomcat-embed-websocket-10.1.34.jar:/Users/flashayla/.m2/repository/org/springframework/spring-web/6.2.1/spring-web-6.2.1.jar:/Users/flashayla/.m2/repository/io/micrometer/micrometer-observation/1.14.2/micrometer-observation-1.14.2.jar:/Users/flashayla/.m2/repository/io/micrometer/micrometer-commons/1.14.2/micrometer-commons-1.14.2.jar:/Users/flashayla/.m2/repository/org/springframework/spring-webmvc/6.2.1/spring-webmvc-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-expression/6.2.1/spring-expression-6.2.1.jar:/Users/flashayla/.m2/repository/org/slf4j/slf4j-simple/2.0.7/slf4j-simple-2.0.7.jar:/Users/flashayla/.m2/repository/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.2/jackson-datatype-jsr310-2.18.2.jar:/Users/flashayla/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.1.Final/hibernate-validator-8.0.1.Final.jar:/Users/flashayla/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/flashayla/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/flashayla/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/flashayla/.m2/repository/org/glassfish/jakarta.el/4.0.2/jakarta.el-4.0.2.jar:/Users/flashayla/.m2/repository/jakarta/el/jakarta.el-api/4.0.0/jakarta.el-api-4.0.0.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.1/spring-boot-starter-logging-3.4.1.jar:/Users/flashayla/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/flashayla/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/flashayla/.m2/repository/org/slf4j/jul-to-slf4j/2.0.16/jul-to-slf4j-2.0.16.jar:/Users/flashayla/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/flashayla/.m2/repository/org/modelmapper/modelmapper/3.2.2/modelmapper-3.2.2.jar:/Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-ui/2.2.0/springdoc-openapi-starter-webmvc-ui-2.2.0.jar:/Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-api/2.2.0/springdoc-openapi-starter-webmvc-api-2.2.0.jar:/Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-common/2.2.0/springdoc-openapi-starter-common-2.2.0.jar:/Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-core-jakarta/2.2.15/swagger-core-jakarta-2.2.15.jar:/Users/flashayla/.m2/repository/org/apache/commons/commons-lang3/3.17.0/commons-lang3-3.17.0.jar:/Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-annotations-jakarta/2.2.15/swagger-annotations-jakarta-2.2.15.jar:/Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-models-jakarta/2.2.15/swagger-models-jakarta-2.2.15.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.18.2/jackson-dataformat-yaml-2.18.2.jar:/Users/flashayla/.m2/repository/org/webjars/swagger-ui/5.2.0/swagger-ui-5.2.0.jar:/Users/flashayla/.m2/repository/net/minidev/json-smart/2.4.10/json-smart-2.4.10.jar:/Users/flashayla/.m2/repository/net/minidev/accessors-smart/2.4.9/accessors-smart-2.4.9.jar:/Users/flashayla/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/Users/flashayla/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/flashayla/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/flashayla/.m2/repository/org/springframework/spring-core/6.2.1/spring-core-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-jcl/6.2.1/spring-jcl-6.2.1.jar: -sourcepath /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/src/main/java:/Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/generated-sources/annotations: -s /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/generated-sources/annotations -g -parameters --release 17 -encoding UTF-8 -XDuseUnsharedTable=true
-[DEBUG] incrementalBuildHelper#beforeRebuildExecution
-[INFO] Compiling 35 source files with javac [debug parameters release 17] to target/classes
-[DEBUG] incrementalBuildHelper#afterRebuildExecution
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] --- resources:3.3.1:testResources (default-testResources) @ NutritionTracker ---
 [DEBUG] Loading mojo org.apache.maven.plugins:maven-resources-plugin:3.3.1:testResources from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-resources-plugin:3.3.1, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@42110406]
@@ -1007,7 +927,7 @@ includes []
 [DEBUG] env.IJ_RESTARTER_LOG: /Users/flashayla/Library/Logs/JetBrains/IntelliJIdea2024.2/restarter.log
 [DEBUG] env.INFOPATH: /opt/homebrew/share/info:
 [DEBUG] env.JAVA_HOME: /Users/flashayla/Library/Java/JavaVirtualMachines/corretto-17.0.14/Contents/Home
-[DEBUG] env.JAVA_MAIN_CLASS_88993: org.codehaus.plexus.classworlds.launcher.Launcher
+[DEBUG] env.JAVA_MAIN_CLASS_18095: org.codehaus.plexus.classworlds.launcher.Launcher
 [DEBUG] env.LC_CTYPE: UTF-8
 [DEBUG] env.LOGNAME: flashayla
 [DEBUG] env.MAVEN_CMD_LINE_ARGS:  spring-boot:run -X
@@ -1027,7 +947,7 @@ includes []
 [DEBUG] env.SSH_AUTH_SOCK: /private/tmp/com.apple.launchd.NlorLrJUNC/Listeners
 [DEBUG] env.TERM: xterm-256color
 [DEBUG] env.TERMINAL_EMULATOR: JetBrains-JediTerm
-[DEBUG] env.TERM_SESSION_ID: 4f8bf71c-5efd-4a49-84ec-4cf889320548
+[DEBUG] env.TERM_SESSION_ID: 435f5a25-4115-4609-aa70-2bc6d2c8855a
 [DEBUG] env.TMPDIR: /var/folders/y9/nk_xzq511jn0hg4vz2yrmngw0000gn/T/
 [DEBUG] env.USER: flashayla
 [DEBUG] env.XPC_FLAGS: 0x0
@@ -1155,7 +1075,7 @@ includes []
 [DEBUG] maven-source-plugin.version: 3.3.1
 [DEBUG] maven-surefire-plugin.version: 3.5.2
 [DEBUG] maven-war-plugin.version: 3.4.0
-[DEBUG] maven.build.timestamp: 2025-03-13T08:43:11Z
+[DEBUG] maven.build.timestamp: 2025-03-14T07:31:03Z
 [DEBUG] maven.build.version: Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
 [DEBUG] maven.compiler.release: 17
 [DEBUG] maven.conf: /opt/homebrew/Cellar/maven/3.9.9/libexec/conf
@@ -1320,128 +1240,13 @@ includes []
   /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/generated-test-sources/test-annotations
 [DEBUG] CompilerReuseStrategy: reuseCreated
 [DEBUG] useIncrementalCompilation enabled
-[INFO]  New dependency detected: /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/classes/com/example/NutritionTracker/dto/UserDataDTO.class
-[INFO] Recompiling the module because of changed dependency.
-[DEBUG] Classpath:
-[DEBUG]  /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/test-classes
-[DEBUG]  /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/classes
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.1/spring-boot-starter-data-jpa-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.1/spring-boot-starter-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot/3.4.1/spring-boot-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.1/spring-boot-autoconfigure-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.1/spring-boot-starter-jdbc-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-jdbc/6.2.1/spring-jdbc-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/hibernate/orm/hibernate-core/6.6.4.Final/hibernate-core-6.6.4.Final.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/data/spring-data-jpa/3.4.1/spring-data-jpa-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/data/spring-data-commons/3.4.1/spring-data-commons-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-orm/6.2.1/spring-orm-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-context/6.2.1/spring-context-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-aop/6.2.1/spring-aop-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-tx/6.2.1/spring-tx-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-beans/6.2.1/spring-beans-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-aspects/6.2.1/spring-aspects-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.1/spring-boot-starter-web-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.1/spring-boot-starter-json-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.2/jackson-datatype-jdk8-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.2/jackson-module-parameter-names-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.1/spring-boot-starter-tomcat-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.34/tomcat-embed-core-10.1.34.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.34/tomcat-embed-el-10.1.34.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.34/tomcat-embed-websocket-10.1.34.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-web/6.2.1/spring-web-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/micrometer/micrometer-observation/1.14.2/micrometer-observation-1.14.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/micrometer/micrometer-commons/1.14.2/micrometer-commons-1.14.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-webmvc/6.2.1/spring-webmvc-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-expression/6.2.1/spring-expression-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/slf4j/slf4j-simple/2.0.7/slf4j-simple-2.0.7.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.2/jackson-datatype-jsr310-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/postgresql/postgresql/42.7.4/postgresql-42.7.4.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/checkerframework/checker-qual/3.42.0/checker-qual-3.42.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.1.Final/hibernate-validator-8.0.1.Final.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/glassfish/jakarta.el/4.0.2/jakarta.el-4.0.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/el/jakarta.el-api/4.0.0/jakarta.el-api-4.0.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.1/spring-boot-starter-logging-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/slf4j/jul-to-slf4j/2.0.16/jul-to-slf4j-2.0.16.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/modelmapper/modelmapper/3.2.2/modelmapper-3.2.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-ui/2.2.0/springdoc-openapi-starter-webmvc-ui-2.2.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-api/2.2.0/springdoc-openapi-starter-webmvc-api-2.2.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-common/2.2.0/springdoc-openapi-starter-common-2.2.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-core-jakarta/2.2.15/swagger-core-jakarta-2.2.15.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apache/commons/commons-lang3/3.17.0/commons-lang3-3.17.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-annotations-jakarta/2.2.15/swagger-annotations-jakarta-2.2.15.jar
-[DEBUG]  /Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-models-jakarta/2.2.15/swagger-models-jakarta-2.2.15.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.18.2/jackson-dataformat-yaml-2.18.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/webjars/swagger-ui/5.2.0/swagger-ui-5.2.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/net/minidev/json-smart/2.4.10/json-smart-2.4.10.jar
-[DEBUG]  /Users/flashayla/.m2/repository/net/minidev/accessors-smart/2.4.9/accessors-smart-2.4.9.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.1/spring-boot-starter-test-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-test/3.4.1/spring-boot-test-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.1/spring-boot-test-autoconfigure-3.4.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-core/6.2.1/spring-core-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-jcl/6.2.1/spring-jcl-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/springframework/spring-test/6.2.1/spring-test-6.2.1.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.0/junit-jupiter-5.10.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/mockito/mockito-core/5.5.0/mockito-core-5.5.0.jar
-[DEBUG]  /Users/flashayla/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar
-[DEBUG]  /Users/flashayla/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar
-[DEBUG]  /Users/flashayla/.m2/repository/org/mockito/mockito-junit-jupiter/5.5.0/mockito-junit-jupiter-5.5.0.jar
-[DEBUG] Source roots:
-[DEBUG]  /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/src/test/java
-[DEBUG]  /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/generated-test-sources/test-annotations
-[DEBUG] Command line options:
-[DEBUG] -d /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/test-classes -classpath /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/test-classes:/Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/classes:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.1/spring-boot-starter-data-jpa-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.1/spring-boot-starter-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot/3.4.1/spring-boot-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.1/spring-boot-autoconfigure-3.4.1.jar:/Users/flashayla/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/flashayla/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.1/spring-boot-starter-jdbc-3.4.1.jar:/Users/flashayla/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/flashayla/.m2/repository/org/springframework/spring-jdbc/6.2.1/spring-jdbc-6.2.1.jar:/Users/flashayla/.m2/repository/org/hibernate/orm/hibernate-core/6.6.4.Final/hibernate-core-6.6.4.Final.jar:/Users/flashayla/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/flashayla/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/flashayla/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/flashayla/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/flashayla/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/flashayla/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/flashayla/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/flashayla/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/flashayla/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/flashayla/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/flashayla/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/flashayla/.m2/repository/org/springframework/data/spring-data-jpa/3.4.1/spring-data-jpa-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/data/spring-data-commons/3.4.1/spring-data-commons-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-orm/6.2.1/spring-orm-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-context/6.2.1/spring-context-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-aop/6.2.1/spring-aop-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-tx/6.2.1/spring-tx-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-beans/6.2.1/spring-beans-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-aspects/6.2.1/spring-aspects-6.2.1.jar:/Users/flashayla/.m2/repository/org/aspectj/aspectjweaver/1.9.22.1/aspectjweaver-1.9.22.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.1/spring-boot-starter-web-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.1/spring-boot-starter-json-3.4.1.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.2/jackson-datatype-jdk8-2.18.2.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.2/jackson-module-parameter-names-2.18.2.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.1/spring-boot-starter-tomcat-3.4.1.jar:/Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.34/tomcat-embed-core-10.1.34.jar:/Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.34/tomcat-embed-el-10.1.34.jar:/Users/flashayla/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.34/tomcat-embed-websocket-10.1.34.jar:/Users/flashayla/.m2/repository/org/springframework/spring-web/6.2.1/spring-web-6.2.1.jar:/Users/flashayla/.m2/repository/io/micrometer/micrometer-observation/1.14.2/micrometer-observation-1.14.2.jar:/Users/flashayla/.m2/repository/io/micrometer/micrometer-commons/1.14.2/micrometer-commons-1.14.2.jar:/Users/flashayla/.m2/repository/org/springframework/spring-webmvc/6.2.1/spring-webmvc-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-expression/6.2.1/spring-expression-6.2.1.jar:/Users/flashayla/.m2/repository/org/slf4j/slf4j-simple/2.0.7/slf4j-simple-2.0.7.jar:/Users/flashayla/.m2/repository/org/slf4j/slf4j-api/2.0.16/slf4j-api-2.0.16.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.2/jackson-databind-2.18.2.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.2/jackson-annotations-2.18.2.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.2/jackson-core-2.18.2.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.2/jackson-datatype-jsr310-2.18.2.jar:/Users/flashayla/.m2/repository/org/postgresql/postgresql/42.7.4/postgresql-42.7.4.jar:/Users/flashayla/.m2/repository/org/checkerframework/checker-qual/3.42.0/checker-qual-3.42.0.jar:/Users/flashayla/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/flashayla/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.1.Final/hibernate-validator-8.0.1.Final.jar:/Users/flashayla/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/flashayla/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/flashayla/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/flashayla/.m2/repository/org/glassfish/jakarta.el/4.0.2/jakarta.el-4.0.2.jar:/Users/flashayla/.m2/repository/jakarta/el/jakarta.el-api/4.0.0/jakarta.el-api-4.0.0.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.1/spring-boot-starter-logging-3.4.1.jar:/Users/flashayla/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/flashayla/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/flashayla/.m2/repository/org/slf4j/jul-to-slf4j/2.0.16/jul-to-slf4j-2.0.16.jar:/Users/flashayla/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/flashayla/.m2/repository/org/modelmapper/modelmapper/3.2.2/modelmapper-3.2.2.jar:/Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-ui/2.2.0/springdoc-openapi-starter-webmvc-ui-2.2.0.jar:/Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-webmvc-api/2.2.0/springdoc-openapi-starter-webmvc-api-2.2.0.jar:/Users/flashayla/.m2/repository/org/springdoc/springdoc-openapi-starter-common/2.2.0/springdoc-openapi-starter-common-2.2.0.jar:/Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-core-jakarta/2.2.15/swagger-core-jakarta-2.2.15.jar:/Users/flashayla/.m2/repository/org/apache/commons/commons-lang3/3.17.0/commons-lang3-3.17.0.jar:/Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-annotations-jakarta/2.2.15/swagger-annotations-jakarta-2.2.15.jar:/Users/flashayla/.m2/repository/io/swagger/core/v3/swagger-models-jakarta/2.2.15/swagger-models-jakarta-2.2.15.jar:/Users/flashayla/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.18.2/jackson-dataformat-yaml-2.18.2.jar:/Users/flashayla/.m2/repository/org/webjars/swagger-ui/5.2.0/swagger-ui-5.2.0.jar:/Users/flashayla/.m2/repository/net/minidev/json-smart/2.4.10/json-smart-2.4.10.jar:/Users/flashayla/.m2/repository/net/minidev/accessors-smart/2.4.9/accessors-smart-2.4.9.jar:/Users/flashayla/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.1/spring-boot-starter-test-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-test/3.4.1/spring-boot-test-3.4.1.jar:/Users/flashayla/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.1/spring-boot-test-autoconfigure-3.4.1.jar:/Users/flashayla/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/flashayla/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/flashayla/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/flashayla/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/flashayla/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/flashayla/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/flashayla/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/flashayla/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-core/6.2.1/spring-core-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-jcl/6.2.1/spring-jcl-6.2.1.jar:/Users/flashayla/.m2/repository/org/springframework/spring-test/6.2.1/spring-test-6.2.1.jar:/Users/flashayla/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/flashayla/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.0/junit-jupiter-5.10.0.jar:/Users/flashayla/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/flashayla/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/flashayla/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/flashayla/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/flashayla/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/flashayla/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/flashayla/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/flashayla/.m2/repository/org/mockito/mockito-core/5.5.0/mockito-core-5.5.0.jar:/Users/flashayla/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/flashayla/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/flashayla/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/flashayla/.m2/repository/org/mockito/mockito-junit-jupiter/5.5.0/mockito-junit-jupiter-5.5.0.jar: -sourcepath /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/src/test/java:/Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/generated-test-sources/test-annotations: -s /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/generated-test-sources/test-annotations -g -parameters --release 17 -encoding UTF-8 -XDuseUnsharedTable=true
-[DEBUG] incrementalBuildHelper#beforeRebuildExecution
-[DEBUG] incrementalBuildHelper#afterRebuildExecution
+[INFO] Nothing to compile - all classes are up to date.
 [INFO]
 [INFO] <<< spring-boot:3.4.1:run (default-cli) < test-compile @ NutritionTracker <<<
 [INFO]
 [INFO]
 [INFO] --- spring-boot:3.4.1:run (default-cli) @ NutritionTracker ---
-[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=78458, ConflictMarker.markTime=23417, ConflictMarker.nodeCount=55, ConflictIdSorter.graphTime=56750, ConflictIdSorter.topsortTime=23875, ConflictIdSorter.conflictIdCount=39, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=686542, ConflictResolver.conflictItemCount=55, DfDependencyCollector.collectTime=38477625, DfDependencyCollector.transformTime=887000}
+[DEBUG] Dependency collection stats {ConflictMarker.analyzeTime=39000, ConflictMarker.markTime=35125, ConflictMarker.nodeCount=55, ConflictIdSorter.graphTime=30833, ConflictIdSorter.topsortTime=23000, ConflictIdSorter.conflictIdCount=39, ConflictIdSorter.conflictIdCycleCount=0, ConflictResolver.totalTime=743584, ConflictResolver.conflictItemCount=55, DfDependencyCollector.collectTime=37136667, DfDependencyCollector.transformTime=889917}
 [DEBUG] org.springframework.boot:spring-boot-maven-plugin:jar:3.4.1
 [DEBUG]    org.springframework.boot:spring-boot-buildpack-platform:jar:3.4.1:runtime
 [DEBUG]       com.fasterxml.jackson.core:jackson-databind:jar:2.18.2:runtime
@@ -1554,11 +1359,11 @@ includes []
  :: Spring Boot ::                (v3.4.1)
 
 [background-preinit] INFO org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-[main] INFO com.example.NutritionTracker.Application - Starting Application using Java 17.0.14 with PID 89013 (/Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/classes started by flashayla in /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend)
+[main] INFO com.example.NutritionTracker.Application - Starting Application using Java 17.0.14 with PID 18107 (/Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/target/classes started by flashayla in /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend)
 [main] INFO com.example.NutritionTracker.Application - The following 1 profile is active: "dev"
 [main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-[main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 29 ms. Found 5 JPA repository interfaces.
-März 13, 2025 9:43:12 AM org.apache.catalina.core.AprLifecycleListener init
+[main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 27 ms. Found 5 JPA repository interfaces.
+März 14, 2025 8:31:04 AM org.apache.catalina.core.AprLifecycleListener init
 FEIN: The Apache Tomcat Native library could not be found using names [tcnative-2, libtcnative-2, tcnative-1, libtcnative-1] on the java.library.path [/Users/flashayla/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]. The errors reported were [Can't load library: /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/bin/libtcnative-2.dylib, Can't load library: /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/bin/liblibtcnative-2.dylib, Can't load library: /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/bin/libtcnative-1.dylib, Can't load library: /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/bin/liblibtcnative-1.dylib, no tcnative-2 in java.library.path: /Users/flashayla/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., no libtcnative-2 in java.library.path: /Users/flashayla/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., no tcnative-1 in java.library.path: /Users/flashayla/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., no libtcnative-1 in java.library.path: /Users/flashayla/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
 org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/bin/libtcnative-2.dylib, Can't load library: /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/bin/liblibtcnative-2.dylib, Can't load library: /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/bin/libtcnative-1.dylib, Can't load library: /Users/flashayla/Projekte/IntelliJ/NutritionTracker/backend/bin/liblibtcnative-1.dylib, no tcnative-2 in java.library.path: /Users/flashayla/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., no libtcnative-2 in java.library.path: /Users/flashayla/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., no tcnative-1 in java.library.path: /Users/flashayla/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:., no libtcnative-1 in java.library.path: /Users/flashayla/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
         at org.apache.tomcat.jni.Library.<init>(Library.java:91)
@@ -1597,7 +1402,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: /Users/flashayla
         at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
         at com.example.NutritionTracker.Application.main(Application.java:10)
 
-März 13, 2025 9:43:12 AM org.apache.tomcat.util.compat.Jre19Compat <clinit>
+März 14, 2025 8:31:04 AM org.apache.tomcat.util.compat.Jre19Compat <clinit>
 FEIN: Class not found so assuming code is running on a pre-Java 19 JVM
 java.lang.ClassNotFoundException: java.lang.WrongThreadException
         at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
@@ -1620,7 +1425,7 @@ java.lang.ClassNotFoundException: java.lang.WrongThreadException
         at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
         at com.example.NutritionTracker.Application.main(Application.java:10)
 
-März 13, 2025 9:43:12 AM org.apache.tomcat.util.compat.Jre21Compat <clinit>
+März 14, 2025 8:31:04 AM org.apache.tomcat.util.compat.Jre21Compat <clinit>
 FEIN: Class not found so assuming code is running on a pre-Java 21 JVM
 java.lang.ClassNotFoundException: java.lang.Thread$Builder
         at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
@@ -1643,7 +1448,7 @@ java.lang.ClassNotFoundException: java.lang.Thread$Builder
         at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
         at com.example.NutritionTracker.Application.main(Application.java:10)
 
-März 13, 2025 9:43:12 AM org.apache.tomcat.util.compat.Jre22Compat <clinit>
+März 14, 2025 8:31:04 AM org.apache.tomcat.util.compat.Jre22Compat <clinit>
 FEIN: Class not found so assuming code is running on a pre-Java 22 JVM
 java.lang.ClassNotFoundException: java.text.ListFormat
         at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
@@ -1666,39 +1471,39 @@ java.lang.ClassNotFoundException: java.text.ListFormat
         at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
         at com.example.NutritionTracker.Application.main(Application.java:10)
 
-März 13, 2025 9:43:12 AM org.apache.catalina.core.ContainerBase addChildInternal
+März 14, 2025 8:31:04 AM org.apache.catalina.core.ContainerBase addChildInternal
 FEIN: Add container child [StandardHost[localhost]] to container [StandardEngine[Tomcat]]
-März 13, 2025 9:43:12 AM org.apache.catalina.core.ContainerBase addChildInternal
+März 14, 2025 8:31:04 AM org.apache.catalina.core.ContainerBase addChildInternal
 FEIN: Add container child [TomcatEmbeddedContext[/api]] to container [StandardEngine[Tomcat].StandardHost[localhost]]
 [main] INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-März 13, 2025 9:43:12 AM org.apache.catalina.core.StandardService startInternal
+März 14, 2025 8:31:04 AM org.apache.catalina.core.StandardService startInternal
 INFORMATION: Starting service [Tomcat]
-März 13, 2025 9:43:12 AM org.apache.catalina.core.StandardEngine startInternal
+März 14, 2025 8:31:04 AM org.apache.catalina.core.StandardEngine startInternal
 INFORMATION: Starting Servlet engine: [Apache Tomcat/10.1.34]
-März 13, 2025 9:43:12 AM org.apache.catalina.loader.WebappLoader startInternal
+März 14, 2025 8:31:04 AM org.apache.catalina.loader.WebappLoader startInternal
 FEIN: Starting this Loader
-März 13, 2025 9:43:12 AM org.apache.catalina.webresources.Cache getResources
-FEIN: Increased cache size by [532] for item [org.apache.catalina.webresources.CachedResource@79518e00] at [/WEB-INF/classes] making total cache size [532]
-März 13, 2025 9:43:12 AM org.apache.catalina.core.StandardContext startInternal
+März 14, 2025 8:31:04 AM org.apache.catalina.webresources.Cache getResources
+FEIN: Increased cache size by [532] for item [org.apache.catalina.webresources.CachedResource@2a334bac] at [/WEB-INF/classes] making total cache size [532]
+März 14, 2025 8:31:04 AM org.apache.catalina.core.StandardContext startInternal
 FEIN: No manager found. Checking if cluster manager should be used. Cluster configured: [false], Application distributable: [false]
-März 13, 2025 9:43:12 AM org.apache.catalina.core.StandardContext startInternal
+März 14, 2025 8:31:04 AM org.apache.catalina.core.StandardContext startInternal
 FEIN: Configured a manager of class [org.apache.catalina.session.StandardManager]
-März 13, 2025 9:43:12 AM org.apache.catalina.core.ApplicationContext log
+März 14, 2025 8:31:04 AM org.apache.catalina.core.ApplicationContext log
 INFORMATION: Initializing Spring embedded WebApplicationContext
-[main] INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 677 ms
-März 13, 2025 9:43:12 AM org.apache.catalina.core.ContainerBase addChildInternal
+[main] INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 682 ms
+März 14, 2025 8:31:04 AM org.apache.catalina.core.ContainerBase addChildInternal
 FEIN: Add container child [StandardWrapper[dispatcherServlet]] to container [StandardEngine[Tomcat].StandardHost[localhost].TomcatEmbeddedContext[/api]]
-März 13, 2025 9:43:12 AM org.apache.catalina.core.ContainerBase addChildInternal
+März 14, 2025 8:31:04 AM org.apache.catalina.core.ContainerBase addChildInternal
 FEIN: Add container child [StandardWrapper[h2Console]] to container [StandardEngine[Tomcat].StandardHost[localhost].TomcatEmbeddedContext[/api]]
-März 13, 2025 9:43:12 AM org.apache.catalina.mapper.Mapper addHost
+März 14, 2025 8:31:04 AM org.apache.catalina.mapper.Mapper addHost
 FEIN: Registered host [localhost]
-März 13, 2025 9:43:12 AM org.apache.catalina.mapper.MapperListener registerContext
+März 14, 2025 8:31:04 AM org.apache.catalina.mapper.MapperListener registerContext
 FEIN: Register Wrapper [h2Console] in Context [/api] for service [StandardService[Tomcat]]
-März 13, 2025 9:43:12 AM org.apache.catalina.mapper.MapperListener registerContext
+März 14, 2025 8:31:04 AM org.apache.catalina.mapper.MapperListener registerContext
 FEIN: Register Wrapper [dispatcherServlet] in Context [/api] for service [StandardService[Tomcat]]
-März 13, 2025 9:43:12 AM org.apache.catalina.mapper.MapperListener registerContext
+März 14, 2025 8:31:04 AM org.apache.catalina.mapper.MapperListener registerContext
 FEIN: Register Context [/api] for service [StandardService[Tomcat]]
-März 13, 2025 9:43:12 AM org.apache.catalina.mapper.MapperListener registerHost
+März 14, 2025 8:31:04 AM org.apache.catalina.mapper.MapperListener registerHost
 FEIN: Register host [localhost] at domain [null] for service [StandardService[Tomcat]]
 [main] INFO org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
 [main] INFO org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.4.Final
@@ -1765,96 +1570,11 @@ Hibernate:
     )
 Hibernate:
     create table food_item_amino_acids (
-        value float(53),
+        amino_acid_value float(53),
         food_item_id uuid not null,
         amino_acid varchar(255) not null,
         primary key (food_item_id, amino_acid)
     )
-[main] WARN org.hibernate.tool.schema.internal.ExceptionHandlerLoggedImpl - GenerationTarget encountered exception accepting command : Error executing DDL "
-    create table food_item_amino_acids (
-        value float(53),
-        food_item_id uuid not null,
-        amino_acid varchar(255) not null,
-        primary key (food_item_id, amino_acid)
-    )" via JDBC [Syntax Fehler in SQL Befehl "\000a    create table food_item_amino_acids (\000a        [*]value float(53),\000a        food_item_id uuid not null,\000a        amino_acid varchar(255) not null,\000a        primary key (food_item_id, amino_acid)\000a    )"; erwartet "identifier"
-Syntax error in SQL statement "\000a    create table food_item_amino_acids (\000a        [*]value float(53),\000a        food_item_id uuid not null,\000a        amino_acid varchar(255) not null,\000a        primary key (food_item_id, amino_acid)\000a    )"; expected "identifier";]
-org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
-    create table food_item_amino_acids (
-        value float(53),
-        food_item_id uuid not null,
-        amino_acid varchar(255) not null,
-        primary key (food_item_id, amino_acid)
-    )" via JDBC [Syntax Fehler in SQL Befehl "\000a    create table food_item_amino_acids (\000a        [*]value float(53),\000a        food_item_id uuid not null,\000a        amino_acid varchar(255) not null,\000a        primary key (food_item_id, amino_acid)\000a    )"; erwartet "identifier"
-Syntax error in SQL statement "\000a    create table food_item_amino_acids (\000a        [*]value float(53),\000a        food_item_id uuid not null,\000a        amino_acid varchar(255) not null,\000a        primary key (food_item_id, amino_acid)\000a    )"; expected "identifier";]
-        at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:94)
-        at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233)
-        at org.hibernate.tool.schema.internal.Helper.applySqlStrings(Helper.java:217)
-        at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createTables(SchemaCreatorImpl.java:428)
-        at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createSequencesTablesConstraints(SchemaCreatorImpl.java:344)
-        at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createFromMetadata(SchemaCreatorImpl.java:239)
-        at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:172)
-        at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:142)
-        at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:118)
-        at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:250)
-        at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144)
-        at java.base/java.util.HashMap.forEach(HashMap.java:1421)
-        at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141)
-        at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
-        at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
-        at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324)
-        at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463)
-        at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1506)
-        at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
-        at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
-        at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419)
-        at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400)
-        at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
-        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1855)
-        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
-        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
-        at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
-        at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336)
-        at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:289)
-        at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334)
-        at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:204)
-        at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970)
-        at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
-        at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-        at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
-        at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
-        at com.example.NutritionTracker.Application.main(Application.java:10)
-Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax Fehler in SQL Befehl "\000a    create table food_item_amino_acids (\000a        [*]value float(53),\000a        food_item_id uuid not null,\000a        amino_acid varchar(255) not null,\000a        primary key (food_item_id, amino_acid)\000a    )"; erwartet "identifier"
-Syntax error in SQL statement "\000a    create table food_item_amino_acids (\000a        [*]value float(53),\000a        food_item_id uuid not null,\000a        amino_acid varchar(255) not null,\000a        primary key (food_item_id, amino_acid)\000a    )"; expected "identifier"; SQL statement:
-
-    create table food_item_amino_acids (
-        value float(53),
-        food_item_id uuid not null,
-        amino_acid varchar(255) not null,
-        primary key (food_item_id, amino_acid)
-    ) [42001-232]
-        at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
-        at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
-        at org.h2.message.DbException.getSyntaxError(DbException.java:261)
-        at org.h2.command.Parser.readIdentifier(Parser.java:5527)
-        at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:8871)
-        at org.h2.command.Parser.parseCreateTable(Parser.java:8819)
-        at org.h2.command.Parser.parseCreate(Parser.java:6398)
-        at org.h2.command.Parser.parsePrepared(Parser.java:645)
-        at org.h2.command.Parser.parse(Parser.java:581)
-        at org.h2.command.Parser.parse(Parser.java:556)
-        at org.h2.command.Parser.prepareCommand(Parser.java:484)
-        at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
-        at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
-        at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
-        at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
-        at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
-        at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
-        at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
-        at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80)
-        ... 39 more
 Hibernate:
     create table food_item (
         version bigint,
@@ -1898,10 +1618,13 @@ Hibernate:
        foreign key (nutrition_log_id)
        references nutrition_log
 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+März 14, 2025 8:31:05 AM org.apache.catalina.webresources.Cache getResource
+FEIN: Increased cache size by [521] for item [org.apache.catalina.webresources.CachedResource@6e21c6ed] at [/index.html] making total cache size [1053]
+März 14, 2025 8:31:05 AM org.apache.catalina.webresources.Cache getResource
+FEIN: Increased cache size by [501] for item [org.apache.catalina.webresources.CachedResource@2f83467] at [/] making total cache size [1554]
 [main] INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/nutrition_tracker'
 [main] INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/api'
-[main] INFO com.example.NutritionTracker.Application - Started Application in 2.319 seconds (process running for 2.457)
-[main] INFO com.example.NutritionTracker.config.StartupRunner - Application startup completed.
+[main] INFO com.example.NutritionTracker.Application - Started Application in 2.372 seconds (process running for 2.51)
 [main] INFO com.example.NutritionTracker.config.DevDataLoader - Starting DevDataLoader...
 [main] INFO com.example.NutritionTracker.config.DevDataLoader - Cleaning up old test data...
 [main] INFO com.example.NutritionTracker.service.NutritionLogService - Cleaning up database before shutdown...
@@ -1945,6 +1668,18 @@ Hibernate:
         amino_acid_requirement aar1_0
 [main] INFO com.example.NutritionTracker.config.DevDataLoader - Cleanup completed.
 Hibernate:
+    /* <criteria> */ select
+        u1_0.id,
+        u1_0.age,
+        u1_0.is_athlete,
+        u1_0.is_longevity_focused,
+        u1_0.is_vegan,
+        u1_0.name,
+        u1_0.version,
+        u1_0.weight
+    from
+        app_user u1_0
+Hibernate:
     /* select
         count(*)
     from
@@ -1959,9 +1694,73 @@ Hibernate:
         app_user (age, is_athlete, is_longevity_focused, is_vegan, name, version, weight, id)
     values
         (?, ?, ?, ?, ?, ?, ?, ?)
-[main] INFO com.example.NutritionTracker.config.DevDataLoader - Test User created with ID: 92469c46-7f07-4405-b8d6-43af325b10a8
-[main] INFO com.example.NutritionTracker.service.FoodItemService - Speichere FoodItems: [com.example.NutritionTracker.entity.FoodItem@59a49dbc, com.example.NutritionTracker.entity.FoodItem@6dde03ce]
-[main] INFO com.example.NutritionTracker.service.FoodItemService - Gespeicherte FoodItems mit IDs: [c66e10fb-51e7-4a7b-b590-403fb9d53c61, 22ec3c29-196d-430a-b81a-00ae41ff955e]
+[main] INFO com.example.NutritionTracker.config.DevDataLoader - Test User created with ID: 0d82555d-ed9f-4236-8948-4e5a1704a79f
+Hibernate:
+    /* select
+        count(*)
+    from
+        FoodItem x */ select
+            count(*)
+        from
+            food_item fi1_0
+[main] INFO com.example.NutritionTracker.service.FoodItemService - Speichere FoodItems: [com.example.NutritionTracker.entity.FoodItem@5beda06e, com.example.NutritionTracker.entity.FoodItem@2474331d, com.example.NutritionTracker.entity.FoodItem@46977829, com.example.NutritionTracker.entity.FoodItem@24eb71f6, com.example.NutritionTracker.entity.FoodItem@12b34bd5, com.example.NutritionTracker.entity.FoodItem@17da6e45, com.example.NutritionTracker.entity.FoodItem@6af10aa7, com.example.NutritionTracker.entity.FoodItem@15eaa2ce, com.example.NutritionTracker.entity.FoodItem@1d0fae45, com.example.NutritionTracker.entity.FoodItem@596343e7]
+[main] INFO com.example.NutritionTracker.service.FoodItemService - Gespeicherte FoodItems mit IDs: [ed44ff03-0207-4807-94f7-e7ce104db30f, 58eaddb7-4b57-4918-bae9-5f37e954ab77, 9cabd3ec-c3ed-4a5e-bf22-feb052fa44df, 8f5ec1ca-4af0-4516-a00d-3d4d9d9233f3, 3d581aba-17ec-426c-9472-b758f9cac754, f70eb31d-1fa8-4bdb-adab-d26e3506202a, bbaceede-c2c3-4e35-afe2-dbb6487e1cec, 04a3e781-419f-4c5f-8b6d-19e7572a975a, 3c533d26-9142-4b8a-9eb1-a2965a968546, bf03e33a-1177-4517-bd2b-fcad762f5b09]
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem */insert
+    into
+        food_item (name, version, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem */insert
+    into
+        food_item (name, version, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem */insert
+    into
+        food_item (name, version, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem */insert
+    into
+        food_item (name, version, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem */insert
+    into
+        food_item (name, version, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem */insert
+    into
+        food_item (name, version, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem */insert
+    into
+        food_item (name, version, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem */insert
+    into
+        food_item (name, version, id)
+    values
+        (?, ?, ?)
 Hibernate:
     /* insert for
         com.example.NutritionTracker.entity.FoodItem */insert
@@ -1994,103 +1793,842 @@ Hibernate:
     where
         id=?
         and version=?
-[main] WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 42102, SQLState: 42S02
-[main] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Tabelle "FOOD_ITEM_AMINO_ACIDS" nicht gefunden
-Table "FOOD_ITEM_AMINO_ACIDS" not found; SQL statement:
-/* insert for com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert into food_item_amino_acids (food_item_id,amino_acid,value) values (?,?,?) [42102-232]
-[main] ERROR com.example.NutritionTracker.config.DevDataLoader - Error during data initialization:
-org.springframework.dao.InvalidDataAccessResourceUsageException: could not prepare statement [Tabelle "FOOD_ITEM_AMINO_ACIDS" nicht gefunden
-Table "FOOD_ITEM_AMINO_ACIDS" not found; SQL statement:
-/* insert for com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert into food_item_amino_acids (food_item_id,amino_acid,value) values (?,?,?) [42102-232]] [/* insert for com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert into food_item_amino_acids (food_item_id,amino_acid,value) values (?,?,?)]; SQL [/* insert for com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert into food_item_amino_acids (food_item_id,amino_acid,value) values (?,?,?)]
-        at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:277)
-        at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)
-        at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566)
-        at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795)
-        at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758)
-        at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:698)
-        at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:416)
-        at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
-        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-        at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
-        at com.example.NutritionTracker.service.FoodItemService$$SpringCGLIB$$0.saveAllFoodItems(<generated>)
-        at com.example.NutritionTracker.config.DevDataLoader.run(DevDataLoader.java:69)
-        at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
-        at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
-        at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
-        at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
-        at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
-        at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
-        at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
-        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)
-        at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
-        at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
-        at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
-        at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)
-        at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)
-        at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-        at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
-        at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
-        at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
-        at com.example.NutritionTracker.Application.main(Application.java:10)
-Caused by: org.hibernate.exception.SQLGrammarException: could not prepare statement [Tabelle "FOOD_ITEM_AMINO_ACIDS" nicht gefunden
-Table "FOOD_ITEM_AMINO_ACIDS" not found; SQL statement:
-/* insert for com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert into food_item_amino_acids (food_item_id,amino_acid,value) values (?,?,?) [42102-232]] [/* insert for com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert into food_item_amino_acids (food_item_id,amino_acid,value) values (?,?,?)]
-        at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:66)
-        at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)
-        at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)
-        at org.hibernate.engine.jdbc.internal.MutationStatementPreparerImpl$StatementPreparationTemplate.prepareStatement(MutationStatementPreparerImpl.java:117)
-        at org.hibernate.engine.jdbc.internal.MutationStatementPreparerImpl.prepareStatement(MutationStatementPreparerImpl.java:38)
-        at org.hibernate.engine.jdbc.mutation.internal.ModelMutationHelper.standardStatementPreparation(ModelMutationHelper.java:141)
-        at org.hibernate.engine.jdbc.mutation.internal.ModelMutationHelper.lambda$standardPreparation$0(ModelMutationHelper.java:122)
-        at org.hibernate.engine.jdbc.mutation.internal.PreparedStatementDetailsStandard.resolveStatement(PreparedStatementDetailsStandard.java:87)
-        at org.hibernate.engine.jdbc.batch.internal.BatchImpl.lambda$addToBatch$0(BatchImpl.java:125)
-        at org.hibernate.engine.jdbc.mutation.internal.PreparedStatementGroupSingleTable.forEachStatement(PreparedStatementGroupSingleTable.java:67)
-        at org.hibernate.engine.jdbc.batch.internal.BatchImpl.addToBatch(BatchImpl.java:112)
-        at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleBatched.performBatchedOperations(MutationExecutorSingleBatched.java:60)
-        at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:63)
-        at org.hibernate.persister.collection.mutation.InsertRowsCoordinatorStandard.insertRows(InsertRowsCoordinatorStandard.java:117)
-        at org.hibernate.persister.collection.BasicCollectionPersister.recreate(BasicCollectionPersister.java:116)
-        at org.hibernate.action.internal.CollectionRecreateAction.execute(CollectionRecreateAction.java:47)
-        at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:644)
-        at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:511)
-        at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:414)
-        at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:41)
-        at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)
-        at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1429)
-        at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:491)
-        at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2354)
-        at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:1978)
-        at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:439)
-        at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:169)
-        at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:267)
-        at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101)
-        at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562)
-        ... 29 more
-Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabelle "FOOD_ITEM_AMINO_ACIDS" nicht gefunden
-Table "FOOD_ITEM_AMINO_ACIDS" not found; SQL statement:
-/* insert for com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert into food_item_amino_acids (food_item_id,amino_acid,value) values (?,?,?) [42102-232]
-        at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
-        at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
-        at org.h2.message.DbException.get(DbException.java:223)
-        at org.h2.message.DbException.get(DbException.java:199)
-        at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:7945)
-        at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:7916)
-        at org.h2.command.Parser.readTableOrView(Parser.java:7895)
-        at org.h2.command.Parser.readTableOrView(Parser.java:7857)
-        at org.h2.command.Parser.parseInsert(Parser.java:1521)
-        at org.h2.command.Parser.parsePrepared(Parser.java:698)
-        at org.h2.command.Parser.parse(Parser.java:581)
-        at org.h2.command.Parser.parse(Parser.java:556)
-        at org.h2.command.Parser.prepareCommand(Parser.java:484)
-        at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
-        at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
-        at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
-        at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:93)
-        at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:315)
-        at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:328)
-        at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
-        at org.hibernate.engine.jdbc.internal.MutationStatementPreparerImpl$1.doPrepare(MutationStatementPreparerImpl.java:48)
-        at org.hibernate.engine.jdbc.internal.MutationStatementPreparerImpl$StatementPreparationTemplate.prepareStatement(MutationStatementPreparerImpl.java:106)
-        ... 55 more
+Hibernate:
+    /* update
+        for com.example.NutritionTracker.entity.FoodItem */update food_item
+    set
+        name=?,
+        version=?
+    where
+        id=?
+        and version=?
+Hibernate:
+    /* update
+        for com.example.NutritionTracker.entity.FoodItem */update food_item
+    set
+        name=?,
+        version=?
+    where
+        id=?
+        and version=?
+Hibernate:
+    /* update
+        for com.example.NutritionTracker.entity.FoodItem */update food_item
+    set
+        name=?,
+        version=?
+    where
+        id=?
+        and version=?
+Hibernate:
+    /* update
+        for com.example.NutritionTracker.entity.FoodItem */update food_item
+    set
+        name=?,
+        version=?
+    where
+        id=?
+        and version=?
+Hibernate:
+    /* update
+        for com.example.NutritionTracker.entity.FoodItem */update food_item
+    set
+        name=?,
+        version=?
+    where
+        id=?
+        and version=?
+Hibernate:
+    /* update
+        for com.example.NutritionTracker.entity.FoodItem */update food_item
+    set
+        name=?,
+        version=?
+    where
+        id=?
+        and version=?
+Hibernate:
+    /* update
+        for com.example.NutritionTracker.entity.FoodItem */update food_item
+    set
+        name=?,
+        version=?
+    where
+        id=?
+        and version=?
+Hibernate:
+    /* update
+        for com.example.NutritionTracker.entity.FoodItem */update food_item
+    set
+        name=?,
+        version=?
+    where
+        id=?
+        and version=?
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.FoodItem.aminoAcidProfile */insert
+    into
+        food_item_amino_acids (food_item_id, amino_acid, amino_acid_value)
+    values
+        (?, ?, ?)
+[main] INFO com.example.NutritionTracker.config.DevDataLoader - FoodItems gespeichert.
+Hibernate:
+    /* <criteria> */ select
+        nl1_0.id,
+        nl1_0.user_id,
+        nl1_0.version
+    from
+        nutrition_log nl1_0
+    order by
+        nl1_0.id desc
+    fetch
+        first ? rows only
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.NutritionLog */insert
+    into
+        nutrition_log (user_id, version, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    select
+        nl1_0.id,
+        nl1_0.user_id,
+        nl1_0.version,
+        fi1_0.nutrition_log_id,
+        fi1_0.id,
+        fi1_0.food_item_id,
+        fi2_0.id,
+        fi2_0.name,
+        fi2_0.version,
+        fi1_0.version
+    from
+        nutrition_log nl1_0
+    left join
+        nutrition_log_food_item fi1_0
+            on nl1_0.id=fi1_0.nutrition_log_id
+    left join
+        food_item fi2_0
+            on fi2_0.id=fi1_0.food_item_id
+    where
+        nl1_0.id=?
+Hibernate:
+    select
+        nl1_0.id,
+        nl1_0.user_id,
+        nl1_0.version
+    from
+        nutrition_log nl1_0
+    where
+        nl1_0.id=?
+[main] INFO com.example.NutritionTracker.config.DevDataLoader - Test NutritionLog created.
+Hibernate:
+    /* select
+        count(*)
+    from
+        AminoAcidRequirement x */ select
+            count(*)
+        from
+            amino_acid_requirement aar1_0
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.AminoAcidRequirement */insert
+    into
+        amino_acid_requirement (amino_acid, base_amount_per_kg, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.AminoAcidRequirement */insert
+    into
+        amino_acid_requirement (amino_acid, base_amount_per_kg, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.AminoAcidRequirement */insert
+    into
+        amino_acid_requirement (amino_acid, base_amount_per_kg, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.AminoAcidRequirement */insert
+    into
+        amino_acid_requirement (amino_acid, base_amount_per_kg, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.AminoAcidRequirement */insert
+    into
+        amino_acid_requirement (amino_acid, base_amount_per_kg, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.AminoAcidRequirement */insert
+    into
+        amino_acid_requirement (amino_acid, base_amount_per_kg, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.AminoAcidRequirement */insert
+    into
+        amino_acid_requirement (amino_acid, base_amount_per_kg, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.AminoAcidRequirement */insert
+    into
+        amino_acid_requirement (amino_acid, base_amount_per_kg, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.AminoAcidRequirement */insert
+    into
+        amino_acid_requirement (amino_acid, base_amount_per_kg, id)
+    values
+        (?, ?, ?)
+Hibernate:
+    /* insert for
+        com.example.NutritionTracker.entity.AminoAcidRequirement */insert
+    into
+        amino_acid_requirement (amino_acid, base_amount_per_kg, id)
+    values
+        (?, ?, ?)
+[main] INFO com.example.NutritionTracker.config.DevDataLoader - Amino acid requirements gespeichert.
+[main] INFO com.example.NutritionTracker.config.StartupRunner - Application startup completed.
+März 14, 2025 8:31:16 AM org.apache.catalina.authenticator.jaspic.AuthConfigFactoryImpl loadPersistentRegistrations
+FEIN: Loading persistent provider registrations from [/private/var/folders/y9/nk_xzq511jn0hg4vz2yrmngw0000gn/T/tomcat.8080.7192858981292336365/conf/jaspic-providers.xml]
+März 14, 2025 8:31:16 AM org.apache.catalina.core.ApplicationContext log
+INFORMATION: Initializing Spring DispatcherServlet 'dispatcherServlet'
+[http-nio-8080-exec-1] INFO org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+[http-nio-8080-exec-1] INFO org.springframework.web.servlet.DispatcherServlet - Completed initialization in 1 ms

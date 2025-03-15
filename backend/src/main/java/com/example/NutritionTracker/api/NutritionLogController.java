@@ -53,7 +53,7 @@ public class NutritionLogController {
     @GetMapping("/latest")
     public ResponseEntity<NutritionLogDTO> getLatestNutritionLog() {
         return nutritionLogService.getLatestNutritionLog()
-                .map(log -> ResponseEntity.ok(nutritionLogService.convertToDTO(log)))
+                .map(ResponseEntity::ok) // ✅ Direkt zurückgeben, weil es schon ein DTO ist
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
