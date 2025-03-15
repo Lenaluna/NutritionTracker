@@ -30,7 +30,7 @@ public class DailyAminoAcidCalculator implements AminoAcidCalculator {
         Map<String, Double> dailyNeeds = new HashMap<>();
 
         for (AminoAcidRequirement req : requirements) {
-            double need = req.getBaseAmountPerKg() * user.getWeight();
+            double need = (req.getBaseAmountPerKg() * user.getWeight()) / 1000; // mg → g
             dailyNeeds.merge(req.getAminoAcid(), need, Double::sum);
         }
 

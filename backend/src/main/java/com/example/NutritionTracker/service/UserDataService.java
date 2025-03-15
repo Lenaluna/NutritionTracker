@@ -46,6 +46,8 @@ public class UserDataService {
                         .age(user.getAge())
                         .weight(user.getWeight())
                         .isAthlete(user.getIsAthlete())
+                        .isVegan(user.getIsVegan())
+                        .isLongevityFocused(user.getIsLongevityFocused())
                         .build());
     }
     public User updateExistingUser(UserDataDTO userDataDTO) {
@@ -84,7 +86,9 @@ public class UserDataService {
 
         // Ausgabe nach dem Speichern
         logger.info("✅ Gespeicherter Benutzer: {}", savedUser);
-        logger.debug("✅ Gespeicherter Benutzer: {}", savedUser);
+        logger.info("🆕 Neuer Zustand nach Speicherung: Name={}, Age={}, Weight={}, Athlete={}, Vegan={}, Longevity={}",
+                user.getName(), user.getAge(), user.getWeight(),
+                user.getIsAthlete(), user.getIsVegan(), user.getIsLongevityFocused());
 
 
         return savedUser;

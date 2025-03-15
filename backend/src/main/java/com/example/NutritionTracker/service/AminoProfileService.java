@@ -119,34 +119,72 @@ public class AminoProfileService {
     }
 
 
-    @Transactional(readOnly = true)
-    public Map<String, Double> calculateAminoAcidCoverageForLatestLog() {
-        logger.info("Berechnung der Aminosäurenabdeckung für das neueste NutritionLog gestartet...");
+//    @Transactional(readOnly = true)
+//    public Map<String, Double> calculateAminoAcidCoverageForLatestLog() {
+//        logger.info("Berechnung der Aminosäurenabdeckung für das neueste NutritionLog gestartet...");
+//
+//        // 1. Tagesbedarf der Aminosäuren abrufen
+//        Map<String, Double> dailyNeeds = calculateDailyAminoAcidNeeds();
+//        logger.info("Tagesbedarf der Aminosäuren: {}", dailyNeeds);
+//
+//        // 2. Konsumierte Aminosäuren summieren (vom neuesten Log)
+//        Map<String, Double> consumedAminoAcids = calculateAminoAcidSumsForLatestLog();
+//        logger.info("Konsumierte Aminosäuren (Summen): {}", consumedAminoAcids);
+//
+//        // 3. Coverage berechnen
+//        Map<String, Double> coverage = new HashMap<>();
+//        for (String aminoAcid : dailyNeeds.keySet()) {
+//            // Hole Tagesbedarf (Default 1.0 für Sicherheit)
+//            double need = dailyNeeds.getOrDefault(aminoAcid, 1.0);
+//
+//            // Hole konsumierte Menge (Default 0.0, falls nicht vorhanden)
+//            double consumed = consumedAminoAcids.getOrDefault(aminoAcid, 0.0);
+//
+//            // Coverage berechnen: (konsumiert / Bedarf) * 100
+//            double percentage = (consumed / need) * 100;
+//            coverage.put(aminoAcid, percentage);
+//        }
+//
+//        logger.info("Aminosäurenabdeckung berechnet: {}", coverage);
+//
+//        return coverage;
+//    }
+@Transactional(readOnly = true)
+public Map<String, Double> calculateAminoAcidCoverageForLatestLog() {
+    logger.info("Berechnung der Aminosäurenabdeckung für das neueste NutritionLog gestartet...");
 
-        // 1. Tagesbedarf der Aminosäuren abrufen
-        Map<String, Double> dailyNeeds = calculateDailyAminoAcidNeeds();
-        logger.info("Tagesbedarf der Aminosäuren: {}", dailyNeeds);
-
-        // 2. Konsumierte Aminosäuren summieren (vom neuesten Log)
-        Map<String, Double> consumedAminoAcids = calculateAminoAcidSumsForLatestLog();
-        logger.info("Konsumierte Aminosäuren (Summen): {}", consumedAminoAcids);
-
-        // 3. Coverage berechnen
-        Map<String, Double> coverage = new HashMap<>();
-        for (String aminoAcid : dailyNeeds.keySet()) {
-            // Hole Tagesbedarf (Default 1.0 für Sicherheit)
-            double need = dailyNeeds.getOrDefault(aminoAcid, 1.0);
-
-            // Hole konsumierte Menge (Default 0.0, falls nicht vorhanden)
-            double consumed = consumedAminoAcids.getOrDefault(aminoAcid, 0.0);
-
-            // Coverage berechnen: (konsumiert / Bedarf) * 100
-            double percentage = (consumed / need) * 100;
-            coverage.put(aminoAcid, percentage);
-        }
-
-        logger.info("Aminosäurenabdeckung berechnet: {}", coverage);
-
-        return coverage;
+    // 1. Tagesbedarf abrufen
+    Map<String, Double> dailyNeeds = calculateDailyAminoAcidNeeds();
+    if (dailyNeeds == null || dailyNeeds.isEmpty()) {
+        logger.error("❌ Fehler: Kein Tagesbedarf gefunden!");
+        return Collections.emptyMap();
     }
+    logger.info("Tagesbedarf der Aminosäuren: {}", dailyNeeds);
+
+    // 2. Konsumierte Aminosäuren summieren
+    Map<String, Double> consumedAminoAcids = calculateAminoAcidSumsForLatestLog();
+    if (consumedAminoAcids == null || consumedAminoAcids.isEmpty()) {
+        logger.warn("⚠️ Keine konsumierten Aminosäuren gefunden. Ergebnis wird leer sein.");
+        return Collections.emptyMap();
+    }
+    logger.info("Konsumierte Aminosäuren (Summen): {}", consumedAminoAcids);
+
+    // 3. Coverage berechnen
+    Map<String, Double> coverage = new HashMap<>();
+    for (String aminoAcid : dailyNeeds.keySet()) {
+        double need = dailyNeeds.getOrDefault(aminoAcid, 0.0);
+        double consumed = consumedAminoAcids.getOrDefault(aminoAcid, 0.0);
+
+        if (need > 0) {
+            double percentage = Math.round((consumed / need) * 100 * 100.0) / 100.0;
+            coverage.put(aminoAcid, percentage);
+        } else {
+            logger.warn("⚠️ Tagesbedarf für {} ist 0. Division durch Null verhindert.", aminoAcid);
+            coverage.put(aminoAcid, 0.0);
+        }
+    }
+
+    logger.info("✅ Aminosäurenabdeckung berechnet: {}", coverage);
+    return coverage;
+}
 }

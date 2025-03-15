@@ -150,10 +150,10 @@ public class NutritionLogService {
 
     @Transactional
     public NutritionLog createLogFromFrontend(NutritionLogCreateDTO logDTO) {
-        logger.info("📝 Anfrage zum Erstellen eines NutritionLogs erhalten: {}", logDTO);
+        logger.info("📝 Anfrage zum Erstellen oder Aktualisieren eines NutritionLogs erhalten: {}", logDTO);
 
         if (logDTO.getUserId() == null) {
-            logger.error("❌ Fehler: User ID ist null! NutritionLog kann nicht erstellt werden.");
+            logger.error("❌ Fehler: User ID ist null! NutritionLog kann nicht erstellt oder aktualisiert werden.");
             throw new IllegalArgumentException("User ID darf nicht null sein!");
         }
 
@@ -168,13 +168,28 @@ public class NutritionLogService {
 
         logger.info("✅ Benutzer gefunden: {} (ID: {})", user.getName(), user.getId());
 
+        // Prüfen, ob bereits ein NutritionLog für diesen User existiert
+        Optional<NutritionLog> existingLog = nutritionLogRepository.findByUser(user);
+
+        if (existingLog.isPresent()) {
+            NutritionLog oldLog = existingLog.get();
+            logger.warn("⚠️ Ein bestehendes NutritionLog mit ID {} gefunden. Lösche das alte Log und die zugehörigen Einträge...", oldLog.getId());
+
+            // Alle NutritionLogFoodItem-Einträge zu diesem Log entfernen
+            nutritionLogFoodItemRepository.deleteByNutritionLog(oldLog);
+
+            // Das alte NutritionLog löschen
+            nutritionLogRepository.delete(oldLog);
+            logger.info("🗑️ Altes NutritionLog und seine FoodItem-Einträge erfolgreich gelöscht.");
+        }
+
         // Neues NutritionLog für den Benutzer erstellen
-        NutritionLog log = NutritionLog.builder()
+        NutritionLog newLog = NutritionLog.builder()
                 .user(user)
                 .build();
 
-        // Speichern des NutritionLogs
-        NutritionLog savedLog = nutritionLogRepository.save(log);
+        // Speichern des neuen NutritionLogs
+        NutritionLog savedLog = nutritionLogRepository.save(newLog);
 
         // Überprüfung nach dem Speichern
         if (savedLog.getId() == null) {
@@ -182,7 +197,7 @@ public class NutritionLogService {
             throw new IllegalStateException("Fehler beim Speichern von NutritionLog.");
         }
 
-        logger.info("✅ NutritionLog erfolgreich erstellt mit ID: {}", savedLog.getId());
+        logger.info("✅ Neues NutritionLog erfolgreich erstellt mit ID: {}", savedLog.getId());
 
         return savedLog;
     }

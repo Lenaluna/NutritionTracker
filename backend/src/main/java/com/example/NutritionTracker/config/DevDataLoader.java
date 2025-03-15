@@ -75,43 +75,53 @@ public class DevDataLoader implements CommandLineRunner {
                 List<FoodItem> foodItemsToSave = List.of(
                         FoodItem.builder().name("Linsen").aminoAcidProfile(Map.of(
                                 "Lysin", 2.1, "Leucin", 1.8, "Isoleucin", 0.9, "Valin", 1.0,
-                                "Methionin", 0.3, "Phenylalanin", 1.2, "Threonin", 0.8, "Tryptophan", 0.2, "Histidin", 0.7)).build(),
+                                "Methionin", 0.3, "Phenylalanin", 1.2, "Threonin", 0.8, "Tryptophan", 0.2,
+                                "Histidin", 0.7, "Glycin", 1.0)).build(),
 
                         FoodItem.builder().name("Quinoa").aminoAcidProfile(Map.of(
                                 "Lysin", 1.2, "Leucin", 1.5, "Isoleucin", 0.7, "Valin", 0.9,
-                                "Methionin", 0.4, "Phenylalanin", 1.0, "Threonin", 0.6, "Tryptophan", 0.1, "Histidin", 0.5)).build(),
+                                "Methionin", 0.4, "Phenylalanin", 1.0, "Threonin", 0.6, "Tryptophan", 0.1,
+                                "Histidin", 0.5, "Glycin", 0.8)).build(),
 
                         FoodItem.builder().name("Kichererbsen").aminoAcidProfile(Map.of(
                                 "Lysin", 2.0, "Leucin", 1.6, "Isoleucin", 0.8, "Valin", 1.1,
-                                "Methionin", 0.3, "Phenylalanin", 1.3, "Threonin", 0.7, "Tryptophan", 0.2, "Histidin", 0.6)).build(),
+                                "Methionin", 0.3, "Phenylalanin", 1.3, "Threonin", 0.7, "Tryptophan", 0.2,
+                                "Histidin", 0.6, "Glycin", 1.2)).build(),
 
                         FoodItem.builder().name("Sojabohnen").aminoAcidProfile(Map.of(
                                 "Lysin", 2.8, "Leucin", 2.5, "Isoleucin", 1.5, "Valin", 1.7,
-                                "Methionin", 0.6, "Phenylalanin", 1.8, "Threonin", 1.1, "Tryptophan", 0.3, "Histidin", 1.0)).build(),
+                                "Methionin", 0.6, "Phenylalanin", 1.8, "Threonin", 1.1, "Tryptophan", 0.3,
+                                "Histidin", 1.0, "Glycin", 1.4)).build(),
 
                         FoodItem.builder().name("Amaranth").aminoAcidProfile(Map.of(
                                 "Lysin", 1.3, "Leucin", 1.4, "Isoleucin", 0.6, "Valin", 0.7,
-                                "Methionin", 0.4, "Phenylalanin", 0.9, "Threonin", 0.5, "Tryptophan", 0.1, "Histidin", 0.4)).build(),
+                                "Methionin", 0.4, "Phenylalanin", 0.9, "Threonin", 0.5, "Tryptophan", 0.1,
+                                "Histidin", 0.4, "Glycin", 0.7)).build(),
 
                         FoodItem.builder().name("Hanfsamen").aminoAcidProfile(Map.of(
                                 "Lysin", 1.9, "Leucin", 2.0, "Isoleucin", 1.2, "Valin", 1.4,
-                                "Methionin", 0.8, "Phenylalanin", 1.6, "Threonin", 1.0, "Tryptophan", 0.3, "Histidin", 0.9)).build(),
+                                "Methionin", 0.8, "Phenylalanin", 1.6, "Threonin", 1.0, "Tryptophan", 0.3,
+                                "Histidin", 0.9, "Glycin", 1.6)).build(),
 
                         FoodItem.builder().name("Chiasamen").aminoAcidProfile(Map.of(
                                 "Lysin", 1.1, "Leucin", 1.3, "Isoleucin", 0.5, "Valin", 0.6,
-                                "Methionin", 0.2, "Phenylalanin", 0.8, "Threonin", 0.4, "Tryptophan", 0.1, "Histidin", 0.3)).build(),
+                                "Methionin", 0.2, "Phenylalanin", 0.8, "Threonin", 0.4, "Tryptophan", 0.1,
+                                "Histidin", 0.3, "Glycin", 0.9)).build(),
 
                         FoodItem.builder().name("Haferflocken").aminoAcidProfile(Map.of(
                                 "Lysin", 0.8, "Leucin", 1.0, "Isoleucin", 0.5, "Valin", 0.6,
-                                "Methionin", 0.3, "Phenylalanin", 0.7, "Threonin", 0.4, "Tryptophan", 0.1, "Histidin", 0.2)).build(),
+                                "Methionin", 0.3, "Phenylalanin", 0.7, "Threonin", 0.4, "Tryptophan", 0.1,
+                                "Histidin", 0.2, "Glycin", 1.1)).build(),
 
                         FoodItem.builder().name("Sonnenblumenkerne").aminoAcidProfile(Map.of(
                                 "Lysin", 1.5, "Leucin", 1.7, "Isoleucin", 0.9, "Valin", 1.1,
-                                "Methionin", 0.7, "Phenylalanin", 1.5, "Threonin", 0.9, "Tryptophan", 0.3, "Histidin", 0.8)).build(),
+                                "Methionin", 0.7, "Phenylalanin", 1.5, "Threonin", 0.9, "Tryptophan", 0.3,
+                                "Histidin", 0.8, "Glycin", 1.3)).build(),
 
                         FoodItem.builder().name("Erbsen").aminoAcidProfile(Map.of(
                                 "Lysin", 2.2, "Leucin", 1.7, "Isoleucin", 0.8, "Valin", 1.0,
-                                "Methionin", 0.3, "Phenylalanin", 1.2, "Threonin", 0.6, "Tryptophan", 0.2, "Histidin", 0.7)).build()
+                                "Methionin", 0.3, "Phenylalanin", 1.2, "Threonin", 0.6, "Tryptophan", 0.2,
+                                "Histidin", 0.7, "Glycin", 1.0)).build()
                 );
 
                 foodItemService.saveAllFoodItems(foodItemsToSave);
