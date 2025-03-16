@@ -17,6 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+/**
+ * Service responsible for managing amino acid profile calculations.
+ */
 @Service
 @RequiredArgsConstructor
 public class AminoProfileService {
@@ -27,53 +30,29 @@ public class AminoProfileService {
     private final Logger logger = LoggerFactory.getLogger(AminoProfileService.class);
     private final NutritionLogRepository nutritionLogRepository;
     private final UserDataService userDataService;
-//
-//    @Transactional(readOnly = true)
-//    public Map<String, Double> calculateAminoAcidSumsForLatestLog() {
-//        // Neuestes NutritionLog abrufen
-//        NutritionLog latestLog = nutritionLogRepository.findTopByOrderByIdDesc()
-//                .orElseThrow(() -> new IllegalArgumentException("Kein NutritionLog gefunden!"));
-//
-//        // Summen der konsumierten Aminosäuren berechnen
-//        Map<String, Double> aminoAcidSums = new HashMap<>();
-//        for (NutritionLogFoodItem logFoodItem : latestLog.getFoodItems()) {
-//            FoodItem foodItem = logFoodItem.getFoodItem();
-//            if (foodItem.getAminoAcidProfile() != null) {
-//                foodItem.getAminoAcidProfile().forEach((amino, value) -> {
-//                    aminoAcidSums.merge(amino, value, Double::sum);
-//                });
-//            }
-//        }
-//
-//        // Ergebnis loggen
-//        logger.info("Summierte Aminosäuren für das neueste NutritionLog: {}", aminoAcidSums);
-//
-//        return aminoAcidSums;
-//    }
 
-
+    /**
+     * Calculates the sum of all consumed amino acids in the latest nutrition log.
+     * @return A map containing amino acids and their summed values.
+     */
     @Transactional(readOnly = true)
     public Map<String, Double> calculateAminoAcidSumsForLatestLog() {
-        logger.info("🔍 calculateAminoAcidSumsForLatestLog() wurde aufgerufen!");
-        System.out.println("🔍 Methode wurde gestartet!");
+        logger.info("Calculating amino acid sums for the latest nutrition log...");
 
-        // Neuestes NutritionLog abrufen
         NutritionLog latestLog = nutritionLogRepository.findTopByOrderByIdDesc()
-                .orElseThrow(() -> new IllegalArgumentException("Kein NutritionLog gefunden!"));
+                .orElseThrow(() -> new IllegalArgumentException("No NutritionLog found!"));
 
-        logger.info("📝 Gefundenes NutritionLog mit ID: {}", latestLog.getId());
+        logger.info("Found NutritionLog with ID: {}", latestLog.getId());
 
-        // Prüfen, ob das Log Lebensmittel enthält
         if (latestLog.getFoodItems() == null || latestLog.getFoodItems().isEmpty()) {
-            logger.warn("⚠️ Keine Lebensmittel im aktuellen NutritionLog gespeichert.");
+            logger.warn("No food items found in the latest NutritionLog.");
             return Collections.emptyMap();
         }
 
-        // Summieren der Aminosäuren nur für ausgewählte Lebensmittel
         Map<String, Double> aminoAcidSums = new HashMap<>();
         for (NutritionLogFoodItem logFoodItem : latestLog.getFoodItems()) {
             FoodItem foodItem = logFoodItem.getFoodItem();
-            logger.info("📦 Verarbeitung von FoodItem: {}", foodItem.getName());
+            logger.info("Processing FoodItem: {}", foodItem.getName());
 
             if (foodItem.getAminoAcidProfile() != null) {
                 foodItem.getAminoAcidProfile().forEach((amino, value) -> {
@@ -82,12 +61,14 @@ public class AminoProfileService {
             }
         }
 
-        // Ergebnis loggen
-        logger.info("✅ Summierte Aminosäuren für das neueste NutritionLog: {}", aminoAcidSums);
-
+        logger.info("Amino acid sums calculated: {}", aminoAcidSums);
         return aminoAcidSums;
     }
 
+    /**
+     * Calculates the daily amino acid requirements based on the user's weight and profile settings.
+     * @return A map of amino acids with their required daily intake values.
+     */
     @Transactional(readOnly = true)
     public Map<String, Double> calculateDailyAminoAcidNeeds() {
         UserDTO userDTO = userDataService.getUser()
@@ -118,73 +99,43 @@ public class AminoProfileService {
         return adjustedNeeds;
     }
 
+    /**
+     * Calculates the amino acid coverage percentage based on the latest log and daily requirements.
+     * @return A map containing amino acids and their percentage coverage values.
+     */
+    @Transactional(readOnly = true)
+    public Map<String, Double> calculateAminoAcidCoverageForLatestLog() {
+        logger.info("Calculating amino acid coverage for the latest NutritionLog...");
 
-//    @Transactional(readOnly = true)
-//    public Map<String, Double> calculateAminoAcidCoverageForLatestLog() {
-//        logger.info("Berechnung der Aminosäurenabdeckung für das neueste NutritionLog gestartet...");
-//
-//        // 1. Tagesbedarf der Aminosäuren abrufen
-//        Map<String, Double> dailyNeeds = calculateDailyAminoAcidNeeds();
-//        logger.info("Tagesbedarf der Aminosäuren: {}", dailyNeeds);
-//
-//        // 2. Konsumierte Aminosäuren summieren (vom neuesten Log)
-//        Map<String, Double> consumedAminoAcids = calculateAminoAcidSumsForLatestLog();
-//        logger.info("Konsumierte Aminosäuren (Summen): {}", consumedAminoAcids);
-//
-//        // 3. Coverage berechnen
-//        Map<String, Double> coverage = new HashMap<>();
-//        for (String aminoAcid : dailyNeeds.keySet()) {
-//            // Hole Tagesbedarf (Default 1.0 für Sicherheit)
-//            double need = dailyNeeds.getOrDefault(aminoAcid, 1.0);
-//
-//            // Hole konsumierte Menge (Default 0.0, falls nicht vorhanden)
-//            double consumed = consumedAminoAcids.getOrDefault(aminoAcid, 0.0);
-//
-//            // Coverage berechnen: (konsumiert / Bedarf) * 100
-//            double percentage = (consumed / need) * 100;
-//            coverage.put(aminoAcid, percentage);
-//        }
-//
-//        logger.info("Aminosäurenabdeckung berechnet: {}", coverage);
-//
-//        return coverage;
-//    }
-@Transactional(readOnly = true)
-public Map<String, Double> calculateAminoAcidCoverageForLatestLog() {
-    logger.info("Berechnung der Aminosäurenabdeckung für das neueste NutritionLog gestartet...");
-
-    // 1. Tagesbedarf abrufen
-    Map<String, Double> dailyNeeds = calculateDailyAminoAcidNeeds();
-    if (dailyNeeds == null || dailyNeeds.isEmpty()) {
-        logger.error("❌ Fehler: Kein Tagesbedarf gefunden!");
-        return Collections.emptyMap();
-    }
-    logger.info("Tagesbedarf der Aminosäuren: {}", dailyNeeds);
-
-    // 2. Konsumierte Aminosäuren summieren
-    Map<String, Double> consumedAminoAcids = calculateAminoAcidSumsForLatestLog();
-    if (consumedAminoAcids == null || consumedAminoAcids.isEmpty()) {
-        logger.warn("⚠️ Keine konsumierten Aminosäuren gefunden. Ergebnis wird leer sein.");
-        return Collections.emptyMap();
-    }
-    logger.info("Konsumierte Aminosäuren (Summen): {}", consumedAminoAcids);
-
-    // 3. Coverage berechnen
-    Map<String, Double> coverage = new HashMap<>();
-    for (String aminoAcid : dailyNeeds.keySet()) {
-        double need = dailyNeeds.getOrDefault(aminoAcid, 0.0);
-        double consumed = consumedAminoAcids.getOrDefault(aminoAcid, 0.0);
-
-        if (need > 0) {
-            double percentage = Math.round((consumed / need) * 100 * 100.0) / 100.0;
-            coverage.put(aminoAcid, percentage);
-        } else {
-            logger.warn("⚠️ Tagesbedarf für {} ist 0. Division durch Null verhindert.", aminoAcid);
-            coverage.put(aminoAcid, 0.0);
+        Map<String, Double> dailyNeeds = calculateDailyAminoAcidNeeds();
+        if (dailyNeeds == null || dailyNeeds.isEmpty()) {
+            logger.error("Error: No daily amino acid requirements found!");
+            return Collections.emptyMap();
         }
-    }
+        logger.info("Daily amino acid requirements: {}", dailyNeeds);
 
-    logger.info("✅ Aminosäurenabdeckung berechnet: {}", coverage);
-    return coverage;
-}
+        Map<String, Double> consumedAminoAcids = calculateAminoAcidSumsForLatestLog();
+        if (consumedAminoAcids == null || consumedAminoAcids.isEmpty()) {
+            logger.warn("No consumed amino acids found. Returning empty result.");
+            return Collections.emptyMap();
+        }
+        logger.info("Consumed amino acids: {}", consumedAminoAcids);
+
+        Map<String, Double> coverage = new HashMap<>();
+        for (String aminoAcid : dailyNeeds.keySet()) {
+            double need = dailyNeeds.getOrDefault(aminoAcid, 0.0);
+            double consumed = consumedAminoAcids.getOrDefault(aminoAcid, 0.0);
+
+            if (need > 0) {
+                double percentage = Math.round((consumed / need) * 100 * 100.0) / 100.0;
+                coverage.put(aminoAcid, percentage);
+            } else {
+                logger.warn("Daily need for {} is 0. Preventing division by zero.", aminoAcid);
+                coverage.put(aminoAcid, 0.0);
+            }
+        }
+
+        logger.info("Amino acid coverage calculated: {}", coverage);
+        return coverage;
+    }
 }

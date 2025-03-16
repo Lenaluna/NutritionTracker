@@ -14,19 +14,6 @@ public class UserController {
 
     private final UserService userService;
 
-//    /**
-//     * Creates a new user in the database.
-//     * This only works if no user already exists (since only one user is allowed).
-//     * Used in DevDataLoader during application startup.
-//     *
-//     * @param user The user entity containing properties like name, weight, etc.
-//     * @return The saved user as a ResponseEntity.
-//     */
-//    @PostMapping("/create")
-//    public ResponseEntity<User> createUser(@RequestBody User user) {
-//        return ResponseEntity.ok(userService.createUser(user));
-//    }
-
     /**
      * Retrieves the current user from the database.
      * This is used for backend requests to fetch user information.

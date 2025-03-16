@@ -10,9 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.Optional;
 
+/**
+ * Service class for managing user data.
+ */
 @Service
 public class UserDataService {
 
@@ -23,19 +25,11 @@ public class UserDataService {
         this.userRepository = userRepository;
     }
 
-//    public void saveUser(UserDataDTO userDataDTO) {
-//
-//        User user = new User();
-//        user.setName(userDataDTO.getName());
-//        user.setAge(userDataDTO.getAge());
-//        user.setWeight(userDataDTO.getWeight());
-//        user.setIsAthlete(userDataDTO.getIsAthlete());
-//        user.setIsVegan(userDataDTO.getIsVegan());
-//        user.setIsLongevityFocused(userDataDTO.getIsLongevityFocused());
-//
-//        userRepository.save(user);
-//    }
-
+    /**
+     * Retrieves the first available user from the database.
+     *
+     * @return An Optional containing the user as a DTO, or empty if no user exists.
+     */
     @Transactional(readOnly = true)
     public Optional<UserDTO> getUser() {
         return userRepository.findAll().stream()
@@ -50,25 +44,32 @@ public class UserDataService {
                         .isLongevityFocused(user.getIsLongevityFocused())
                         .build());
     }
-    public User updateExistingUser(UserDataDTO userDataDTO) {
 
-        System.out.println("✅ updateExistingUser() wurde aufgerufen für User: " + userDataDTO.getName());
-        logger.info("ℹ️ Eingehende Benutzerdaten: {}", userDataDTO);
-        logger.info("🎯 Eingehende Werte: Name={}, Age={}, Weight={}, Athlete={}, Vegan={}, Longevity={}",
+    /**
+     * Updates an existing user with new data from the provided UserDataDTO.
+     * If no user exists in the database, an exception is thrown.
+     *
+     * @param userDataDTO The DTO containing updated user data.
+     * @return The updated User entity.
+     */
+    public User updateExistingUser(UserDataDTO userDataDTO) {
+        logger.info("Incoming user data: {}", userDataDTO);
+        logger.info("Incoming values: Name={}, Age={}, Weight={}, Athlete={}, Vegan={}, Longevity={}",
                 userDataDTO.getName(), userDataDTO.getAge(), userDataDTO.getWeight(),
                 userDataDTO.getIsAthlete(), userDataDTO.getIsVegan(), userDataDTO.getIsLongevityFocused());
-        // Lade den existierenden User aus der Datenbank
+
+        // Load the existing user from the database
         User user = userRepository.findAll().stream().findFirst()
-                .orElseThrow(() -> new EntityNotFoundException("Kein User in der Datenbank gefunden."));
+                .orElseThrow(() -> new EntityNotFoundException("No user found in the database."));
 
-        logger.info("📝 Gefundener Benutzer vor dem Update: {}", user);
+        logger.info("Existing user before update: {}", user);
 
-        // Vorherige Werte ausgeben, um zu sehen, ob null-Werte reinkommen
-        logger.info("⚠️ Vorheriger Zustand: Name={}, Age={}, Weight={}, Athlete={}, Vegan={}, Longevity={}",
+        // Log previous values before updating
+        logger.info("Previous state: Name={}, Age={}, Weight={}, Athlete={}, Vegan={}, Longevity={}",
                 user.getName(), user.getAge(), user.getWeight(),
                 user.getIsAthlete(), user.getIsVegan(), user.getIsLongevityFocused());
 
-        // Neue Werte setzen
+        // Update user properties
         user.setName(userDataDTO.getName());
         user.setAge(userDataDTO.getAge());
         user.setWeight(userDataDTO.getWeight());
@@ -76,20 +77,19 @@ public class UserDataService {
         user.setIsVegan(userDataDTO.getIsVegan());
         user.setIsLongevityFocused(userDataDTO.getIsLongevityFocused());
 
-        // Nach dem Setzen prüfen, ob die Werte korrekt übernommen wurden
-        logger.info("🆕 Neuer Zustand vor Speicherung: Name={}, Age={}, Weight={}, Athlete={}, Vegan={}, Longevity={}",
+        // Log new values before saving
+        logger.info("New state before saving: Name={}, Age={}, Weight={}, Athlete={}, Vegan={}, Longevity={}",
                 user.getName(), user.getAge(), user.getWeight(),
                 user.getIsAthlete(), user.getIsVegan(), user.getIsLongevityFocused());
 
-        // Speichere User
+        // Save the updated user
         User savedUser = userRepository.save(user);
 
-        // Ausgabe nach dem Speichern
-        logger.info("✅ Gespeicherter Benutzer: {}", savedUser);
-        logger.info("🆕 Neuer Zustand nach Speicherung: Name={}, Age={}, Weight={}, Athlete={}, Vegan={}, Longevity={}",
+        // Log after saving
+        logger.info("Saved user: {}", savedUser);
+        logger.info("New state after saving: Name={}, Age={}, Weight={}, Athlete={}, Vegan={}, Longevity={}",
                 user.getName(), user.getAge(), user.getWeight(),
                 user.getIsAthlete(), user.getIsVegan(), user.getIsLongevityFocused());
-
 
         return savedUser;
     }

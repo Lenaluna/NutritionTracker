@@ -22,6 +22,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * This class is responsible for initializing test data in the development and test environments.
+ * It ensures that predefined users, food items, and nutrition logs exist in the database.
+ */
 @Component
 @Profile({"dev", "test"})
 @RequiredArgsConstructor
@@ -38,6 +42,11 @@ public class DevDataLoader implements CommandLineRunner {
     private final NutritionLogRepository nutritionLogRepository;
 
 
+    /**
+     * Runs the data initialization process. It performs cleanup and inserts test data if needed.
+     *
+     * @param args Command-line arguments (not used in this implementation).
+     */
     @Override
     public void run(String... args) {
         logger.info("Starting DevDataLoader...");
@@ -54,11 +63,13 @@ public class DevDataLoader implements CommandLineRunner {
         }
 
         try {
+            // Check if a user already exists
             Optional<User> existingUser = userRepository.findAll().stream().findFirst();           User user;
             if (existingUser.isPresent()) {
                 user = existingUser.get();
                 logger.warn("Ein Benutzer existiert bereits. Nutze vorhandenen Benutzer mit ID: {}", user.getId());
             } else {
+                // Create a new test user
                 user = User.builder()
                         .name("Test User")
                         .age(30)
@@ -71,6 +82,7 @@ public class DevDataLoader implements CommandLineRunner {
                 logger.info("Test User created with ID: {}", user.getId());
             }
 
+            // Insert default food items if none exist
             if (foodItemRepository.count() == 0) {
                 List<FoodItem> foodItemsToSave = List.of(
                         FoodItem.builder().name("Linsen").aminoAcidProfile(Map.of(
@@ -128,19 +140,20 @@ public class DevDataLoader implements CommandLineRunner {
                 logger.info("FoodItems gespeichert.");
             }
 
+            // Ensure there is at least one NutritionLog for the user
             Optional<NutritionLog> existingLog = nutritionLogService.getLatestNutritionLogEntity();
             if (existingLog.isEmpty()) {
                 NutritionLog log = NutritionLog.builder().user(user).build();
                 nutritionLogService.createLog(log);
                 NutritionLog savedLog = nutritionLogService.createLog(log);
 
-// Prüfen, ob das Log erfolgreich gespeichert wurde
+                // Verify if the log was saved correctly
                 if (savedLog.getId() == null) {
                     logger.error("FEHLER: NutritionLog wurde nicht korrekt gespeichert!");
                     throw new IllegalStateException("NutritionLog konnte nicht erstellt werden.");
                 }
 
-// Überprüfung nach erneutem Laden aus der Datenbank
+                // Double-check persistence
                 savedLog = nutritionLogRepository.findById(savedLog.getId()).orElse(null);
                 if (savedLog == null || savedLog.getId() == null) {
                     throw new IllegalStateException("Fehler beim Speichern von NutritionLog.");
@@ -149,6 +162,7 @@ public class DevDataLoader implements CommandLineRunner {
                 logger.info("Test NutritionLog created.");
             }
 
+            // Insert amino acid requirements if none exist
             if (aminoAcidRequirementRepository.count() == 0) {
                 List<AminoAcidRequirement> aminoAcidRequirements = List.of(
                         new AminoAcidRequirement(null, "Lysin", 30.0),

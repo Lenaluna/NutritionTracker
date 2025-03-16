@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+/**
+ * Service class responsible for managing FoodItem entities.
+ */
 @Service
 @RequiredArgsConstructor
 public class FoodItemService {
@@ -22,8 +24,9 @@ public class FoodItemService {
     private static final Logger logger = LoggerFactory.getLogger(FoodItemService.class);
 
     /**
-     * Returns all FoodItems as DTOs.
-     * @return List of FoodItemDTOs
+     * Retrieves all available FoodItems as DTOs.
+     *
+     * @return List of FoodItemDTOs representing all food items in the database.
      */
     @Transactional(readOnly = true)
     public List<FoodItemDTO> getAllFoodItems() {
@@ -33,24 +36,27 @@ public class FoodItemService {
     }
 
     /**
-     * Cleans up food items from the database before shutdown.
+     * Cleans up all food items from the database before the application shuts down.
+     * This method ensures that food items are deleted when the application is stopped.
      */
     @PreDestroy
     public void cleanup() {
-        logger.info("Cleaning up food items from database...");
+        logger.info("Cleaning up food items from the database...");
         foodItemRepository.deleteAll();
-        logger.info("All food items deleted.");
+        logger.info("All food items have been deleted.");
     }
 
     /**
      * Saves a list of FoodItem entities to the database.
-     * @param foodItems The list of FoodItem entities to save
+     *
+     * @param foodItems The list of FoodItem entities to be saved.
+     * @return List of saved FoodItem entities with their assigned IDs.
      */
     @Transactional
     public List<FoodItem> saveAllFoodItems(List<FoodItem> foodItems) {
-        logger.info("Speichere FoodItems: {}", foodItems); // Logging vor dem Speichern
+        logger.info("Saving food items: {}", foodItems); // Logging before saving
         List<FoodItem> savedItems = foodItemRepository.saveAll(foodItems);
-        logger.info("Gespeicherte FoodItems mit IDs: {}", savedItems.stream().map(FoodItem::getId).toList()); // Logging nach dem Speichern
+        logger.info("Saved food items with IDs: {}", savedItems.stream().map(FoodItem::getId).toList()); // Logging after saving
         return savedItems;
     }
 }

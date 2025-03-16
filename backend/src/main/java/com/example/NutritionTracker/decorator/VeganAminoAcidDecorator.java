@@ -3,21 +3,32 @@ package com.example.NutritionTracker.decorator;
 import java.util.Map;
 
 /**
- * Decorator to adjust amino acid requirements for a vegan diet.
- * Increases key amino acids that are often limited in plant-based diets.
- * Adjustments are based on common deficiencies in plant-based protein sources.
+ * The {@code VeganAminoAcidDecorator} adjusts amino acid requirements to account for common deficiencies
+ * in plant-based diets. It increases the intake of key amino acids that are often limited in vegan protein sources.
+ * The adjustments are based on nutritional needs for individuals following a plant-based diet.
  */
 public class VeganAminoAcidDecorator extends AminoAcidCalculatorDecorator {
 
+    /**
+     * Constructs a {@code VeganAminoAcidDecorator} that wraps an existing {@link AminoAcidCalculator}.
+     *
+     * @param wrapped The base calculator that this decorator modifies.
+     */
     public VeganAminoAcidDecorator(AminoAcidCalculator wrapped) {
         super(wrapped);
     }
 
+    /**
+     * Modifies the base amino acid needs by increasing essential amino acids that are often lacking in a vegan diet.
+     *
+     * @param dailyNeeds The base daily amino acid requirements.
+     * @return A modified map of amino acid requirements with adjustments for a vegan diet.
+     */
     @Override
     public Map<String, Double> calculateAminoAcids(Map<String, Double> dailyNeeds) {
         Map<String, Double> aminoAcids = super.calculateAminoAcids(dailyNeeds);
 
-        // Increase essential amino acids that are often limited in plant-based diets
+        // Increase essential amino acids that are commonly limited in plant-based diets
         aminoAcids.computeIfPresent("Lysin", (k, v) -> v * 1.25);       // +25% (often limited in grains)
         aminoAcids.computeIfPresent("Methionin", (k, v) -> v * 1.2);   // +20% (often limited in legumes)
         aminoAcids.computeIfPresent("Tryptophan", (k, v) -> v * 1.15); // +15% (important for serotonin production)

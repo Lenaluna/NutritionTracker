@@ -48,7 +48,7 @@ public class AminoProfileController {
     public ResponseEntity<Map<String, Double>> calculateAminoAcidCoverage() {
         logger.info("Request zum Berechnen der Aminosäurenabdeckung für das neueste Log erhalten.");
 
-        // Coverage berechnen mit dem neuesten NutritionLog
+        // Calculates Coverage with newest NutritionLog
         Map<String, Double> coverage = aminoProfileService.calculateAminoAcidCoverageForLatestLog();
 
         return ResponseEntity.ok(coverage);
