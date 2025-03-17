@@ -1,0 +1,11 @@
+App.vue
+api.js
+main.js
+
+router:
+index.js
+
+views:
+FoodSelectionView.vue
+HomeView.vue
+ResultView.vue

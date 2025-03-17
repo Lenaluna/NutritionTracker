@@ -1,0 +1,501 @@
+
+========== router/index.js ==========
+// Vue Router configuration
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import FoodSelectionView from '../views/FoodSelectionView.vue';
+import ResultView from '../views/ResultView.vue';
+
+// Define application routes
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: HomeView
+  },
+  {
+    path: '/selection',
+    name: 'FoodSelection',
+    component: FoodSelectionView
+  },
+  {
+    path: '/results',
+    name: 'Results',
+    component: ResultView
+  }
+];
+
+// Create and export the router instance
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+});
+
+export default router;
+
+
+
+========== views/ResultView.vue ==========
+<template>
+  <v-container class="py-5">
+    <!-- Header with a friendly greeting -->
+    <h1 v-if="userName">Hallo {{ userName }}, hier sind deine Ergebnisse!</h1>
+    <h1 v-else>Hier sind deine Ergebnisse.</h1>
+
+    <div v-if="profile">
+      <!-- Section displaying selected food items -->
+      <h2>Ausgewählte Lebensmittel</h2>
+      <v-list v-if="selectedFoods.length">
+        <v-list-item v-for="food in selectedFoods" :key="food.id">
+          <v-list-item-title>{{ food.name }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+      <p v-else class="error">Keine Lebensmittel ausgewählt</p>
+
+      <!-- Section displaying total amino acids -->
+      <h2>Gesamt-Aminosäuren</h2>
+      <v-table v-if="profile.aminoAcids">
+        <thead>
+          <tr>
+            <th>Aminosäure</th>
+            <th>Menge (g)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(value, key) in profile.aminoAcids" :key="key">
+            <td>{{ key }}</td>
+            <td>{{ value.toFixed(2) }}</td>
+          </tr>
+        </tbody>
+      </v-table>
+      <p v-else class="error">Keine Aminosäuredaten verfügbar</p>
+
+      <!-- Section displaying percentage coverage -->
+      <h2>Prozentuale Deckung</h2>
+      <v-table v-if="profile.dailyCoverage">
+        <thead>
+          <tr>
+            <th>Aminosäure</th>
+            <th>Deckung (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(value, key) in profile.dailyCoverage" :key="key">
+            <td>{{ key }}</td>
+            <td>{{ (value * 100).toFixed(1) }}%</td>
+          </tr>
+        </tbody>
+      </v-table>
+      <p v-else class="error">Keine Deckungsdaten verfügbar</p>
+    </div>
+
+
+    <!-- Button to clear stored data and return to the home screen -->
+    <v-btn class="mt-4" @click="closeApp">
+      Anwendung schließen
+    </v-btn>
+  </v-container>
+</template>
+
+<script>
+import { ref, onMounted } from "vue";
+import api from "../api";
+
+export default {
+  name: "ResultView",
+  setup() {
+    // Reactive variables for user profile, selected foods, and username
+    const profile = ref(null);
+    const selectedFoods = ref([]);
+    const userData = ref(null);
+    const userName = ref("");
+
+    // Fetch stored data and calculate the amino acid profile on component mount
+    onMounted(async () => {
+      console.log("Component mounted, fetching local storage data...");
+
+      // Retrieve user and food data from local storage
+      const storedUserData = localStorage.getItem("userData");
+      const storedSelectedFoods = localStorage.getItem("selectedFoods");
+
+      if (storedUserData) {
+        userData.value = JSON.parse(storedUserData);
+        userName.value = userData.value.name || "Unbekannter Benutzer";
+        console.log("User name set to:", userName.value);
+      }
+
+      if (storedSelectedFoods) {
+        selectedFoods.value = JSON.parse(storedSelectedFoods);
+        console.log("Selected foods loaded:", selectedFoods.value);
+      }
+
+      // Extract food IDs from the selected foods list
+      const selectedFoodIds = selectedFoods.value.map((f) => f.id);
+
+      try {
+        // Send data to the backend to calculate the amino acid profile
+        const response = await api.post("/amino-profile/calculate", {
+          userData: userData.value,
+          selectedFoodIds,
+        });
+        profile.value = response.data;
+        console.log("API response received:", profile.value);
+      } catch (error) {
+        console.error("Error calculating amino acid profile:", error);
+      }
+    });
+
+    // Function to clear local storage and return to the home screen
+    const closeApp = () => {
+      localStorage.clear();
+      window.location.href = "/";
+    };
+
+    return { profile, selectedFoods, userData, userName, closeApp };
+  }
+};
+</script>
+
+<style scoped>
+/* Table styling */
+.v-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.v-table th,
+.v-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.v-table th {
+  background-color: #f4f4f4;
+}
+
+/* Styling for error messages */
+.error {
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+}
+</style>
+
+
+
+========== views/HomeView.vue ==========
+<template>
+  <v-container class="py-5">
+    <h1>Welcome to the Nutrition Tracker</h1>
+    <p>Here you can calculate your amino acid profile.</p>
+
+    <v-form>
+      <!-- Name Input Field with Validation -->
+      <v-text-field
+        v-model="userData.name"
+        label="Name"
+        class="input-field"
+        :error-messages="errors.name"
+      ></v-text-field>
+
+      <!-- Weight Input Field with Validation -->
+      <v-text-field
+        v-model="userData.weight"
+        label="Weight (kg)"
+        type="number"
+        class="input-field"
+        :error-messages="errors.weight"
+      ></v-text-field>
+
+      <!-- Age Input Field with Validation -->
+      <v-text-field
+        v-model="userData.age"
+        label="Age"
+        type="number"
+        class="input-field"
+        :error-messages="errors.age"
+      ></v-text-field>
+
+      <!-- Custom Checkbox for Athlete Selection -->
+      <div class="custom-checkbox-wrapper" @click="toggleAthlete">
+        <div class="custom-checkbox" :class="{ checked: userData.isAthlete }">
+          <span v-if="userData.isAthlete">✓</span>
+        </div>
+        <label>Athlete</label>
+      </div>
+
+      <!-- Submit Button -->
+      <v-btn class="mt-4 submit-button" @click="goToSelection">
+        Submit
+      </v-btn>
+    </v-form>
+  </v-container>
+</template>
+
+<script>
+import { ref } from "vue";
+import api from "../api";
+
+export default {
+  name: "HomeView",
+  setup() {
+    // Stores user input values
+    const userData = ref({
+      name: "",
+      weight: null,
+      age: null,
+      isAthlete: false,
+    });
+
+    // Stores validation error messages for each field
+    const errors = ref({
+      name: "",
+      weight: "",
+      age: "",
+    });
+
+    // Toggles the athlete selection checkbox
+    const toggleAthlete = () => {
+      userData.value.isAthlete = !userData.value.isAthlete;
+      console.log("Athlete status changed:", userData.value.isAthlete);
+    };
+
+// Saves user data, handles backend validation errors, and redirects on success
+const goToSelection = async () => {
+  try {
+    // Reset previous validation errors
+    errors.value = { name: "", weight: "", age: "" };
+
+    // Send user data to the backend
+    await api.post("/user-data/save", userData.value);
+
+    // Store user data in local storage for later use
+    localStorage.setItem("userData", JSON.stringify(userData.value));
+
+    // Redirect to the selection page
+    window.location.href = "/selection";
+  } catch (error) {
+    console.error("Error while saving user data:", error);
+
+    // Check if response contains validation errors
+    if (error.response && error.response.data) {
+      // Directly assign errors from backend if structured as { fieldName: "errorMessage" }
+      errors.value = error.response.data;
+
+      // Alternative case: If errors are inside an 'errors' field
+      if (error.response.data.errors) {
+        for (const field in error.response.data.errors) {
+          if (errors.value[field] !== undefined) {
+            errors.value[field] = error.response.data.errors[field];
+          }
+        }
+      }
+    }
+  }
+};
+
+    return { userData, toggleAthlete, goToSelection, errors };
+  },
+};
+
+</script>
+
+<style scoped>
+/* Limits the maximum width of input fields */
+.input-field {
+  max-width: 400px;
+}
+
+/* Styles the custom checkbox */
+.custom-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+/* Default styling for the checkbox */
+.custom-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: white;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Styling when the checkbox is selected */
+.custom-checkbox.checked {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Adds margin for the submit button */
+.submit-button {
+  margin-top: 20px;
+}
+</style>
+
+
+
+========== views/FoodSelectionView.vue ==========
+<template>
+  <v-container class="py-5">
+    <h1>Wähle deine Lebensmittel</h1>
+
+    <!-- List of food items -->
+    <v-list>
+      <v-list-item
+        v-for="food in foodItems"
+        :key="food.id"
+        @click="selectFood(food)"
+        :class="{ 'selected': selectedFoods.includes(food) }"
+      >
+        <v-list-item-title>{{ food.name }}</v-list-item-title>
+      </v-list-item>
+    </v-list>
+
+    <!-- Button to proceed to results page -->
+    <v-btn class="mt-4" @click="goToResults">
+      Aminosäureprofil berechnen
+    </v-btn>
+  </v-container>
+</template>
+
+<script>
+import { ref, onMounted } from 'vue';
+import api from '../api';
+
+export default {
+  name: 'FoodSelectionView',
+  setup() {
+    const foodItems = ref([]); // Stores the list of available food items
+    const selectedFoods = ref([]); // Stores the selected food items
+
+    // Fetches food items from the API when the component is mounted
+    onMounted(async () => {
+      try {
+        const res = await api.get('/food-items');
+        foodItems.value = res.data;
+      } catch (error) {
+        console.error('Fehler beim Abrufen der Lebensmittel:', error);
+      }
+    });
+
+    // Adds or removes a food item from the selected list when clicked
+    const selectFood = (food) => {
+      const index = selectedFoods.value.findIndex(item => item.id === food.id);
+      if (index === -1) {
+        selectedFoods.value.push(food); // Add to selection
+      } else {
+        selectedFoods.value.splice(index, 1); // Remove from selection
+      }
+    };
+
+    // Saves selected food items and navigates to the results page
+    const goToResults = () => {
+      localStorage.setItem('selectedFoods', JSON.stringify(selectedFoods.value));
+      window.location.href = '/results';
+    };
+
+    return { foodItems, selectedFoods, selectFood, goToResults };
+  }
+};
+</script>
+
+<style scoped>
+/* Styles for selected food items */
+.selected {
+  background-color: lightblue !important;
+  color: black !important;
+  font-weight: bold;
+  border-radius: 5px;
+}
+</style>
+
+
+
+========== App.vue ==========
+<script setup>
+// Import Vue Router components
+import { RouterLink, RouterView } from 'vue-router';
+</script>
+
+<template>
+  <v-app>
+    <!-- Application navigation bar -->
+    <v-app-bar app color="primary">
+      <v-toolbar-title>Nutrition Tracker</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/selection">Select Food</RouterLink>
+        <RouterLink to="/results">Results</RouterLink>
+      </nav>
+    </v-app-bar>
+
+    <!-- Main application content -->
+    <v-main>
+      <RouterView />
+    </v-main>
+  </v-app>
+</template>
+
+<style scoped>
+/* Navigation bar styles */
+nav {
+  display: flex;
+  gap: 1rem;
+  padding-right: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+</style>
+
+
+
+========== main.js ==========
+// Entry point of the Vue application
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import axios from 'axios';
+
+import 'vuetify/styles'; // Vuetify styles for UI components
+import { createVuetify } from 'vuetify';
+
+import * as components from 'vuetify/components';
+import * as directives from 'vuetify/directives';
+
+// Create Vuetify instance with components and directives
+const vuetify = createVuetify({
+  components,
+  directives
+});
+
+// Set base URL for API requests
+axios.defaults.baseURL = 'http://localhost:8080';
+
+// Create and mount the Vue app
+const app = createApp(App);
+app.use(router);
+app.use(vuetify);
+app.mount('#app');
+
